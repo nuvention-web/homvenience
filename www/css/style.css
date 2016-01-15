@@ -1,1 +1,68 @@
-/* Empty. Add your own CSS if you like */
+#header{
+	height: 90px;
+}
+
+#logo{
+	font-family: 'Lobster', cursive;
+	font-size: 45px;
+	margin-top: 40px;
+}
+
+#search-bar {
+  background: none;
+  position: absolute;
+  width: 100%;
+  top: 88px;
+  height: 40px;
+  z-index: 3;
+}
+
+#search-bar .item {
+  background: none;
+  border: none;
+}
+
+#free{
+	margin-top: 135px;
+	height: 130px;
+	background-image: url('img/london.jpg');
+	color: #fff;
+
+
+}
+
+#free-word{
+	margin: 50px auto;
+	font-size: 50px;
+	letter-spacing: 2px;
+	font-family: 'Roboto', sans-serif;
+	font-style: italic;
+}
+
+#lend{
+	background-color: #ddd;
+	margin-top: 15px;
+	height: 130px;
+}
+
+#lend-word{
+	margin: 50px auto;
+	font-size: 35px;
+}
+
+#ihave{
+	background-color: #ddd;
+	margin-top: 15px;
+	height: 130px;
+}
+
+#i-word{
+	margin: 50px auto;
+	font-size: 35px;
+}
+
+
+
+
+
+
