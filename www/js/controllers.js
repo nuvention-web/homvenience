@@ -21,6 +21,12 @@ angular.module('starter.controllers', [])
   $scope.chat = Chats.get($stateParams.chatId);
 })
 
+  .controller('wrapperCtrl',function($scope){
+    $scope.Message = testObject.get("Message");
+    tquery.equalTo("index",1);
+    tquery.find().then(function(result){$scope.Message = result[0].get("Information");},function (err) {$scope.Message = "Failed";});
+  })
+
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
