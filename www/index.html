@@ -41,7 +41,7 @@
 <body ng-app="starter">
 
     <!-- header bar！！！ -->
-    <ion-nav-bar class="bar-royal">
+    <ion-nav-bar class="navbar">
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
       </ion-nav-back-button>
     </ion-nav-bar>
@@ -50,7 +50,7 @@
     <!-- fixed tabs -->
     <script id="templates/tabs.html" type="text/ng-template">
       <ion-view>
-        <ion-tabs class="tabs-icon-top tabs-positive">
+        <ion-tabs class="tabs-icon-top">
 
           <ion-tab title="Home" icon="ion-ios-home" href="#/tab/home">
             <ion-nav-view name="home-tab"></ion-nav-view>
@@ -142,30 +142,13 @@
               <p>
                 This is my PS3！I bought it in 2013. Anyone want play with it? It's free to lend！'
               </p>
-              <p>
-                <a href="#" class="subdued">1 Like</a>
-                <a href="#" class="subdued">5 Comments</a>
-              </p>
-            </div>
-
-            <div class="item tabs tabs-secondary tabs-icon-left">
-              <a class="tab-item" href="#">
-                <i class="icon ion-thumbsup"></i>
-                Like
-              </a>
-              <a class="tab-item" href="#">
-                <i class="icon ion-chatbox"></i>
-                Comment
-              </a>
-              <a class="tab-item" href="#">
-                <i class="icon ion-share"></i>
-                Share
-              </a>
-            </div>
-
+              <div><i class="icon ion-location"></i>
+                999m</div>
         </ion-content>
       </ion-view>
     </script>
+
+
 
 
     <!-- search part!!!! -->
