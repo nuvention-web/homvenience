@@ -16,13 +16,22 @@ angular.module('starter.controllers', [])
     Chats.remove(chat);
   };
 })
+  .controller('SignInCtrl', function($scope, $state) {
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+    $scope.signIn = function(user) {
+      console.log('Sign-In', user);
+      $state.go('tabs.home');
+    };
 
-  .controller('wrapperCtrl',function($scope){
-    console.log();
+  })
+
+//.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+//  $scope.chat = Chats.get($stateParams.chatId);
+//})
+
+
+  .controller('SearchCtrl',function($scope){
+    $scope.search_res = [];
     APP.search($scope,1);
   })
 
