@@ -1,7 +1,11 @@
+/**
+ * Created by herbertxu on 1/24/16.
+ */
+
 
 Parse.initialize("KnJk0tRr89V3CoheSEVz2Q89B6K1DMjLFGu6Kjj0", "YUFmkfELE7CXIHVfI8tnIjjPzcTFr7qSacEAWJmC");
 
-var TestObject = Parse.Object.extend("TestObject");
+/*var TestObject = Parse.Object.extend("TestObject");
 var testObject = new TestObject();
 testObject.save({Message: "Hello World"}, {
   success: function(object) {
@@ -10,7 +14,7 @@ testObject.save({Message: "Hello World"}, {
   error: function(model, error) {
     $(".error").show();
   }
-});
+});*/
 
 var Test = Parse.Object.extend("Test");
 
@@ -58,8 +62,9 @@ var Customer = Parse.Object.extend("Customer" , {
     query.notEqualTo("Desc","");
     query.find({
       success:function(result) {
-        alert($scope.search_res.length);
+        console.log("got something");
         $scope.search_res = result;
+        console.log($scope.search_res.length);
       },
       error:function(err){
         alert("Search Failed");
@@ -69,5 +74,3 @@ var Customer = Parse.Object.extend("Customer" , {
 });
 
 var APP = new Customer();
-APP.search(1);
-alert(display.search_items[0].get("Desc"));

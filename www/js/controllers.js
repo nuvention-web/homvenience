@@ -25,14 +25,21 @@ angular.module('starter.controllers', [])
 
   })
 
+  .controller('HomeTabCtrl', function($scope) {
+    console.log('HomeTabCtrl');
+  })
+
 //.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
 //  $scope.chat = Chats.get($stateParams.chatId);
 //})
 
 
   .controller('SearchCtrl',function($scope){
-    $scope.search_res = [];
-    APP.search($scope,1);
+    $scope.search_res = []
+    $scope.init = function () {
+      console.log("ready to fetch");
+      APP.search($scope, 1);
+    }
   })
 
 .controller('AccountCtrl', function($scope) {

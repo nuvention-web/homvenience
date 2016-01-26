@@ -90,7 +90,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 //      buttonClicked: function(index) {
 //        return true;
 //      }
-//    });
+//    });f
 
 //    // For example's sake, hide the sheet after two seconds
 //    $timeout(function() {
