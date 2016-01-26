@@ -35,6 +35,8 @@ var Display = Parse.Object.extend("Display", {
 
 var display = new Display();
 
+var findres = [];
+
 var Customer = Parse.Object.extend("Customer" , {
   ListOfPostItem : {},
   post : function (image, desc, owner){
@@ -55,17 +57,20 @@ var Customer = Parse.Object.extend("Customer" , {
         alert("Customer Upload Failed");
       });
   },
-  search : function (distance) {
+  search : function ($scope,distance) {
     var query = new Parse.Query(Item);
     query.notEqualTo("Desc","");
-    query.find().then(function(result) {
-      display.search_items.push(result[0]);
-      //alert("Hello"+result[0].get("Desc"));
-      alert("bonjour"+ display.search_items[0].get("Desc"));
-    },function(err){
-      alert("Search Failed");
+    query.find({
+      success:function(result) {
+        $scope.Message = result;
+        //alert("Hello"+result[0].get("Desc"));
+        alert("bonjour"+ display.search_items[0].get("Desc"));
+      },
+      error:function(err){
+        alert("Search Failed");
+      }
     });
-  },
+  }
 });
 
 var APP = new Customer();
