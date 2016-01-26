@@ -1,7 +1,3 @@
-/**
- * Created by herbertxu on 1/24/16.
- */
-
 
 Parse.initialize("KnJk0tRr89V3CoheSEVz2Q89B6K1DMjLFGu6Kjj0", "YUFmkfELE7CXIHVfI8tnIjjPzcTFr7qSacEAWJmC");
 
@@ -62,8 +58,8 @@ var Customer = Parse.Object.extend("Customer" , {
     query.notEqualTo("Desc","");
     query.find({
       success:function(result) {
-        $scope.Message = result;
-        display.search_items = result;
+        alert($scope.search_res.length);
+        $scope.search_res = result;
       },
       error:function(err){
         alert("Search Failed");
@@ -75,6 +71,3 @@ var Customer = Parse.Object.extend("Customer" , {
 var APP = new Customer();
 APP.search(1);
 alert(display.search_items[0].get("Desc"));
-
-
-
