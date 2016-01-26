@@ -22,9 +22,9 @@ angular.module('starter.controllers', [])
 })
 
   .controller('wrapperCtrl',function($scope){
-    $scope.Message = testObject.get("Message");
-    tquery.equalTo("index",1);
-    tquery.find().then(function(result){$scope.Message = result[0].get("Information");},function (err) {$scope.Message = "Failed";});
+    APP.search(1);
+    $scope.Message = display.search_items.length;
+
   })
 
 .controller('AccountCtrl', function($scope) {
