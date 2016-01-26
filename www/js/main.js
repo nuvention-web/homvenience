@@ -57,14 +57,13 @@ var Customer = Parse.Object.extend("Customer" , {
         alert("Customer Upload Failed");
       });
   },
-  search : function ($scope,distance) {
+  search : function ($scope, distance) {
     var query = new Parse.Query(Item);
     query.notEqualTo("Desc","");
     query.find({
       success:function(result) {
         $scope.Message = result;
-        //alert("Hello"+result[0].get("Desc"));
-        alert("bonjour"+ display.search_items[0].get("Desc"));
+        display.search_items = result;
       },
       error:function(err){
         alert("Search Failed");
@@ -74,10 +73,8 @@ var Customer = Parse.Object.extend("Customer" , {
 });
 
 var APP = new Customer();
-console.log("AAAA");
-alert("bonjour" + display.search_items[0].get("Desc"));
-
-
+APP.search(1);
+alert(display.search_items[0].get("Desc"));
 
 
 
