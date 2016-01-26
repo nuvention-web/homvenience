@@ -62,9 +62,8 @@ var Customer = Parse.Object.extend("Customer" , {
     query.notEqualTo("Desc","");
     query.find({
       success:function(result) {
-        $scope.Message = result;
-        //alert("Hello"+result[0].get("Desc"));
-        alert("bonjour"+ display.search_items[0].get("Desc"));
+        alert($scope.search_res.length);
+        $scope.search_res = result;
       },
       error:function(err){
         alert("Search Failed");
