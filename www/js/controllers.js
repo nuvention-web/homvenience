@@ -29,18 +29,44 @@ angular.module('starter.controllers', [])
 //  $scope.chat = Chats.get($stateParams.chatId);
 //})
 
+
   .controller('SearchCtrl',function($scope){
-    alert("HI");
     $scope.search_res = [];
-    alert("good");
-    alert($scope.search_res.length);
     APP.search($scope,1);
-    alert($scope.search_res.length);
-    alert("bye");
   })
 
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };
+})
+
+.controller(function($scope, $ionicActionSheet, $timeout) {
+
+ // Triggered on a button click, or some other target
+ $scope.show = function() {
+
+   // Show the action sheet
+   var hideSheet = $ionicActionSheet.show({
+     buttons: [
+       { text: '<b>Share</b> This' },
+       { text: 'Move' }
+     ],
+     destructiveText: 'Delete',
+     titleText: 'Modify your album',
+     cancelText: 'Cancel',
+     cancel: function() {
+          // add cancel code..
+        },
+     buttonClicked: function(index) {
+       return true;
+     }
+   });
+
+   // For example's sake, hide the sheet after two seconds
+   $timeout(function() {
+     hideSheet();
+   }, 2000);
+
+ };
 });

@@ -57,7 +57,7 @@ var Customer = Parse.Object.extend("Customer" , {
         alert("Customer Upload Failed");
       });
   },
-  search : function ($scope,distance) {
+  search : function ($scope, distance) {
     var query = new Parse.Query(Item);
     query.notEqualTo("Desc","");
     query.find({
@@ -73,9 +73,8 @@ var Customer = Parse.Object.extend("Customer" , {
 });
 
 var APP = new Customer();
-
-
-
+APP.search(1);
+alert(display.search_items[0].get("Desc"));
 
 
 
