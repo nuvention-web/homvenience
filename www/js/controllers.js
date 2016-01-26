@@ -22,6 +22,7 @@ angular.module('starter.controllers', [])
 })
 
   .controller('wrapperCtrl',function($scope){
+    console.log();
     APP.search(1);
     $scope.Message = display.search_items.length;
 

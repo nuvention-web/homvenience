@@ -69,7 +69,8 @@ var Customer = Parse.Object.extend("Customer" , {
 });
 
 var APP = new Customer();
-
+console.log("AAAA");
+alert("bonjour" + display.search_items[0].get("Desc"));
 
 
 
