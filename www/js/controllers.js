@@ -22,10 +22,21 @@ angular.module('starter.controllers', [])
 })
 
   .controller('wrapperCtrl',function($scope){
+<<<<<<< HEAD
     console.log();
     APP.search(1);
     $scope.Message = display.search_items.length;
 
+||||||| merged common ancestors
+    APP.search(1);
+    $scope.Message = display.search_items.length;
+
+=======
+    $scope.Message = testObject.get("Message");
+    //tquery.equalTo("index",1);
+    //tquery.find().then(function(result){$scope.Message = result[0].get("Information");},function (err) {$scope.Message = "Failed";});
+    APP.search($scope,1);
+>>>>>>> f22a4f1e5f7dface8830045a7d74bea876a96284
   })
 
 .controller('AccountCtrl', function($scope) {
