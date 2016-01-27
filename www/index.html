@@ -37,7 +37,7 @@
 
   </head>
 
-  <body ng-app="starter">
+  <body ng-app="starter" ng-controller = "MenuCtrl">
     <ion-nav-bar class="bar-royal">
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
       </ion-nav-back-button>
@@ -46,7 +46,7 @@
 
     <script id="templates/tabs.html" type="text/ng-template">
       <ion-view>
-        <ion-tabs class="tabs-icon-top tabs-positive">
+        <ion-tabs class="tabs-icon-only tabs-positive">
 
           <ion-tab title="Home" icon="ion-ios-home" href="#/tab/home">
             <ion-nav-view name="home-tab"></ion-nav-view>
@@ -56,9 +56,10 @@
             <ion-nav-view name="search-tab"></ion-nav-view>
           </ion-tab>
 
-          <ion-tab title="Post" icon="icon ion-plus-circled" href="#/tab/post">
+          <ion-tab title="Post" icon="icon ion-plus-circled" ng-click="modal.show()">
               <ion-nav-view name="post-tab" ></ion-nav-view>
           </ion-tab>
+
 
           <ion-tab title="Chat" icon="ion-chatbubbles" href="#/tab/chat">
             <ion-nav-view name="post-tab" ></ion-nav-view>
@@ -67,8 +68,6 @@
           <ion-tab title="Account" icon="ion-person" href="#/tab/account">
             <ion-nav-view name="post-tab" ></ion-nav-view>
           </ion-tab>
-
-
         </ion-tabs>
       </ion-view>
     </script>
@@ -78,12 +77,6 @@
     <script id="templates/sign-in.html" type="text/ng-template">
       <ion-view view-title="">
         <ion-content>
-
-          <div class="bar bar-header">
-            <button class="button button-icon ion ion-chevron-left button-clear button-dark"></button>
-            <div class="h2 title">Sign-In</div>
-            <button class="button button-clear button-positive">Sign-Up</button>
-          </div>
           <div class="list">
             <br>
             <label class="item item-input">
@@ -111,14 +104,6 @@
       <ion-view view-title="Forgot Password">
         <ion-content padding="true">
           <p>
-            Yeah this is just a demo showing how views can be shown without tabs, then you can navigate
-            to views within tabs. Additionally, only one set of tabs needs to be written for all of the different views that should go inside the tabs. (Compared to written the same tab links in the footer of every view that's in a tab.)
-          </p>
-          <p>
-            There's no username/password, just click
-            the Sign-In button back a the sign-in view.
-          </p>
-          <p>
             Return to <a href="#/sign-in">Sign-In</a>.
           </p>
         </ion-content>
@@ -137,30 +122,13 @@
             </div>
 
             <div class="item item-body">
-              <img class="full-image" src="img/ps.png">
-              <p>
+            <p>
                 This is my PS3！I bought it in 2013. Anyone want play with it? It's free to lend！'
-              </p>
-              <p>
-                <a href="#" class="subdued">1 Like</a>
-                <a href="#" class="subdued">5 Comments</a>
-              </p>
+            </p>
+              <img class="full-image" src="img/ps.png">
+              
             </div>
 
-            <div class="item tabs tabs-secondary tabs-icon-left">
-              <a class="tab-item" href="#">
-                <i class="icon ion-thumbsup"></i>
-                Like
-              </a>
-              <a class="tab-item" href="#">
-                <i class="icon ion-chatbox"></i>
-                Comment
-              </a>
-              <a class="tab-item" href="#">
-                <i class="icon ion-share"></i>
-                Share
-              </a>
-            </div>
 
             <div class="item bar bar-balanced tabs tabs-secondary tabs-icon-left">
               <p>
@@ -191,6 +159,33 @@
           </ion-content>
         </ion-view>
     </script>
+
+    <script id="templates/modal.html" type="text/ng-template">
+      <ion-modal-view>  
+        <ion-header-bar class="bar-royal bar-header bar-positive bar">
+          <h1 class="title">New Post</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+        <div class="list card">
+
+        <div class="item item-avatar">
+          <img src="avatar.jpg">
+          <h2>Pretty Hate Machine</h2>
+          <p>Nine Inch Nails</p>
+        </div>
+        <div>
+        <button class = "button button-icon icon ion-camera" ng-click = showDetails()></button>
+        <label class="item item-input">
+        <textarea placeholder="Comments" rows = "10"></textarea>
+        </label>                  
+        </div>
+        </div>
+
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
 
 <feature name="Camera">
     <param name="ios-package" value="CDVCamera" />

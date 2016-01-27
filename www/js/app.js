@@ -62,6 +62,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     });
+    // .state("tabs.post", {
+    //   url: '/post',
+    //   views:{
+    //     'post-tab':{
+    //       templateUrl: 'templates/home.html',
+    //       controller: 'HomeTabCtrl'
+    //     }
+    //   }
+    // });
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/sign-in');
