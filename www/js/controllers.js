@@ -35,10 +35,10 @@ angular.module('starter.controllers', [])
 
 
   .controller('SearchCtrl',function($scope){
-    $scope.search_res = []
-    $scope.init = function () {
-      console.log("ready to fetch");
-      APP.search($scope, 1);
+    $scope.defaultDistance = 1;
+    $scope.search_res  = [];
+    $scope.refresh = function () {
+      APP.search($scope, $scope.defaultDistance);
     }
   })
 

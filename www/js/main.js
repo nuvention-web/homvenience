@@ -60,11 +60,11 @@ var Customer = Parse.Object.extend("Customer" , {
   search : function ($scope, distance) {
     var query = new Parse.Query(Item);
     query.notEqualTo("Desc","");
+    var finded = []
     query.find({
       success:function(result) {
-        console.log("got something");
         $scope.search_res = result;
-        console.log($scope.search_res.length);
+        $scope.$apply();
       },
       error:function(err){
         alert("Search Failed");
