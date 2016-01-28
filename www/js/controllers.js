@@ -109,11 +109,21 @@ angular.module('starter.controllers', [])
    $scope.SignIn = function(u) {
       Parse.User.logIn(u.username, u.password, {
         success: function(user) {
+          currentUser = Parse.User.current();
+          console.log(currentUser.get("username"))
+          isLogin = true;
           $state.go('tabs.home');
         },
         error: function(user, error) {
           // The login failed. Check error to see why.
         }
       });
-   };
+   }
+   $scope.Header = function(){
+    if(!isLogin)
+      return "button button-clear icon ion-log-in";
+    else
+      return "button button-clear icon ion-log-out";
+   }
+   ;
   });

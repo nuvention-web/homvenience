@@ -22,9 +22,6 @@ var Test = Parse.Object.extend("Test");
 
 var tquery = new Parse.Query(Test);
 
-var user = new Parse.User();
-
-
 // user.signUp(null, {
 //   success: function(user){
 //     alert('success');
@@ -33,14 +30,14 @@ var user = new Parse.User();
 //     alert("error");
 //   }
 // })
-Parse.User.logOut();
+
 
 var currentUser = Parse.User.current();
 if(currentUser){
-  alert(currentUser.phone);
+  isLogin = true;
 }
 else{
-  alert('Failed');
+  console.log('Failed');
 }
 
 
