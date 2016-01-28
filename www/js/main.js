@@ -16,14 +16,37 @@ testObject.save({Message: "Hello World"}, {
   }
 });*/
 
+var isLogin = false;
+
 var Test = Parse.Object.extend("Test");
 
 var tquery = new Parse.Query(Test);
 
+var user = new Parse.User();
+
+
+// user.signUp(null, {
+//   success: function(user){
+//     alert('success');
+//   },
+//   error: function(user, error){
+//     alert("error");
+//   }
+// })
+Parse.User.logOut();
+
+var currentUser = Parse.User.current();
+if(currentUser){
+  alert(currentUser.phone);
+}
+else{
+  alert('Failed');
+}
 
 
 // Item class
 var Item = Parse.Object.extend("Item",{
+  Title:"",
   Desc:"",
   Owner:"",
   Name:""
@@ -39,13 +62,12 @@ var findres = [];
 
 var Customer = Parse.Object.extend("Customer" , {
   ListOfPostItem : {},
-  User : null,
-  post : function (image, desc, owner){
+  post : function (title, image, desc, owner){
     var item = new Item();
-    item.set("Desc",desc);
+    item.set("Title", title)
     item.set("Image",image);
+    item.set("Desc",desc);
     item.set("Owner",owner);
-
     item.save().then(function(object){
         this.ListOfPostItem.add(object);
       },

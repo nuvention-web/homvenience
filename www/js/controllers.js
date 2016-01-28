@@ -1,3 +1,4 @@
+
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
@@ -47,7 +48,7 @@ angular.module('starter.controllers', [])
       enableFriends: true
     };
   })
-  .controller('MenuCtrl', function($scope, $ionicModal, $ionicActionSheet) {
+  .controller('MenuCtrl', function($scope, $ionicModal, $ionicActionSheet, $state) {
     $scope.newPost = [
       { name: 'Gordon Freeman' },
       { name: 'Barney Calhoun' },
@@ -59,8 +60,8 @@ angular.module('starter.controllers', [])
       $scope.modal = modal;
     });
     
-    $scope.createPost = function(u) {        
-      $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
+    $scope.createContact = function(u) {        
+      APP.post(u.title, NULL, u.Desc, 'Ounan')
       $scope.modal.hide();
     };
 
@@ -75,7 +76,7 @@ angular.module('starter.controllers', [])
        cancelText: 'Cancel',
        cancel: function() {
             // add cancel code..
-          },
+       },
        buttonClicked: function(index) {
         if(index == 1){
           alert("fuck");
@@ -83,5 +84,36 @@ angular.module('starter.controllers', [])
          return true;
        }
      });
+   }
+
+    $scope.postShow = function() {
+
+     // Show the action sheet
+     var hideSheet = $ionicActionSheet.show({
+       buttons: [
+         { text: 'I can help' },
+         { text: 'I need help' }
+       ],
+       cancelText: 'Cancel',
+       cancel: function() {
+            // add cancel code..
+       },
+       buttonClicked: function(index) {
+        if(index == 0){
+          $scope.modal.show();
+        }
+         return true;
+       }
+     });
+   }
+   $scope.SignIn = function(u) {
+      Parse.User.logIn(u.username, u.password, {
+        success: function(user) {
+          $state.go('tabs.home');
+        },
+        error: function(user, error) {
+          // The login failed. Check error to see why.
+        }
+      });
    };
-});
+  });
