@@ -84,3 +84,4 @@ angular.module('ionicApp', ['ionic'])
 .controller('HomeTabCtrl', function($scope) {
   console.log('HomeTabCtrl');
 });
+

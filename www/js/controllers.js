@@ -35,45 +35,53 @@ angular.module('starter.controllers', [])
 
 
   .controller('SearchCtrl',function($scope){
-    $scope.defaultDistance = 1;
-    $scope.search_res  = [];
-    $scope.refresh = function () {
-      APP.search($scope, $scope.defaultDistance);
+    $scope.search_res = []
+    $scope.init = function () {
+      console.log("ready to fetch");
+      APP.search($scope, 1);
     }
   })
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-})
+  .controller('AccountCtrl', function($scope) {
+    $scope.settings = {
+      enableFriends: true
+    };
+  })
+  .controller('MenuCtrl', function($scope, $ionicModal, $ionicActionSheet) {
+    $scope.newPost = [
+      { name: 'Gordon Freeman' },
+      { name: 'Barney Calhoun' },
+      { name: 'Lamarr the Headcrab' },
+    ];
+    $ionicModal.fromTemplateUrl('templates/modal.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    
+    $scope.createPost = function(u) {        
+      $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
+      $scope.modal.hide();
+    };
 
-.controller(function($scope, $ionicActionSheet, $timeout) {
+    $scope.showDetails = function() {
 
- // Triggered on a button click, or some other target
- $scope.show = function() {
-
-   // Show the action sheet
-   var hideSheet = $ionicActionSheet.show({
-     buttons: [
-       { text: '<b>Share</b> This' },
-       { text: 'Move' }
-     ],
-     destructiveText: 'Delete',
-     titleText: 'Modify your album',
-     cancelText: 'Cancel',
-     cancel: function() {
-          // add cancel code..
-        },
-     buttonClicked: function(index) {
-       return true;
-     }
-   });
-
-   // For example's sake, hide the sheet after two seconds
-   $timeout(function() {
-     hideSheet();
-   }, 2000);
-
- };
+     // Show the action sheet
+     var hideSheet = $ionicActionSheet.show({
+       buttons: [
+         { text: 'Take a picture' },
+         { text: 'Select from Photos' }
+       ],
+       cancelText: 'Cancel',
+       cancel: function() {
+            // add cancel code..
+          },
+       buttonClicked: function(index) {
+        if(index == 1){
+          alert("fuck");
+        }
+         return true;
+       }
+     });
+   };
 });

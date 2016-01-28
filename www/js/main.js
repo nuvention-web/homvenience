@@ -39,6 +39,7 @@ var findres = [];
 
 var Customer = Parse.Object.extend("Customer" , {
   ListOfPostItem : {},
+  User : null,
   post : function (image, desc, owner){
     var item = new Item();
     item.set("Desc",desc);
@@ -83,4 +84,4 @@ var Customer = Parse.Object.extend("Customer" , {
 
 var APP = new Customer();
 
-
+APP.search(scope, 1);
