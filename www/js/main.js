@@ -45,6 +45,7 @@ var Customer = Parse.Object.extend("Customer" , {
     item.set("Image",image);
     item.set("Owner",owner);
 
+    
     item.save().then(function(object){
         this.ListOfPostItem.add(object);
       },
@@ -61,7 +62,7 @@ var Customer = Parse.Object.extend("Customer" , {
     var query = new Parse.Query(Item);
     query.notEqualTo("Desc","");
     var finded = []
-    query.find({
+    /*query.find({
       success:function(result) {
         $scope.search_res = result;
         $scope.$apply();
@@ -69,7 +70,14 @@ var Customer = Parse.Object.extend("Customer" , {
       error:function(err){
         alert("Search Failed");
       }
-    });
+    });*/
+    query.find().then(function(result) {
+      $scope.search_res = result;
+      $scope.$apply();
+    },
+    function(err){
+      alert("Search Failed");
+    })
   }
 });
 
