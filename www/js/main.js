@@ -30,7 +30,7 @@ var tquery = new Parse.Query(Test);
 //     alert("error");
 //   }
 // })
-
+Parse.User.logOut();
 
 var currentUser = Parse.User.current();
 if(currentUser){

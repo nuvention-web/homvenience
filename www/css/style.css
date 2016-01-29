@@ -9,3 +9,52 @@
 }
 
 */
+
+.bar-col{
+	background-color: #53d769 !important;
+}
+.bar-col h2{
+	color:#fff;
+}
+
+.tab-nav{
+	background-color: #53d769 !important;
+}
+
+#user-item{
+	padding-bottom: 0px !important;
+}
+
+#itembar{
+	font-size: 15px !important;
+}
+
+.icon-site{
+	font-size: 20px !important;
+}
+/* 可以定义icon的颜色 */
+#itembar .icolor{
+	color:#53d769;
+	font-size: 16px;
+}
+
+.item-detail{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.list{
+	border-color: #ddd;
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-style: solid;
+}
+
+#item-header{
+	border-width: 0px !important;
+}
+
+
+
+
+

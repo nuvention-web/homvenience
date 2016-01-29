@@ -28,6 +28,11 @@ angular.module('starter.controllers', [])
 
   .controller('HomeTabCtrl', function($scope) {
     console.log('HomeTabCtrl');
+    $scope.search_res = []
+    $scope.init = function () {
+      console.log("ready to fetch");
+      APP.search($scope, 1);
+    }
   })
 
 //.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -110,7 +115,8 @@ angular.module('starter.controllers', [])
       Parse.User.logIn(u.username, u.password, {
         success: function(user) {
           currentUser = Parse.User.current();
-          console.log(currentUser.get("username"))
+          alert(currentUser.get("username"));
+          console.log(currentUser.get("username"));
           isLogin = true;
           $state.go('tabs.home');
         },
@@ -127,3 +133,5 @@ angular.module('starter.controllers', [])
    }
    ;
   });
+
+
