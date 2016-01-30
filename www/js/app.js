@@ -53,15 +53,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+
     .state('detail', {
       url: '/detail',
-      views: {
-        'home-tab': {
-          templateUrl: 'templates/detail.html',
-          controller: 'DetailTabCtrl'
-        }
-      }
+      templateUrl: 'templates/detail.html',
+      controller: 'DetailCtrl'
     })
+
     .state('tabs.search',{
       url: '/search',
       views:{

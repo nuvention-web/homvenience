@@ -17,7 +17,9 @@ angular.module('starter.controllers', [])
     Chats.remove(chat);
   };
 })
-  .controller('SignInCtrl', function($scope, $state) {
+
+
+.controller('SignInCtrl', function($scope, $state) {
 
     $scope.signIn = function(user) {
       console.log('Sign-In', user);
@@ -26,21 +28,36 @@ angular.module('starter.controllers', [])
 
   })
 
-  .controller('HomeTabCtrl', function($scope) {
+
+.controller('HomeTabCtrl', function($scope) {
     console.log('HomeTabCtrl');
     $scope.search_res = []
     $scope.init = function () {
-      console.log("ready to fetch");
+      console.log('ready to fetch');
       APP.search($scope, 1);
+    }
+    $scope.esc = function() {
+      $state.go('detail');
     }
   })
 
 //.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
 //  $scope.chat = Chats.get($stateParams.chatId);
 //})
+  
 
 
-  .controller('SearchCtrl',function($scope){
+.controller('DetailCtrl',function($scope){
+    $scope.search_res = []
+    $scope.init = function () {
+      console.log("ready to fetch");
+      APP.search($scope, 1);
+    }
+
+  })
+
+
+.controller('SearchCtrl',function($scope){
     $scope.search_res = []
     $scope.init = function () {
       console.log("ready to fetch");
@@ -53,6 +70,7 @@ angular.module('starter.controllers', [])
       enableFriends: true
     };
   })
+
   .controller('MenuCtrl', function($scope, $ionicModal, $ionicActionSheet, $state) {
     $scope.newPost = [
       { name: 'Gordon Freeman' },
@@ -111,6 +129,8 @@ angular.module('starter.controllers', [])
        }
      });
    }
+
+
    $scope.SignIn = function(u) {
       Parse.User.logIn(u.username, u.password, {
         success: function(user) {
@@ -125,6 +145,8 @@ angular.module('starter.controllers', [])
         }
       });
    }
+
+  //bar上面的两种状态
    $scope.Header = function(){
     if(!isLogin)
       return "button button-clear icon ion-log-in";

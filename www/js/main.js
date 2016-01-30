@@ -22,6 +22,8 @@ var Test = Parse.Object.extend("Test");
 
 var tquery = new Parse.Query(Test);
 
+
+
 // user.signUp(null, {
 //   success: function(user){
 //     alert('success');

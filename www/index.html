@@ -114,7 +114,9 @@
     </script>
 
 
-    <!--Homepage!!!!!-->
+
+
+<!--Homepage!!!!!-->
 
     <script id="templates/home.html" type="text/ng-template">
       <ion-view ng-init="init()">
@@ -123,38 +125,49 @@
           <h2 class="title">Home</h2>
         </ion-header-bar>
 
-        <ion-content >
+        <ion-content>
        
-          <div class="list" ng-repeat = "x in search_res">
-              <a id="item-header"class="item item-avatar">
+          <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
+
+              <a id="item-header" class="item item-avatar" >
                   <img src="img/mike.png">
-                  <h2>Venkman</h2>
-                  <p>Back off, man. Im a scientist.</p>
+                  <h2>Venkman&nbsp<i class="icon fa fa-smile-o icolor"></i></h2>
+                  <p>活跃度.</p>
               </a>
-              <div class='item-detail' >
-                <img class="full-image" src="img/ps.png">
-                <p>
-                    This is my PS3！I bought it in 2013. Anyone want play with it? It's free to lend！'
-                </p>
-                <div id='itembar'class="row">
-                  <div class="col col-50"><i class="icon ion-ios-location icon-site"></i>
-                  Evanston</div>
-                  <div class="col col-20"><i class="icon fa fa-smile-o icolor"></i>
-                   nice</div>
-                  <div class="col col-33"><i class="icon ion-chatbubble icolor"></i>
-                   comments</div>
-              </div>
-          </div>
+
+              <a id='home-a' href="#/detail">
+                <div class='item-detail'>
+                  <img class="full-image" src="img/ps.png">
+                  <p>
+                      This is my PS3！I bought it in 2013. Anyone want play with it? It's free to lend！'
+                  </p>
+                  <div id='itembar'class="row">
+                      <div class="col col-67"><i class="icon ion-ios-location icon-site"></i>
+                      Evanston
+                      </div>
+                      <div class="col col-13"><i class="icon fa fa-smile-o icolor"></i>
+                       7
+                       </div>
+                      <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
+                       10
+                       </div>
+                  </div>
+                </div>
+              </a>
+
+            </div>
         </ion-content>
       </ion-view>
     </script>
 
-    <!--item-detail-->
+
+
+<!--item-detail-->
     <script id="templates/detail.html" type="text/ng-template">
-      <ion-view>
+      <ion-view ng-init="init()">
 
         <ion-header-bar class="bar-col bar bar-header">
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+          <h2 class="title">Detail</h2>
         </ion-header-bar>
 
         <ion-content >
@@ -162,23 +175,38 @@
           <div class="list">
               <a id="item-header"class="item item-avatar" href="#">
                   <img src="img/mike.png">
-                  <h2>Venkman</h2>
-                  <p>Back off, man. Im a scientist.</p>
+                  <h2 >Venkman</h2>
+                  <p>
+                    Back. I am going to zhuang B.
+                  </p>
               </a>
-              <div class='item-detail' >
-                <img class="full-image" src="img/ps.png">
+              <div class='item-detail'>
                 <p>
-                    This is my PS3！I bought it in 2013. Anyone want play with it? It's free to lend！'
+                    This is my PS3！I bought it in 2013. Anyone want play with it? Free to lend
                 </p>
                 <div id='itembar'class="row">
-                  <div class="col col-50"><i class="icon ion-ios-location icon-site"></i>
-                  Evanston</div>
-                  <div class="col col-20"><i class="icon fa fa-smile-o icolor"></i>
-                   nice</div>
-                  <div class="col col-33"><i class="icon ion-chatbubble icolor"></i>
-                   comments</div>
+                  <i class="icon ion-ios-location icon-site"></i>
+<!-- 传定位进来 -->         
+                  <p>&nbsp Evanston</p>
+                  <p>&nbsp 多久之前</p>
+                </div>
+              <img class="full-image" src="img/ps.png">
               </div>
+            <p>
+            <a class="button icon icon-right ion-chevron-right" href="#/tab/home">Home</a>
+            </p>
           </div>
+
+          <div id='detail-comment' class="list" ng-repeat = "x in search_res">
+              <a class="item item-avatar" href="#">
+                
+                <img src="venkman.jpg">
+                <h2>Venkman</h2>
+                <p>Back off, man. Im a scientist.</p>
+              </a>
+              <p>adfasdfaf</p>
+          </div>
+
         </ion-content>
       </ion-view>
     </script>
