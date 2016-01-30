@@ -61,7 +61,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller:'SearchCtrl'
         }
       }
-    });
+    })
+    /*.state('tabs.itemdetail',{
+      url: '/itemdetail',
+      views:{
+        'itemdetail':{
+          templateUrl: 'templates/itemdetail.html',
+          controller: 'ItemDetailCtrl'
+        }
+      }
+    });*/
     // .state("tabs.post", {
     //   url: '/post',
     //   views:{

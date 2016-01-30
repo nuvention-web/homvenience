@@ -38,7 +38,7 @@ angular.module('starter.controllers', [])
     $scope.search_res = []
     $scope.init = function () {
       console.log("ready to fetch");
-      APP.search($scope, 1);
+      Cus.search($scope, 1);
     }
   })
 
@@ -58,8 +58,8 @@ angular.module('starter.controllers', [])
     }).then(function(modal) {
       $scope.modal = modal;
     });
-    
-    $scope.createPost = function(u) {        
+
+    $scope.createPost = function(u) {
       $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
       $scope.modal.hide();
     };
