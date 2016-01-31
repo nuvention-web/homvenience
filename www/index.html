@@ -306,12 +306,16 @@
               Request
             </li>
             </a>
+            <a href='#offering'>
             <li class="item">
               Offering
             </li>
+            </a>
+            <a href='#record'>
             <li class="item">
               Record
             </li>
+            </a>
         </ul>  
         
 
@@ -342,7 +346,49 @@
                 <button class="button button-clear button-text ion-ios-checkmark-outline choice"></button>
             </li>
         </ul>  
+        </ion-content>
+      </ion-view>
+    </script>
 
+    <script id="templates/record.html" type="text/ng-template">
+      <ion-view>
+
+        <ion-header-bar class="bar-col bar bar-header">
+          <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
+          </a>
+          <h2 class="title rest-bar">Record</h2>   
+        </ion-header-bar>
+
+        <ion-content>
+        <ul class="list">
+            <li class="item item-avatar">
+                <img src="img/mike.png">
+                <h2 >Venkman</h2>
+                <button class="{{head()}}"></button>
+            </li>
+        </ul>  
+        </ion-content>
+      </ion-view>
+    </script>
+
+
+    <script id="templates/offering.html" type="text/ng-template">
+      <ion-view>
+
+        <ion-header-bar class="bar-col bar bar-header">
+          <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
+          </a>
+          <h2 class="title rest-bar">Offering</h2>   
+        </ion-header-bar>
+
+        <ion-content>
+        <ul class="list">
+            <li class="item item-avatar">
+                <img src="img/mike.png">
+                <h2 >Venkman</h2>
+                <button class="{{head()}}}"></button>
+            </li>
+        </ul>  
         </ion-content>
       </ion-view>
     </script>
