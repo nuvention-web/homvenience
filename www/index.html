@@ -37,7 +37,7 @@
 
   </head>
 
-  <body ng-app="starter" ng-controller="MenuCtrl">
+  <body ng-app="starter" ng-controller="MainCtrl">
 <!--     <ion-nav-bar class="bar-royal">
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
       </ion-nav-back-button> -->
@@ -94,7 +94,7 @@
             </label>
           </div>
           <div class="padding">
-            <button class="button button-block button-positive" ng-click="SignIn(user)">
+            <button class="button button-block button-balanced" ng-click="SignIn(user)">
               Sign-In
             </button>
             <p class="text-center">
@@ -277,7 +277,7 @@
 <!--发布信息页面-->
     <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>  
-        <ion-header-bar class="bar-royal bar-header bar-positive bar">
+        <ion-header-bar class="bar-col bar-header bar-positive bar">
           <h2 class="title">I can help</h2>
           <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
           <button class="button button-clear button-primary" ng-click="createContact(newItem)">Post</button>
