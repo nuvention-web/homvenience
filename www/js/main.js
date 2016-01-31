@@ -169,9 +169,9 @@ var Customer = Parse.Object.extend("Customer" , {
     query.notEqualTo("Owner",currentUser.get("username"));
     query.notEqualTo("Holder",currentUser.id);
     query.find().then(function(result) {
-      alert("serach!");
       $scope.search_res = result;
       $scope.$apply();
+      console.log($scope.search_res.length);
     },
     function(err){
       alert("Search Failed");
