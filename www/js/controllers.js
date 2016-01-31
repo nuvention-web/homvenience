@@ -182,6 +182,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $state.go('tabs.home');
         },
         error: function(user, error) {
+          alert(error);
           // The login failed. Check error to see why.
         }
       });
