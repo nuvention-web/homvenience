@@ -168,6 +168,7 @@ var Customer = Parse.Object.extend("Customer" , {
     var query = new Parse.Query(Item);
     query.notEqualTo("Owner",currentUser.get("username"));
     query.find().then(function(result) {
+      alert("serach!");
       $scope.search_res = result;
       $scope.$apply();
     },
