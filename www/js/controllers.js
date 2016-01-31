@@ -99,12 +99,8 @@ angular.module('starter.controllers', ['ionic'])
 
   })
 
-  .controller('MenuCtrl', function($scope, $ionicModal, $ionicActionSheet, $state) {
-    $scope.newPost = [
-      { name: 'Gordon Freeman' },
-      { name: 'Barney Calhoun' },
-      { name: 'Lamarr the Headcrab' },
-    ];
+  .controller('MenuCtrl', function($scope, $ionicModal, $ionicPopup, $ionicActionSheet, $state) {
+    
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
     }).then(function(modal) {
@@ -172,6 +168,16 @@ angular.module('starter.controllers', ['ionic'])
           // The login failed. Check error to see why.
         }
       });
+   }
+
+  $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Don\'t eat that!',
+       template: 'It might taste good'
+     });
+     alertPopup.then(function(res) {
+       console.log('Thank you for not eating my delicious ice cream cone');
+     });
    }
 
   //bar上面的两种状态
