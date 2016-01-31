@@ -218,6 +218,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             }
           });
           APP.set("CurrentGP", GP);
+          APP.search($scope, 1);
           $state.go('tabs.home');
         },
         error: function(user, error) {
@@ -227,6 +228,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       });
    }
 
+   $scope.SignIn = function() {
+    Parse.User.logIn();
+    isLogin = false;
+  }
   //bar上面的两种状态
    $scope.Header = function(){
     if(!isLogin)

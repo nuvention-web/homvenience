@@ -20,8 +20,6 @@ var isLogin = false;
 
 var photo_arry = [];
 
-Parse.User.logOut();
-
 var currentUser = Parse.User.current();
 if(currentUser){
   isLogin = true;
