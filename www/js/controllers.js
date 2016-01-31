@@ -122,7 +122,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       item.set("Title", $scope.newItem.Title);
       item.set("ImageArry",photo_arry);
       item.set("Desc",$scope.newItem.Desc);
-      item.set("User",currentUser);
+      item.set("Holder",currentUser.id);
+      item.set("Owner", currentUser.get("username"));
+      item.set("State", "Available");
       item.set("GeoPoint", GP);
       item.save(null, {
         success: function(item) {
