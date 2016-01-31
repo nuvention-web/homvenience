@@ -42,7 +42,7 @@ var Item = Parse.Object.extend("Item",{
   requestList:[],
 
   clearRequests : function(){
-    this.requestList = [];
+    this.set("requestList" ,[]);
   }
 });
 
@@ -56,6 +56,7 @@ var Request = Parse.Object.extend("Request",{
   itemId:null,
   requesterId:null,
   time:null
+
 });
 
 var Customer = Parse.Object.extend("Customer" , {
@@ -87,12 +88,21 @@ var Customer = Parse.Object.extend("Customer" , {
 
 
   accept:function(requestId,itemId,requesterId){
+    var app = this;
     var query = new Parse.Query(Item);
     query.get(itemId).then(function(obj){
       obj.set("State","LentOut");
       obj.set("Holder",requesterId);
-      obj.clearRequest();
-      obj.save();
+      obj.clearRequests();
+      obj.save().then(function(obj){
+        console.log("Start moving");
+        app.set("ListOfPostItem",delArray(itemId,app.get("ListOfPostItem")));
+        app.get("ListOfLent").push(itemId);
+        app.save();
+        if(app.get("ListOfPostItem").length == 0){
+          window.clearInterval(RequestTimer);
+        }
+      });
       console.log("accpeted!");
 
     });
@@ -106,11 +116,9 @@ var Customer = Parse.Object.extend("Customer" , {
     newRequest.set("requesterId",currentUser.id);
     newRequest.set("time",new Date());
     newRequest.save().then(function(obj){
-      alert("request saved");
       var query = new Parse.Query(Item);
       query.get(itemId).then(function(res){
         var rel = res.get("requestList");
-        alert("rel established");
         rel.push(obj.id);
         res.save().then(function(call){
           var req = app.get("Requests");
@@ -175,18 +183,15 @@ var RequestTimer;
 
 var checkRequest = function(){
   //Only for test
-  if(APP.get("ListOfRequest").length!=0){
+  /*if(APP.get("ListOfRequest").length!=0){
     var a = APP.get("ListOfRequest");
     var id = a[0];
     var testq = new Parse.Query(Request);
     testq.get(id).then(function(obj){
       console.log("start accept");
-      APP.accept(id,obj.get("itemId"),obj.get("requesterId")).then(function (){
-
-      });
-
+      APP.accept(id,obj.get("itemId"),obj.get("requesterId"));
     });
-  }
+  }*/
   //
   console.log("start check request");
   var posted = APP.get("ListOfPostItem");
@@ -226,6 +231,7 @@ var checkAccept = function(){
             APP.get("ListOfGet").push(itemid);
           }
           obj.destroy();
+          APP.set("Requests",delArray(obj.id,APP.get("Requests")));
           console.log("destroy"+ req);
         }
       });
@@ -233,3 +239,13 @@ var checkAccept = function(){
   }
   APP.save();
 };
+
+var delArray = function (target,array){
+  var res = [];
+  for(var i = 0;i<array.length;i++){
+    if(array[i] != target) {
+      res.push(array[i]);
+    }
+  }
+  return res;
+}

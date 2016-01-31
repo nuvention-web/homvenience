@@ -57,7 +57,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       console.log("ready to fetch");
       APP.search($scope, 1);
     };
-    $scope.testRequest = function(itemId){
+    $scope.Request = function(itemId){
       APP.request(itemId);
     };
   })
@@ -77,39 +77,41 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   })
 
-  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $state, $cordovaCamera, $ionicPopup) {
+  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
+
     $scope.newItem = {
       Title : "",
       Desc : ""
     };
 
-
-    $scope.newPost = [
-      { name: 'Gordon Freeman' },
-      { name: 'Barney Calhoun' },
-      { name: 'Lamarr the Headcrab' },
-    ];
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
     }).then(function(modal) {
       $scope.modal = modal;
     });
-
-    $scope.createContact = function(u) {
-      if(!$scope.newItem.Title)
+   // An alert dialog
+     $scope.CreatePostAlert = function() {
+       var alertPopup = $ionicPopup.alert({
+         template: 'Post Success!'
+       });
+       alertPopup.then(function(res) {
+         console.log('Thank you for not eating my delicious ice cream cone');
+       });
+     };
+    $scope.createPost = function() {
+      alert($scope.newItem.Title);
+      if($scope.newItem.Title == "")
       {
-        alert("Please enter the title");
-      }
-      if(!$scope.newItem.Desc){
-        $scope.newItem.Desc = "";
+        alert("no title");
+        return;
       }
       var item = new Item();
       var GP = new Parse.GeoPoint.current({
         success: function (point){
-          alert("GP success");
+          console.log("GP success");
         },
         error: function (error){
-          alert(error);
+          console.log(error);
         }
       });
       item.set("Title", $scope.newItem.Title);
@@ -119,6 +121,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       item.set("Owner", currentUser.get("username"));
       item.set("State", "Available");
       item.set("GeoPoint", GP);
+      item.set("requestList", []);
       item.save(null, {
         success: function(item) {
           // Execute any logic that should take place after the object is saved.
@@ -126,6 +129,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.newItem.Title = null;
           $scope.newItem.Desc = null;
           $scope.modal.hide();
+          APP.set("ListOfPostItem",item.id);
+          APP.save();
         },
         error: function(item, error) {
           // Execute any logic that should take place if the save fails.
