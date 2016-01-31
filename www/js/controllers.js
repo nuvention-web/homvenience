@@ -165,6 +165,7 @@ angular.module('starter.controllers', ['ionic'])
           $state.go('tabs.home');
         },
         error: function(user, error) {
+          alert(error);
           // The login failed. Check error to see why.
         }
       });
