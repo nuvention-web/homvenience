@@ -4,13 +4,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
@@ -84,7 +77,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   })
 
-  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $state, $cordovaCamera) {
+  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $state, $cordovaCamera, $ionicPopup) {
     $scope.newItem = {
       Title : "",
       Desc : ""
@@ -221,6 +214,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         }
       });
    }
+
+
+  $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Request successful',
+     });
+     alertPopup.then(function(res) {
+       console.log('Thank you for not eating my delicious ice cream cone');
+     });
+   };
 
   //bar上面的两种状态
    $scope.Header = function(){

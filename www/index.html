@@ -6,7 +6,7 @@
     <title></title>
     <!--字体-->
     <link href="https://fonts.googleapis.com/css?family=Oleo%20Script" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C500" rel="stylesheet" type="text/css">
 
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
@@ -299,6 +299,47 @@
                   </p>
               </a>
             </li>
+            <a href='#request'>
+            <li class="item">
+              Request
+            </li>
+            </a>
+            <li class="item">
+              Offering
+            </li>
+            <li class="item">
+              Record
+            </li>
+        </ul>  
+        
+        <button class="button button-block button-stable">
+          Log Out
+        </button>
+
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/request.html" type="text/ng-template">
+      <ion-view>
+
+        <ion-header-bar class="bar-col bar bar-header">
+          <h2 class="title rest-bar">Request</h2>
+          <button class="button button-clear icon ion-log-in" ng-click="Login"></button>
+
+        </ion-header-bar>
+
+        <ion-content>
+        <ul class="list">
+            <li class="item">
+              <a id="item-header"class="item item-avatar" href="#account">
+                  <img src="img/mike.png">
+                  <h2 >Venkman</h2>
+                  <p>
+                    Back. I am going to zhuang B.
+                  </p>
+              </a>
+            </li>
             <li class="item">
               Request
             </li>
@@ -355,3 +396,4 @@
   </body>
 
 </html>
+</script></body></html>
