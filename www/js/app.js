@@ -80,7 +80,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     })
 
-
+    .state('request', {
+      url: '/request',
+      templateUrl: 'templates/request.html',
+    })
 
 
 

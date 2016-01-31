@@ -80,7 +80,7 @@
       <ion-view >
         <ion-header-bar class="bar-col bar-header bar">
 
-          <h2 id='rest-bar' class="title">Sign-In</h2>
+          <h2 class="title rest-bar">Sign-In</h2>
         </ion-header-bar>
         <ion-content>
           <div class="list">
@@ -284,7 +284,7 @@
 
         <ion-header-bar class="bar-col bar bar-header">
           <h2 class="title rest-bar">Account</h2>
-          <button class="button button-clear icon ion-log-in" ng-click="Login"></button>
+          <button class="button button-clear icon ion-ios-gear"></button>
 
         </ion-header-bar>
 
@@ -312,7 +312,8 @@
             </li>
         </ul>  
         
-        <button class="button button-block button-stable">
+
+        <button class="button button-block button-stable" href='#/tab/home'>
           Log Out
         </button>
 
@@ -324,36 +325,21 @@
       <ion-view>
 
         <ion-header-bar class="bar-col bar bar-header">
-          <h2 class="title rest-bar">Request</h2>
-          <button class="button button-clear icon ion-log-in" ng-click="Login"></button>
-
+          <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
+          </a>
+          <h2 class="title rest-bar">Request</h2>   
         </ion-header-bar>
 
         <ion-content>
         <ul class="list">
-            <li class="item">
-              <a id="item-header"class="item item-avatar" href="#account">
-                  <img src="img/mike.png">
-                  <h2 >Venkman</h2>
-                  <p>
-                    Back. I am going to zhuang B.
-                  </p>
-              </a>
+            <li class="item item-avatar">
+                <img src="img/mike.png">
+                <h2 >Venkman</h2>
+                <div class="">
+                <button class="button button-clear button-text ion-ios-close-outline choice"></button>
+                <button class="button button-clear button-text ion-ios-checkmark-outline choice"></button>
             </li>
-            <li class="item">
-              Request
-            </li>
-            <li class="item">
-              Offering
-            </li>
-            <li class="item">
-              Record
-            </li>
-        </ul>
-
-        <button class="button button-block button-stable">
-          Log Out
-        </button>
+        </ul>  
 
         </ion-content>
       </ion-view>
@@ -376,7 +362,7 @@
         <button class = "button button-icon icon ion-camera" ng-click = showDetails()></button>
 
         <label class="item item-input">
-          <textarea placeholder="Write description here" rows = "20" ng-model="newItem.Desc"></textarea></label>
+          <textarea placeholder="Write description here" rows = "20" ng-model ="newItem.Desc"></textarea></label>
 
         <button class="button button-block button-stable" ng-click="createPost()">
           Post
