@@ -1,28 +1,36 @@
-/*.navbar{
-	background-color: #FFD12A !important;
-	height: 50px;
-	color: #fff;
+/*-----间隙背景-----*/
+.content-back{
+	background-color: #eee;
 }
 
-.tabs{
-	background-color: 	#FFFAFA !important;
+.button-text{
+	color: #000;
 }
 
-*/
+.view{
+	background-color: #ddd;
+}
 
 .bar-col{
-	background-color: #53d769 !important;
+	background-color: #9BDDFF !important;
 }
-.bar-col h2{
+
+.rest-bar{
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-size: 26px;
+}
+
+/*----Signin部分----*/
+#sign-button{
 
 }
 
-.tab-nav{
-	background-color: #53d769 !important;
-}
-
-#user-item{
-	padding-bottom: 0px !important;
+/*----home部分----*/
+#home-bar{
+	color: #fff !important;
+	font-size: 28px;
+	font-family: 'Oleo Script', cursive;
 }
 
 #itembar{
@@ -30,48 +38,55 @@
 }
 
 .icon-site{
-	font-size: 15px !important;
+	color: #9BDDFF;
 }
 
-/* 可以定义icon的颜色 */
-#itembar .icolor{
-	color:#53d769;
-	font-size: 15px;
+#user-item{
+	padding-bottom: 0px !important;
+}
+
+#item-bar{
+	font-size: 16px !important;
+	color: #777;
+}
+
+/*-----可以定义icon的颜色-----*/
+#item-bar .icolor{
+	color: #9BDDFF;
 }
 
 .item-detail{
 	padding-left: 10px;
 	padding-right: 10px;
-}
-
-.list{
-	border-color: #ddd;
-	border-top-width: 1px;
-	border-bottom-width: 1px;
-	border-style: solid;
+	background-color: #fff;
 }
 
 #item-header{
 	border-width: 0px !important;
 }
 
-
+/*-----home超链接-----*/
 #home-a{
 	display: block;
 	text-decoration: none;
 	color: inherit;
 }
 
+/*-----评论-----*/
 #detail-comment{
 
 }
 
-#detail-comment a{
-	border-bottom-width: 0px;
-}
+
 
 #comment-title{
 	background-color: #ddd;
+}
+
+/*-----个人信息-----*/
+.right{
+	text-align: right;
+
 }
 
 
