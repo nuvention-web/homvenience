@@ -16,24 +16,31 @@ testObject.save({Message: "Hello World"}, {
   }
 });*/
 
-var Test = Parse.Object.extend("Test");
+var isLogin = false;
 
-var tquery = new Parse.Query(Test);
+Parse.User.logOut();
 
+var currentUser = Parse.User.current();
+if(currentUser){
+  isLogin = true;
+}
+else{
+  console.log('Failed');
+}
 
 
 // Item class
 var Item = Parse.Object.extend("Item",{
+  Title:"",
   Desc:"",
   Owner:"",
-  Name:"",
   State:"",
   Holder:"",
 
-  Requests:[],
+  requestList:[],
 
   clearRequests : function(){
-
+    this.requestList = [];
   }
 });
 
@@ -50,12 +57,12 @@ var Request = Parse.Object.extend("Request",{
 });
 
 var Customer = Parse.Object.extend("Customer" , {
-  ListOfPostItem : {},
-  ListOfRequest:{},
-  ListOfGet:{},
-  User : null,
-  RequestTimer: null, // to check whether there is request
-  AcceptTimer: null, // to check whether there is accept
+  ListOfPostItem : [],
+  ListOfRequest:[],//to store received requests
+  ListOfGet:[],
+  ListOfLent:[],
+  Requests:[],// to store sent requests
+  Denied:[],
 
   checkRequest : function($scope){
     var ids = [];
@@ -74,60 +81,75 @@ var Customer = Parse.Object.extend("Customer" , {
     })
   },
 
-  checkAccept:function(){
 
-  },
 
 
   accept:function(requestId,itemId,requesterId){
-    var query = Parse.Query(Item);
-    query.equalTo("objectId",itemId);
-    query.find().then(function(results){
-      results[0].set("Holder",requesterId);
-      results[0].set("State","LentOut");
-      results[0].save();
-    },function(err){
-      alert(err);
+    var query = new Parse.Query(Item);
+    query.get(itemId).then(function(obj){
+      obj.set("State","LentOut");
+      obj.set("Holder",requesterId);
+      obj.clearRequest();
+      obj.save();
+      console.log("accpeted!");
+
     });
+    //this.set("ListOfPostItem", this.get("ListOfPostItem").slice(0,))
   },
 
   request : function(itemId){
+    var app = this;
     var newRequest = new Request();
-    newRequest.set("ItemId",itemId);
-    newRequest.set("RequesterId",this.get("objectId"));
-    newRequest.set("Time",new Date());
+    newRequest.set("itemId",itemId);
+    newRequest.set("requesterId",currentUser.id);
+    newRequest.set("time",new Date());
     newRequest.save().then(function(obj){
-      var query = Parse.Query(Item);
-      query.equalTo("objectId",itemId);
-      query.find().then(function(results){
-        var target = results[0];
-        target.get("Requests").push(newRequest.get("RequestId"));
-        target.save();
-      })
+      alert("request saved");
+      var query = new Parse.Query(Item);
+      query.get(itemId).then(function(res){
+        var rel = res.get("requestList");
+        alert("rel established");
+        rel.push(obj.id);
+        res.save().then(function(call){
+          var req = app.get("Requests");
+          req.push(obj.id);
+          if(req.length!=0) {
+            AcceptTimer = setInterval(checkAccept, 1000);
+            console.log("set finished");
+          }
+          app.save().then(function(saved){
+            alert("Request Sent");
+          },function(err){
+            alert("Request Failure2");
+          });
+        },function(err){
+          alert("Request Failure");
+        });
+      },function(err){
+        alert(err);
+      });
     },function(err){
       alert("Request Failed"+err);
     });
   },
 
-  post : function (image, desc, owner,ownerId){
+  post : function (title, image, desc, owner){
+    var app = this;
     var item = new Item();
-    item.set("Desc",desc);
+    item.set("Title", title)
     item.set("Image",image);
-    item.set("Owner",owner);
+    item.set("Desc",desc);
+    item.set("Owner",currentUser.get("username"));
     item.set("State","Available");
-    item.set("Holder",ownerId);
-
+    item.set("Holder",currentUser.id);
 
     item.save().then(function(object){
-        this.get("ListOfPostItem")[item.get("objectId")] = item;
+        this.get("ListOfPostItem")[object.id] = item;
       },
       function(err){
         alert("Upload Failed");
       }).then(function (object){
-        if(this.get("requestTimer") == null) {
-          this.set("requestTimer", setInterval(this.checkRequest, 1000));
-        }
-        Customer.save();
+        app.save();
       },
       function (err){
         alert("Customer Upload Failed");
@@ -135,7 +157,7 @@ var Customer = Parse.Object.extend("Customer" , {
   },
   search : function ($scope, distance) {
     var query = new Parse.Query(Item);
-    query.notEqualTo("Desc","");
+    query.notEqualTo("Owner",currentUser.get("username"));
     query.find().then(function(result) {
       $scope.search_res = result;
       $scope.$apply();
@@ -146,4 +168,68 @@ var Customer = Parse.Object.extend("Customer" , {
   }
 });
 
-var Cus = new Customer();
+var APP;
+var AcceptTimer;
+var RequestTimer;
+
+var checkRequest = function(){
+  //Only for test
+  if(APP.get("ListOfRequest").length!=0){
+    var a = APP.get("ListOfRequest");
+    var id = a[0];
+    var testq = new Parse.Query(Request);
+    testq.get(id).then(function(obj){
+      console.log("start accept");
+      APP.accept(id,obj.get("itemId"),obj.get("requesterId")).then(function (){
+        
+      });
+
+    });
+  }
+  //
+  console.log("start check request");
+  var posted = APP.get("ListOfPostItem");
+  var query = new Parse.Query(Item);
+  var res = [];
+  var temp;
+  var itemid;
+  for(var j in posted){
+    itemid = posted[j];
+    query.get(itemid).then(function(item){
+      temp = item.get("requestList");
+      var reqid;
+      for(var i in temp){
+        reqid = temp[i];
+        res.push(reqid);
+      }
+      APP.set("ListOfRequest",res);
+      APP.save().then();
+    });
+  }
+};
+
+var checkAccept = function(){
+  var requests = APP.get("Requests");
+  console.log("checkAccept");
+  var query = new Parse.Query(Request);
+  var itemid;
+  var query4item = new Parse.Query(Item);
+  var req;
+  for(var i in requests){
+    req = requests[i];
+    query.get(req).then(function(obj){
+      itemid = obj.get("itemId");
+      query4item.get(itemid).then(function(item){
+        if(item.get("State") == "LentOut") {
+          if (item.get("Holder") == currentUser.id) {
+            APP.get("ListOfGet").push(itemid);
+          }
+          obj.destroy();
+          console.log("destroy"+ req);
+        }
+      });
+    });
+  }
+  APP.save();
+};
+

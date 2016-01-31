@@ -85,3 +85,5 @@ angular.module('ionicApp', ['ionic'])
   console.log('HomeTabCtrl');
 });
 
+
+$(document).ready("MenuCtrl")；

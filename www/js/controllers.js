@@ -1,3 +1,4 @@
+
 angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
@@ -27,6 +28,11 @@ angular.module('starter.controllers', [])
 
   .controller('HomeTabCtrl', function($scope) {
     console.log('HomeTabCtrl');
+    $scope.search_res = []
+    $scope.init = function () {
+      console.log("ready to fetch");
+      APP.search($scope, 1);
+    };
   })
 
 //.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -35,11 +41,14 @@ angular.module('starter.controllers', [])
 
 
   .controller('SearchCtrl',function($scope){
-    $scope.search_res = []
+    $scope.search_res = [];
     $scope.init = function () {
       console.log("ready to fetch");
-      Cus.search($scope, 1);
-    }
+      APP.search($scope, 1);
+    };
+    $scope.testRequest = function(itemId){
+      APP.request(itemId);
+    };
   })
 
   .controller('AccountCtrl', function($scope) {
@@ -47,7 +56,7 @@ angular.module('starter.controllers', [])
       enableFriends: true
     };
   })
-  .controller('MenuCtrl', function($scope, $ionicModal, $ionicActionSheet) {
+  .controller('MenuCtrl', function($scope, $ionicModal, $ionicActionSheet, $state) {
     $scope.newPost = [
       { name: 'Gordon Freeman' },
       { name: 'Barney Calhoun' },
@@ -59,8 +68,8 @@ angular.module('starter.controllers', [])
       $scope.modal = modal;
     });
 
-    $scope.createPost = function(u) {
-      $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
+    $scope.createContact = function(u) {
+      APP.post(u.title, NULL, u.Desc, 'Ounan')
       $scope.modal.hide();
     };
 
@@ -75,7 +84,7 @@ angular.module('starter.controllers', [])
        cancelText: 'Cancel',
        cancel: function() {
             // add cancel code..
-          },
+       },
        buttonClicked: function(index) {
         if(index == 1){
           alert("fuck");
@@ -83,5 +92,60 @@ angular.module('starter.controllers', [])
          return true;
        }
      });
-   };
-});
+   }
+
+    $scope.postShow = function() {
+
+     // Show the action sheet
+     var hideSheet = $ionicActionSheet.show({
+       buttons: [
+         { text: 'I can help' },
+         { text: 'I need help' }
+       ],
+       cancelText: 'Cancel',
+       cancel: function() {
+            // add cancel code..
+       },
+       buttonClicked: function(index) {
+        if(index == 0){
+          $scope.modal.show();
+        }
+         return true;
+       }
+     });
+   }
+   $scope.SignIn = function(u) {
+      Parse.User.logIn(u.username, u.password, {
+        success: function(user) {
+          currentUser = Parse.User.current();
+          alert(currentUser.get("username"));
+          console.log(currentUser.get("username"));
+          isLogin = true;
+          APP = currentUser.get("customer");
+          APP.fetch().then(function(obj){
+            alert(APP.id);
+            if(APP.get("Requests").length != 0){
+              AcceptTimer = setInterval(checkAccept,1000);
+            }
+            if(APP.get("ListOfPostItem").length!=0){
+              RequestTimer = setInterval(checkRequest,3000);
+            }
+          });
+
+          $state.go('tabs.home');
+        },
+        error: function(user, error) {
+          // The login failed. Check error to see why.
+        }
+      });
+   }
+   $scope.Header = function(){
+    if(!isLogin)
+      return "button button-clear icon ion-log-in";
+    else
+      return "button button-clear icon ion-log-out";
+   }
+   ;
+  });
+
+
