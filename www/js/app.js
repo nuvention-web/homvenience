@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -53,15 +53,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
+
     .state('detail', {
       url: '/detail',
-      views: {
-        'home-tab': {
-          templateUrl: 'templates/detail.html',
-          controller: 'DetailTabCtrl'
-        }
-      }
+      templateUrl: 'templates/detail.html',
+      controller: 'DetailCtrl'
     })
+
     .state('tabs.search',{
       url: '/search',
       views:{
@@ -71,15 +69,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
         }
       }
     })
-    /*.state('tabs.itemdetail',{
-      url: '/itemdetail',
-      views:{
-        'itemdetail':{
-          templateUrl: 'templates/itemdetail.html',
-          controller: 'ItemDetailCtrl'
+
+
+    .state('tabs.account', {
+      url: '/account',
+      views: {
+        'account-tab': {
+          templateUrl: 'templates/account.html',
+          controller: 'AccountCtrl'
         }
       }
-    });*/
+    });
     // .state("tabs.post", {
     //   url: '/post',
     //   views:{

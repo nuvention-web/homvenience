@@ -5,8 +5,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
     <!--字体-->
-    <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700italic' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C700italic" rel="stylesheet" type="text/css">
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -22,7 +22,7 @@
     <script src="lib/ionic/js/ionic-angular.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-
+    <script src="js/ng-cordova.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 
@@ -37,12 +37,14 @@
 
   </head>
 
-  <body ng-app="starter" ng-controller = "MenuCtrl">
+  <body ng-app="starter" ng-controller="MainCtrl">
 <!--     <ion-nav-bar class="bar-royal">
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
       </ion-nav-back-button> -->
-    </ion-nav-bar>
+
     <ion-nav-view></ion-nav-view>
+
+<!--固定导航栏-->
 
     <script id="templates/tabs.html" type="text/ng-template">
       <ion-view>
@@ -65,14 +67,14 @@
           </ion-tab>
 
           <ion-tab title="Account" icon="ion-person" href="#/tab/account">
-            <ion-nav-view name="post-tab" ></ion-nav-view>
+            <ion-nav-view name="account-tab" ></ion-nav-view>
           </ion-tab>
         </ion-tabs>
       </ion-view>
     </script>
 
 
-
+<!--登录页面-->
     <script id="templates/sign-in.html" type="text/ng-template">
       <ion-view view-title="">
         <ion-header-bar class="bar-col bar-header bar-positive bar">
@@ -92,7 +94,7 @@
             </label>
           </div>
           <div class="padding">
-            <button class="button button-block button-positive" ng-click="SignIn(user)">
+            <button class="button button-block button-balanced" ng-click="SignIn(user)">
               Sign-In
             </button>
             <p class="text-center">
@@ -102,6 +104,7 @@
         </ion-content>
       </ion-view>
     </script>
+
 
     <script id="templates/forgot-password.html" type="text/ng-template">
       <ion-view view-title="Forgot Password">
@@ -114,7 +117,9 @@
     </script>
 
 
-    <!--Homepage!!!!!-->
+
+
+<!--Homepage!!!!!-->
 
     <script id="templates/home.html" type="text/ng-template">
       <ion-view ng-init="init()">
@@ -123,62 +128,102 @@
           <h2 class="title">Home</h2>
         </ion-header-bar>
 
-        <ion-content >
+        <ion-content>
 
-          <div class="list" ng-repeat = "x in search_res">
-              <a id="item-header"class="item item-avatar">
+          <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
+
+              <a id="item-header" class="item item-avatar" >
                   <img src="img/mike.png">
-                  <h2>Venkman</h2>
-                  <p>Back off, man. Im a scientist.</p>
+                  <h2>Venkman&nbsp<i class="icon fa fa-smile-o icolor"></i></h2>
+                  <p>活跃度.</p>
               </a>
-              <div class='item-detail' >
-                <img class="full-image" src="img/ps.png">
-                <p>
-                    This is my PS3！I bought it in 2013. Anyone want play with it? It's free to lend！'
-                </p>
-                <div id='itembar'class="row">
-                  <div class="col col-50"><i class="icon ion-ios-location icon-site"></i>
-                  Evanston</div>
-                  <div class="col col-20"><i class="icon fa fa-smile-o icolor"></i>
-                   nice</div>
-                  <div class="col col-33"><i class="icon ion-chatbubble icolor"></i>
-                   comments</div>
-              </div>
-          </div>
+
+              <a id='home-a' href="#/detail">
+                <div class='item-detail'>
+                  <img class="full-image" src="img/ps.png">
+                  <p>
+                      This is my PS3！I bought it in 2013. Anyone want play with it? It's free to lend！'
+                  </p>
+                  <div id='itembar'class="row">
+                      <div class="col col-67"><i class="icon ion-ios-location icon-site"></i>
+                      Evanston
+                      </div>
+                      <div class="col col-13"><i class="icon fa fa-smile-o icolor"></i>
+                       7
+                       </div>
+                      <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
+                       10
+                       </div>
+                  </div>
+                </div>
+              </a>
+
+            </div>
         </ion-content>
       </ion-view>
     </script>
 
-    <!--item-detail-->
+
+
+<!--item详情页面-->
     <script id="templates/detail.html" type="text/ng-template">
-      <ion-view>
+      <ion-view ng-init="init()">
 
         <ion-header-bar class="bar-col bar bar-header">
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+          <h2 class="title">Detail</h2>
         </ion-header-bar>
 
         <ion-content >
 
           <div class="list">
-              <a id="item-header"class="item item-avatar" href="#">
+              <a id="item-header"class="item item-avatar" href="#account">
                   <img src="img/mike.png">
-                  <h2>Venkman</h2>
-                  <p>Back off, man. Im a scientist.</p>
+                  <h2 >Venkman</h2>
+                  <p>
+                    Back. I am going to zhuang B.
+                  </p>
               </a>
-              <div class='item-detail' >
-                <img class="full-image" src="img/ps.png">
+              <div class='item-detail'>
                 <p>
-                    This is my PS3！I bought it in 2013. Anyone want play with it? It's free to lend！'
+                    This is my PS3！I bought it in 2013. Anyone want play with it? Free to lend
                 </p>
-                <div id='itembar' class="row">
-                  <div class="col col-50"><i class="icon ion-ios-location icon-site"></i>
-                  Evanston</div>
-                  <div class="col col-20"><i class="icon fa fa-smile-o icolor"></i>
-                   nice</div>
-                  <div class="col col-33"><i class="icon ion-chatbubble icolor"></i>
-                   comments</div>
+                <div id='itembar'class="row">
+                  <i class="icon ion-ios-location icon-site"></i>
+<!--传定位进来-->
+                  <p>&nbsp Evanston</p>
+                  <p>&nbsp 多久之前</p>
+                </div>
+              <img class="full-image" src="img/ps.png">
               </div>
+            <p>
+            <a class="button icon icon-right ion-chevron-right" href="#/tab/home">Home</a>
+            </p>
           </div>
+          <div id='comment-title'>
+                  <span>afdasdfad</span>
+                </div>
+
+          <div id='detail-comment' class="list" ng-repeat = "x in search_res">
+              <a class="item item-avatar" href="#">
+
+                <img src="venkman.jpg">
+                <h2>Venkman</h2>
+                <p>Back off, man. Im a scientist.</p>
+              </a>
+              <p>adfasdfaf</p>
+          </div>
+          <div class="tabs tabs-icon-only">
+            <a class="tab-item">
+              <i class="icon ion-home"></i>
+            </a>
+            <a class="tab-item">
+              <i class="icon ion-star"></i>
+            </a>
+            <a class="tab-item">
+              <i class="icon ion-gear-a"></i>
+            </a>
+          </div>
+
         </ion-content>
       </ion-view>
     </script>
@@ -186,10 +231,11 @@
 
     <script id="templates/search.html" type="text/ng-template">
         <ion-view view-title="Search"  ng-init="init()">
-          <ion-header-bar class="bar-royal bar-header bar-positive bar">
+
+          <ion-header-bar class="bar-col bar bar-header">
           <h2 class="title">Search</h2>
-          <button class="button button-clear icon ion-log-in" ng-click="Login"></button>
           </ion-header-bar>
+
           <ion-content padding="true">
             <div class="list card"  ng-repeat="x in search_res" ng-click="testRequest(x.id)">
               <div class="item item-avatar">
@@ -206,20 +252,43 @@
         </ion-view>
     </script>
 
+
+<!--个人信息页面-->
+    <script id="templates/account.html" type="text/ng-template">
+      <ion-view>
+
+        <ion-header-bar class="bar-assertive">
+        <h1 class="title">Photos</h1>
+        </ion-header-bar>
+        <ion-content ng-controller="ExampleController" padding="true">
+        <button class="button button-full button-assertive" ng-click="takePhoto()">
+        Take Photo
+        </button>
+        <button class="button button-full button-assertive" ng-click="choosePhoto()">
+        Choose Photo
+        </button>
+        <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}" style="text-align: center">
+        </ion-content>
+      </ion-view>
+    </script>
+
+
+
+<!--发布信息页面-->
     <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>
-        <ion-header-bar class="bar-royal bar-header bar-positive bar">
+        <ion-header-bar class="bar-col bar-header bar-positive bar">
           <h2 class="title">I can help</h2>
           <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
-          <button class="button button-clear button-primary" ng-click="createContact(newItem)">Post</button>
+          <button class="button button-clear button-primary" ng-click="createContact()">Post</button>
         </ion-header-bar>
         <ion-content>
         <button class = "button button-icon icon ion-camera" ng-click = showDetails()></button>
         <label class="item item-input">
-          <input type="text" placeholder="Subject" ng-model="newItem.title">
+          <input type="text" placeholder="Subject" ng-model="newItem.Title">
         </label>
         <label class="item item-input">
-          <textarea placeholder="Write description here" rows = "20" ng-model="newItem.Desc"></textarea>
+          <textarea placeholder="Write description here" rows = "25" ng-model="newItem.Desc"></textarea>
         </label>
         </ion-content>
       </ion-modal-view>
@@ -227,10 +296,10 @@
 
 
 <feature name="Camera">
-    <param name="ios-package" value="CDVCamera" />
+    <param name="ios-package" value="CDVCamera">
 </feature>
 
-    <script type="text/javascript" src="js/main.js"/>
+    <script type="text/javascript" src="js/main.js"></script>
 
   </body>
 </html>

@@ -18,6 +18,8 @@ testObject.save({Message: "Hello World"}, {
 
 var isLogin = false;
 
+var photo_arry = [];
+
 Parse.User.logOut();
 
 var currentUser = Parse.User.current();
@@ -36,7 +38,7 @@ var Item = Parse.Object.extend("Item",{
   Owner:"",
   State:"",
   Holder:"",
-
+  ImageArry:[],
   requestList:[],
 
   clearRequests : function(){
@@ -137,7 +139,6 @@ var Customer = Parse.Object.extend("Customer" , {
     var app = this;
     var item = new Item();
     item.set("Title", title)
-    item.set("Image",image);
     item.set("Desc",desc);
     item.set("Owner",currentUser.get("username"));
     item.set("State","Available");
@@ -181,7 +182,7 @@ var checkRequest = function(){
     testq.get(id).then(function(obj){
       console.log("start accept");
       APP.accept(id,obj.get("itemId"),obj.get("requesterId")).then(function (){
-        
+
       });
 
     });
@@ -232,4 +233,3 @@ var checkAccept = function(){
   }
   APP.save();
 };
-

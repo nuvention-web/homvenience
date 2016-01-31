@@ -14,7 +14,7 @@
 	background-color: #53d769 !important;
 }
 .bar-col h2{
-	color:#fff;
+
 }
 
 .tab-nav{
@@ -30,12 +30,13 @@
 }
 
 .icon-site{
-	font-size: 20px !important;
+	font-size: 15px !important;
 }
+
 /* 可以定义icon的颜色 */
 #itembar .icolor{
 	color:#53d769;
-	font-size: 16px;
+	font-size: 15px;
 }
 
 .item-detail{
@@ -55,6 +56,22 @@
 }
 
 
+#home-a{
+	display: block;
+	text-decoration: none;
+	color: inherit;
+}
 
+#detail-comment{
+
+}
+
+#detail-comment a{
+	border-bottom-width: 0px;
+}
+
+#comment-title{
+	background-color: #ddd;
+}
 
 
