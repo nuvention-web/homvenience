@@ -68,7 +68,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller:'SearchCtrl'
         }
       }
-    });
+    })
+
+
+    .state('tabs.account', {
+      url: '/account',
+      views: {
+        'account-tab': {
+          templateUrl: 'templates/account.html',
+          controller: 'AccountCtrl'
+        }
+      }
+    })
+
+
+
+    ;
     // .state("tabs.post", {
     //   url: '/post',
     //   views:{

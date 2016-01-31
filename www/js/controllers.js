@@ -65,10 +65,19 @@ angular.module('starter.controllers', [])
     }
   })
 
-  .controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope) {
+    $scope.search_res = []
+    $scope.init = function () {
+      console.log("ready to fetch");
+      APP.search($scope, 1);
+    }
+/*
     $scope.settings = {
-      enableFriends: true
+    enableFriends: true
     };
+*/
+
+
   })
 
   .controller('MenuCtrl', function($scope, $ionicModal, $ionicActionSheet, $state) {
