@@ -103,7 +103,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     });
 
     $scope.createContact = function(u) {
-      var item = new Item();
       if(!$scope.newItem.Title)
       {
         alert("Please enter the title");
@@ -111,23 +110,35 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       if(!$scope.newItem.Desc){
         $scope.newItem.Desc = "";
       }
-    item.set("Title", $scope.newItem.Title);
-    item.set("ImageArry",photo_arry);
-    item.set("Desc",$scope.newItem.Desc);
-    item.set("User",currentUser);
-    item.save(null, {
-      success: function(item) {
-        // Execute any logic that should take place after the object is saved.
-        alert("Post Success");
-        $scope.newItem.Title = null;
-        $scope.newItem.Desc = null;
-        $scope.modal.hide();
-      },
-      error: function(item, error) {
-        // Execute any logic that should take place if the save fails.
-        // error is a Parse.Error with an error code and message.
-        alert('Failed to create new object, with error code: ' + error.message);
-      }
+      var item = new Item();
+      var GP = new Parse.GeoPoint.current({
+        success: function (point){
+          alert("GP success");
+        },
+        error: function (error){
+          alert(error);
+        }
+      });
+      item.set("Title", $scope.newItem.Title);
+      item.set("ImageArry",photo_arry);
+      item.set("Desc",$scope.newItem.Desc);
+      item.set("Holder",currentUser.id);
+      item.set("Owner", currentUser.get("username"));
+      item.set("State", "Available");
+      item.set("GeoPoint", GP);
+      item.save(null, {
+        success: function(item) {
+          // Execute any logic that should take place after the object is saved.
+          alert("Post Success");
+          $scope.newItem.Title = null;
+          $scope.newItem.Desc = null;
+          $scope.modal.hide();
+        },
+        error: function(item, error) {
+          // Execute any logic that should take place if the save fails.
+          // error is a Parse.Error with an error code and message.
+          alert('Failed to create new object, with error code: ' + error.message);
+        }
     });
   }
 
@@ -193,7 +204,15 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
               RequestTimer = setInterval(checkRequest,3000);
             }
           });
-
+          var GP = new Parse.GeoPoint.current({
+            success: function (point){
+             alert("GP success");
+            },
+            error: function (error){
+              alert(error);
+            }
+          });
+          APP.set("CurrentGP", GP);
           $state.go('tabs.home');
         },
         error: function(user, error) {
