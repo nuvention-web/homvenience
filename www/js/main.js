@@ -183,7 +183,7 @@ var RequestTimer;
 
 var checkRequest = function(){
   //Only for test
-  if(APP.get("ListOfRequest").length!=0){
+  /*if(APP.get("ListOfRequest").length!=0){
     var a = APP.get("ListOfRequest");
     var id = a[0];
     var testq = new Parse.Query(Request);
@@ -191,7 +191,7 @@ var checkRequest = function(){
       console.log("start accept");
       APP.accept(id,obj.get("itemId"),obj.get("requesterId"));
     });
-  }
+  }*/
   //
   console.log("start check request");
   var posted = APP.get("ListOfPostItem");

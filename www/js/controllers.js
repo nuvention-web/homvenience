@@ -64,7 +64,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       console.log("ready to fetch");
       APP.search($scope, 1);
     };
-    $scope.testRequest = function(itemId){
+    $scope.Request = function(itemId){
       APP.request(itemId);
     };
   })
@@ -90,7 +90,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       Title : "",
       Desc : ""
     };
-    
+
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
     }).then(function(modal) {
@@ -136,6 +136,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.newItem.Title = null;
           $scope.newItem.Desc = null;
           $scope.modal.hide();
+          APP.set("ListOfPostItem",item.id);
+          APP.save();
         },
         error: function(item, error) {
           // Execute any logic that should take place if the save fails.

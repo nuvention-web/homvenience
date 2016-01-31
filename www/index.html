@@ -42,7 +42,7 @@
 <!--     <ion-nav-bar class="bar-royal">
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
       </ion-nav-back-button> -->
-    
+
     <ion-nav-view></ion-nav-view>
 
 <!--固定导航栏-->
@@ -98,7 +98,7 @@
             <button id='sign-button' class="button button-block" ng-click="SignIn(user)">
               Sign In
             </button>
-            
+
               <a href="#/forgot-password">Sign Up</a>
               <a href="#/forgot-password">Forgot password</a>
 
@@ -131,7 +131,7 @@
         </ion-header-bar>
 
         <ion-content class='content-back'>
-       
+
           <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
 
               <a id="item-header" class="item item-avatar" >
@@ -175,11 +175,11 @@
         <a href='#/tab/home'>
           <button class="button button-clear button-text"><i class='ion-ios-arrow-back'>&nbsp back</i></button>
         </a>
-          
+
         </ion-header-bar>
 
         <ion-content >
-       
+
           <div class="list">
               <a id="item-header"class="item item-avatar" href="#account">
                   <img src="img/mike.png">
@@ -194,7 +194,7 @@
                 </p>
                 <div id='itembar'class="row">
                   <i class="icon ion-ios-location icon-site"></i>
-<!--传定位进来-->         
+<!--传定位进来-->
                   <p>&nbsp Evanston</p>
                   <p>&nbsp 多久之前</p>
                 </div>
@@ -209,7 +209,7 @@
 
           <div id='detail-comment' class="list" ng-repeat = "x in search_res">
               <a class="item item-avatar" href="#">
-                
+
                 <img src="venkman.jpg">
                 <h2>Venkman</h2>
                 <p>Back off, man. Im a scientist.</p>
@@ -238,7 +238,7 @@
 
           <ion-header-bar class="bar-col bar-header bar">
           <h2 class="title rest-bar">Search</h2>
-          
+
           </ion-header-bar>
 
           <ion-content>
@@ -249,10 +249,10 @@
               </label>
             </div>
 
-            <div class="list card"  ng-repeat="x in search_res">
+            <div class="list card"  ng-repeat="x in search_res" ng-click="Request(x.id)">
               <div class="item item-avatar">
                 <img src="img/ben.png">
-                <h2>{{x.get("Name")}}</h2>
+                <h2>{{x.get("Title")}}</h2>
 
                 <p>{{x.get("Owner")}}</p>
               </div>
@@ -308,8 +308,8 @@
             <li class="item">
               Record
             </li>
-        </ul>  
-        
+        </ul>
+
         <button class="button button-block button-stable">
           Log Out
         </button>
@@ -322,7 +322,7 @@
 
 <!--发布信息页面-->
     <script id="templates/modal.html" type="text/ng-template">
-      <ion-modal-view>  
+      <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-col">
           <h2 class="title rest-bar">I can help</h2>
           <button class="button button-clear" ng-click="modal.hide()"><i class='ion-close-round'></i></button>
