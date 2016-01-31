@@ -22,7 +22,7 @@ var Test = Parse.Object.extend("Test");
 
 var tquery = new Parse.Query(Test);
 
-
+var photo_arry = [];
 
 // user.signUp(null, {
 //   success: function(user){
@@ -47,8 +47,9 @@ else{
 var Item = Parse.Object.extend("Item",{
   Title:"",
   Desc:"",
-  Owner:"",
-  Name:""
+  User:null,
+  Name:"",
+  ImageArry : []
 });
 
 var Display = Parse.Object.extend("Display", {
@@ -64,9 +65,7 @@ var Customer = Parse.Object.extend("Customer" , {
   post : function (title, image, desc, owner){
     var item = new Item();
     item.set("Title", title)
-    item.set("Image",image);
     item.set("Desc",desc);
-    item.set("Owner",owner);
     item.save().then(function(object){
         this.ListOfPostItem.add(object);
       },
@@ -96,5 +95,3 @@ var Customer = Parse.Object.extend("Customer" , {
 });
 
 var APP = new Customer();
-
-APP.search(scope, 1);
