@@ -136,7 +136,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.newItem.Title = null;
           $scope.newItem.Desc = null;
           $scope.modal.hide();
-          APP.set("ListOfPostItem",item.id);
+          APP.get("ListOfPostItem").push(item.id);
           APP.save();
         },
         error: function(item, error) {
