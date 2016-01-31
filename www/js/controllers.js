@@ -228,7 +228,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       });
    }
 
-   $scope.SignIn = function() {
+   $scope.LogOut = function() {
     Parse.User.logIn();
     isLogin = false;
   }
