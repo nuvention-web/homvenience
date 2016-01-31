@@ -44,7 +44,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 //.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
 //  $scope.chat = Chats.get($stateParams.chatId);
 //})
-  
+
 
 
 .controller('DetailCtrl',function($scope){
@@ -57,12 +57,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
 
-.controller('SearchCtrl',function($scope){
-    $scope.search_res = []
+  .controller('SearchCtrl',function($scope){
+    $scope.search_res = [];
+
     $scope.init = function () {
       console.log("ready to fetch");
       APP.search($scope, 1);
-    }
+    };
+    $scope.testRequest = function(itemId){
+      APP.request(itemId);
+    };
   })
 
 .controller('AccountCtrl', function($scope) {
@@ -97,7 +101,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }).then(function(modal) {
       $scope.modal = modal;
     });
-    
+
     $scope.createContact = function(u) {
       var item = new Item();
       if(!$scope.newItem.Title)
@@ -179,6 +183,17 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           currentUser = Parse.User.current();
           alert(currentUser.get("username"));
           isLogin = true;
+          APP = currentUser.get("customer");
+          APP.fetch().then(function(obj){
+            alert(APP.id);
+            if(APP.get("Requests").length != 0){
+              AcceptTimer = setInterval(checkAccept,1000);
+            }
+            if(APP.get("ListOfPostItem").length!=0){
+              RequestTimer = setInterval(checkRequest,3000);
+            }
+          });
+
           $state.go('tabs.home');
         },
         error: function(user, error) {
@@ -209,7 +224,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                     popoverOptions: CameraPopoverOptions,
                     saveToPhotoAlbum: false
                 };
-   
+
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
                         alert("photo success");
@@ -225,7 +240,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                     });
 
                 }
-                
+
                 $scope.choosePhoto = function () {
                   var options = {
                     quality: 75,
@@ -238,7 +253,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                     popoverOptions: CameraPopoverOptions,
                     saveToPhotoAlbum: false
                 };
-   
+
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
                         var file = new Parse.File("myfile.jpeg", fileData, "image/jpeg");

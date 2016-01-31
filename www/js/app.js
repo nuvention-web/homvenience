@@ -79,11 +79,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'AccountCtrl'
         }
       }
-    })
-
-
-
-    ;
+    });
     // .state("tabs.post", {
     //   url: '/post',
     //   views:{

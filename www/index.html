@@ -41,7 +41,7 @@
 <!--     <ion-nav-bar class="bar-royal">
       <ion-nav-back-button class="button-icon ion-arrow-left-c">
       </ion-nav-back-button> -->
-    
+
     <ion-nav-view></ion-nav-view>
 
 <!--固定导航栏-->
@@ -129,7 +129,7 @@
         </ion-header-bar>
 
         <ion-content>
-       
+
           <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
 
               <a id="item-header" class="item item-avatar" >
@@ -174,7 +174,7 @@
         </ion-header-bar>
 
         <ion-content >
-       
+
           <div class="list">
               <a id="item-header"class="item item-avatar" href="#account">
                   <img src="img/mike.png">
@@ -189,7 +189,7 @@
                 </p>
                 <div id='itembar'class="row">
                   <i class="icon ion-ios-location icon-site"></i>
-<!--传定位进来-->         
+<!--传定位进来-->
                   <p>&nbsp Evanston</p>
                   <p>&nbsp 多久之前</p>
                 </div>
@@ -205,7 +205,7 @@
 
           <div id='detail-comment' class="list" ng-repeat = "x in search_res">
               <a class="item item-avatar" href="#">
-                
+
                 <img src="venkman.jpg">
                 <h2>Venkman</h2>
                 <p>Back off, man. Im a scientist.</p>
@@ -237,15 +237,15 @@
           </ion-header-bar>
 
           <ion-content padding="true">
-            <div class="list card"  ng-repeat="x in search_res">
+            <div class="list card"  ng-repeat="x in search_res" ng-click="testRequest(x.id)">
               <div class="item item-avatar">
                 <img src="img/ben.png">
-                <h2>{{x.get("Name")}}</h2>
-
+                <h2>{{x.get("Title")}}</h2>
                 <p>{{x.get("Owner")}}</p>
               </div>
               <div class="item item-body">
                 <p>{{x.get("Desc")}}</p>
+                <p>{{x.id}}</p>
               </div>
             </div>
           </ion-content>
@@ -276,7 +276,7 @@
 
 <!--发布信息页面-->
     <script id="templates/modal.html" type="text/ng-template">
-      <ion-modal-view>  
+      <ion-modal-view>
         <ion-header-bar class="bar-col bar-header bar-positive bar">
           <h2 class="title">I can help</h2>
           <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
@@ -301,4 +301,12 @@
 
     <script type="text/javascript" src="js/main.js"></script>
 
+<<<<<<< HEAD
 </body></html>
+||||||| merged common ancestors
+  </body>
+</html></script></body></html>
+=======
+  </body>
+</html>
+>>>>>>> 1705a25b3821e1b3d75cda7da4af12fb7a280b98
