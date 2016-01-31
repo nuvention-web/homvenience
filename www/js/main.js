@@ -235,6 +235,7 @@ var checkAccept = function(){
           }
           obj.destroy();
           APP.set("Requests",delArray(obj.id,APP.get("Requests")));
+          APP.save();
           if(APP.get("Requests").length == 0){
             window.clearInterval(AcceptTimer);
           }
