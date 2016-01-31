@@ -221,8 +221,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       });
    }
 
-<<<<<<< HEAD
-
   $scope.showAlert = function() {
      var alertPopup = $ionicPopup.alert({
        title: 'Request successful',
@@ -230,15 +228,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
      alertPopup.then(function(res) {
        console.log('Thank you for not eating my delicious ice cream cone');
      });
-   };
+   }
 
-||||||| merged common ancestors
-=======
    $scope.LogOut = function() {
     Parse.User.logIn();
     isLogin = false;
   }
->>>>>>> fee7b36bb7b8b8f036f2d2e712667cf938024b20
   //bar上面的两种状态
    $scope.Header = function(){
     if(!isLogin)
