@@ -70,6 +70,20 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     })
 
+    .state('tabs.chat',{
+      url: '/chat',
+      views:{
+        'chat-tab':{
+          templateUrl: 'templates/chat.html',
+          controller:''
+        }
+      }
+    })
+
+
+
+
+
 
     .state('tabs.account', {
       url: '/account',

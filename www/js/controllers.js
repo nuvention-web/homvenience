@@ -84,50 +84,64 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   })
 
-  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $state, $cordovaCamera) {
+  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
+
     $scope.newItem = {
       Title : "",
       Desc : ""
     };
-
-
-    $scope.newPost = [
-      { name: 'Gordon Freeman' },
-      { name: 'Barney Calhoun' },
-      { name: 'Lamarr the Headcrab' },
-    ];
+    
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
     }).then(function(modal) {
       $scope.modal = modal;
     });
-
-    $scope.createContact = function(u) {
-      var item = new Item();
-      if(!$scope.newItem.Title)
+   // An alert dialog
+     $scope.CreatePostAlert = function() {
+       var alertPopup = $ionicPopup.alert({
+         template: 'Post Success!'
+       });
+       alertPopup.then(function(res) {
+         console.log('Thank you for not eating my delicious ice cream cone');
+       });
+     };
+    $scope.createPost = function() {
+      alert($scope.newItem.Title);
+      if($scope.newItem.Title == "")
       {
-        alert("Please enter the title");
+        alert("no title");
+        return;
       }
-      if(!$scope.newItem.Desc){
-        $scope.newItem.Desc = "";
-      }
-    item.set("Title", $scope.newItem.Title);
-    item.set("ImageArry",photo_arry);
-    item.set("Desc",$scope.newItem.Desc);
-    item.set("User",currentUser);
-    item.save(null, {
-      success: function(item) {
-        // Execute any logic that should take place after the object is saved.
-        alert("Post Success");
-        $scope.newItem.Title = null;
-        $scope.newItem.Desc = null;
-        $scope.modal.hide();
-      },
-      error: function(item, error) {
-        // Execute any logic that should take place if the save fails.
-        // error is a Parse.Error with an error code and message.
-        alert('Failed to create new object, with error code: ' + error.message);
-      }
+      var item = new Item();
+      var GP = new Parse.GeoPoint.current({
+        success: function (point){
+          console.log("GP success");
+        },
+        error: function (error){
+          console.log(error);
+        }
+      });
+      item.set("Title", $scope.newItem.Title);
+      item.set("ImageArry",photo_arry);
+      item.set("Desc",$scope.newItem.Desc);
+      item.set("Holder",currentUser.id);
+      item.set("Owner", currentUser.get("username"));
+      item.set("State", "Available");
+      item.set("GeoPoint", GP);
+      item.set("requestList", []);
+      item.save(null, {
+        success: function(item) {
+          // Execute any logic that should take place after the object is saved.
+          alert("Post Success");
+          $scope.newItem.Title = null;
+          $scope.newItem.Desc = null;
+          $scope.modal.hide();
+        },
+        error: function(item, error) {
+          // Execute any logic that should take place if the save fails.
+          // error is a Parse.Error with an error code and message.
+          alert('Failed to create new object, with error code: ' + error.message);
+        }
     });
   }
 
@@ -193,7 +207,15 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
               RequestTimer = setInterval(checkRequest,3000);
             }
           });
-
+          var GP = new Parse.GeoPoint.current({
+            success: function (point){
+             alert("GP success");
+            },
+            error: function (error){
+              alert(error);
+            }
+          });
+          APP.set("CurrentGP", GP);
           $state.go('tabs.home');
         },
         error: function(user, error) {
