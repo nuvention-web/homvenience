@@ -167,6 +167,7 @@ var Customer = Parse.Object.extend("Customer" , {
   search : function ($scope, distance) {
     var query = new Parse.Query(Item);
     query.notEqualTo("Owner",currentUser.get("username"));
+    query.notEqualTo("Holder",currentUser.id);
     query.find().then(function(result) {
       alert("serach!");
       $scope.search_res = result;
@@ -234,6 +235,9 @@ var checkAccept = function(){
           }
           obj.destroy();
           APP.set("Requests",delArray(obj.id,APP.get("Requests")));
+          if(APP.get("Requests").length == 0){
+            window.clearInterval(AcceptTimer);
+          }
           console.log("destroy"+ req);
         }
       });
