@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -75,10 +75,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       views:{
         'chat-tab':{
           templateUrl: 'templates/chat.html',
-          controller:'ChatCtrl'
+          controller:''
         }
       }
     })
+
+
+
+
 
 
     .state('tabs.account', {
@@ -89,12 +93,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           controller: 'AccountCtrl'
         }
       }
-    })
-
-
-
-
-    ;
+    });
     // .state("tabs.post", {
     //   url: '/post',
     //   views:{
