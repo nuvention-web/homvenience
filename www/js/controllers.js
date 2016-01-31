@@ -41,22 +41,6 @@ angular.module('starter.controllers', ['ionic'])
     }
   })
 
-//.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-//  $scope.chat = Chats.get($stateParams.chatId);
-//})
-  
-.controller('PopupCtrl',function($scope, $ionicPopup, $timeout) {
-   // An alert dialog
-   $scope.showAlert = function() {
-     var alertPopup = $ionicPopup.alert({
-       title: 'Don\'t eat that!',
-       template: 'It might taste good'
-     });
-     alertPopup.then(function(res) {
-       console.log('Thank you for not eating my delicious ice cream cone');
-     });
-   };
- })
 
 .controller('DetailCtrl',function($scope){
     $scope.search_res = []
@@ -77,11 +61,7 @@ angular.module('starter.controllers', ['ionic'])
   })
 
 .controller('tChaCtrl',function($scope){
-    $scope.search_res = []
-    $scope.init = function () {
-      console.log("ready to fetch");
-      APP.search($scope, 1);
-    }
+    
   })
 
 .controller('AccountCtrl', function($scope) {
@@ -90,13 +70,6 @@ angular.module('starter.controllers', ['ionic'])
       console.log("ready to fetch");
       APP.search($scope, 1);
     }
-/*
-    $scope.settings = {
-    enableFriends: true
-    };
-*/
-
-
   })
 
   .controller('MenuCtrl', function($scope, $ionicModal, $ionicPopup, $ionicActionSheet, $state) {
