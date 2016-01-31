@@ -129,7 +129,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.newItem.Title = null;
           $scope.newItem.Desc = null;
           $scope.modal.hide();
-          APP.set("ListOfPostItem",item.id);
+          APP.get("ListOfPostItem").push(item.id);
           APP.save();
         },
         error: function(item, error) {
@@ -211,6 +211,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             }
           });
           APP.set("CurrentGP", GP);
+          APP.search($scope, 1);
           $state.go('tabs.home');
         },
         error: function(user, error) {
@@ -220,6 +221,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       });
    }
 
+<<<<<<< HEAD
 
   $scope.showAlert = function() {
      var alertPopup = $ionicPopup.alert({
@@ -230,6 +232,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
      });
    };
 
+||||||| merged common ancestors
+=======
+   $scope.LogOut = function() {
+    Parse.User.logIn();
+    isLogin = false;
+  }
+>>>>>>> fee7b36bb7b8b8f036f2d2e712667cf938024b20
   //bar上面的两种状态
    $scope.Header = function(){
     if(!isLogin)

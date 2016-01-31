@@ -167,9 +167,11 @@ var Customer = Parse.Object.extend("Customer" , {
   search : function ($scope, distance) {
     var query = new Parse.Query(Item);
     query.notEqualTo("Owner",currentUser.get("username"));
+    query.notEqualTo("Holder",currentUser.id);
     query.find().then(function(result) {
       $scope.search_res = result;
       $scope.$apply();
+      console.log($scope.search_res.length);
     },
     function(err){
       alert("Search Failed");
@@ -183,7 +185,7 @@ var RequestTimer;
 
 var checkRequest = function(){
   //Only for test
-  /*if(APP.get("ListOfRequest").length!=0){
+  if(APP.get("ListOfRequest").length!=0){
     var a = APP.get("ListOfRequest");
     var id = a[0];
     var testq = new Parse.Query(Request);
@@ -191,7 +193,7 @@ var checkRequest = function(){
       console.log("start accept");
       APP.accept(id,obj.get("itemId"),obj.get("requesterId"));
     });
-  }*/
+  }
   //
   console.log("start check request");
   var posted = APP.get("ListOfPostItem");
@@ -209,7 +211,8 @@ var checkRequest = function(){
         res.push(reqid);
       }
       APP.set("ListOfRequest",res);
-      APP.save().then();
+      APP.save();
+      console.log("Request Fetched");
     });
   }
 };
@@ -232,6 +235,10 @@ var checkAccept = function(){
           }
           obj.destroy();
           APP.set("Requests",delArray(obj.id,APP.get("Requests")));
+          APP.save();
+          if(APP.get("Requests").length == 0){
+            window.clearInterval(AcceptTimer);
+          }
           console.log("destroy"+ req);
         }
       });

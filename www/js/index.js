@@ -86,4 +86,4 @@ angular.module('ionicApp', ['ionic'])
 });
 
 
-$(document).ready("MenuCtrl")；
+$(document).ready("MainCtrl")；

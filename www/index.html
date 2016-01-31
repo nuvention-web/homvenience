@@ -239,6 +239,8 @@
           <ion-header-bar class="bar-col bar-header bar">
           <h2 class="title rest-bar">Search</h2>
 
+          <button class="button button-clear icon ion-log-in" ng-click="init()"></button>
+
           </ion-header-bar>
 
           <ion-content>
@@ -313,7 +315,7 @@
         </ul>  
         
 
-        <button class="button button-block button-stable" href='#/tab/home'>
+        <button class="button button-block button-stable" ng-click = "LogOut()">
           Log Out
         </button>
 
@@ -377,6 +379,9 @@
     <param name="ios-package" value="CDVCamera">
 </feature>
 
-    <script type="text/javascript" src="js/main.js">
+    <script type="text/javascript" src="js/main.js"></script>
 
-</script></body></html>
+  </body>
+
+</html>
+
