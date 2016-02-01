@@ -269,7 +269,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   $scope.showAlert = function() {
      var alertPopup = $ionicPopup.alert({
-       title: 'Request successful',
+       title: 'Request successfully',
      });
      alertPopup.then(function(res) {
        console.log('Thank you for not eating my delicious ice cream cone');
