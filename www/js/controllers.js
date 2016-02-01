@@ -46,6 +46,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       console.log("ready to fetch");
       APP.search($scope, 1);
     }
+    $scope.request = function(){
+      APP.request();
+    }
 
   })
 
