@@ -1,4 +1,9 @@
 /*-----间隙背景-----*/
+.ng-binding{
+	border-radius:10px !important;
+
+}
+
 a{
 	text-decoration: none;
 }
