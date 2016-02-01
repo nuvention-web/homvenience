@@ -293,7 +293,7 @@
         <ion-content>
         <ul class="list">
             <li class="item">
-              <a id="item-header"class="item item-avatar" href="#account">
+              <a id="item-header" class="item item-avatar" href="#account">
                   <img src="img/mike.png">
                   <h2 >Venkman</h2>
                   <p>
@@ -312,8 +312,8 @@
             <li class="item">
               Record
             </li>
-        </ul>  
-        
+        </ul>
+
 
         <button class="button button-block button-stable" ng-click = "LogOut()">
           Log Out
@@ -329,11 +329,11 @@
         <ion-header-bar class="bar-col bar bar-header">
           <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
           </a>
-          <h2 class="title rest-bar">Request</h2>   
+          <h2 class="title rest-bar">Request</h2>
         </ion-header-bar>
 
         <ion-content>
-        <ul class="list">
+        <ul class="list" ng-repeat="x in reqs">
             <li class="item item-avatar">
                 <img src="img/mike.png">
                 <h2 >Venkman</h2>
@@ -341,7 +341,7 @@
                 <button class="button button-clear button-text ion-ios-close-outline choice"></button>
                 <button class="button button-clear button-text ion-ios-checkmark-outline choice"></button>
             </li>
-        </ul>  
+        </ul>
 
         </ion-content>
       </ion-view>
