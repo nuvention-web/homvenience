@@ -111,6 +111,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
 
+    $scope.photo_arry = [];
+
+
     $scope.newItem = {
       Title : "",
       Desc : ""
@@ -131,7 +134,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
        });
      };
     $scope.createPost = function() {
-      alert($scope.newItem.Title);
+      
       if($scope.newItem.Title == "")
       {
         alert("no title");
@@ -147,7 +150,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         }
       });
       item.set("Title", $scope.newItem.Title);
-      item.set("ImageArry",photo_arry);
+      item.set("ImageArry",photo_Arry);
       item.set("Desc",$scope.newItem.Desc);
       item.set("Holder",currentUser.id);
       item.set("Owner", currentUser.get("username"));
@@ -162,6 +165,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.newItem.Desc = null;
           $scope.modal.hide();
           APP.get("ListOfPostItem").push(item.id);
+          photo_Arry = [];
           APP.save();
         },
         error: function(item, error) {
@@ -173,7 +177,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   }
 
     $scope.showDetails = function() {
-      photo_arry = [];
      // Show the action sheet
      var hideSheet = $ionicActionSheet.show({
        buttons: [
@@ -197,7 +200,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    }
 
     $scope.postShow = function() {
-
+      photo_Arry = [];
      // Show the action sheet
      var hideSheet = $ionicActionSheet.show({
        buttons: [
@@ -210,6 +213,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
        },
        buttonClicked: function(index) {
         if(index == 0){
+          $scope.modal.show();
+        }
+        if(index == 1){
           $scope.modal.show();
         }
          return true;
@@ -234,7 +240,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           });
           var GP = new Parse.GeoPoint.current({
             success: function (point){
-             console.log("GP success");
+              console.log("GP Success");
             },
             error: function (error){
               alert(error);
@@ -272,8 +278,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       return "button button-clear icon ion-log-out";
    }
 
-
    $scope.takePhoto = function () {
+
+
                   var options = {
                     quality: 75,
                     destinationType: Camera.DestinationType.DATA_URL,
@@ -288,14 +295,17 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        alert("photo success");
-                        var file = new Parse.File("pic.www", imageData, "image/jpeg");
-                        parseFile.save().then(function() {
-                          alert("chengo");
-                        }, function(error) {
-                          alert(error);
-                          // The file either could not be read, or could not be saved to Parse.
-                        });
+                        var ImageName = ID() + ".jpeg";
+                        alert(ImageName);
+                        var IMG = new Parse.File(ImageName, { base64: imageData });
+                        if(IMG == null){
+                          alert("photo save failed");
+                          scope.imgURI = "";
+                          return;
+                        }else{
+                          //alert("photo save success");
+                        }
+                        photo_Arry.push(IMG);
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
@@ -317,8 +327,17 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        var file = new Parse.File("myfile.jpeg", fileData, "image/jpeg");
-                        photo_arry.push(file);
+                        var ImageName = ID() + ".jpeg";
+                        alert(ImageName);
+                        var IMG = new Parse.File(ImageName, { base64: imageData });
+                        if(IMG == null){
+                          alert("photo save failed");
+                          scope.imgURI = "";
+                          return;
+                        }else{
+                          //alert("photo save success");
+                        }
+                        photo_Arry.push(IMG);
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
