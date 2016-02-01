@@ -83,7 +83,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     .state('request', {
       url: '/request',
+      controller: 'RequestCtrl',
       templateUrl: 'templates/request.html',
+    })
+
+    .state('offering', {
+      url: '/offering',
+      templateUrl: 'templates/offering.html',
+    })
+
+    .state('record', {
+      url: '/record',
+      templateUrl: 'templates/record.html',
     })
 
 
