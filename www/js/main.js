@@ -15,12 +15,20 @@ testObject.save({Message: "Hello World"}, {
     $(".error").show();
   }
 });*/
+var ID = function () {
+  return Math.random().toString(36).substr(2, 9);
+};
+
+
+var base64 = "V29ya2luZyBhdCBQYXJzZSBpcyBncmVhdCE=";
 
 var isLogin = false;
 
-var photo_arry = [];
-
 Parse.User.logOut();
+
+photo_Arry = [];
+
+alert(photo_Arry.length);
 
 var currentUser = Parse.User.current();
 if(currentUser){
