@@ -306,10 +306,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                           //alert("photo save success");
                         }
                         photo_Arry.push(IMG);
-                        }, function(error) {
-                          alert(error);
-                          // The file either could not be read, or could not be saved to Parse.
-                        });
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
