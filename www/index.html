@@ -134,7 +134,7 @@
 
           <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
 
-              <a id="item-header" class="item item-avatar" >
+              <a class="item item-avatar item-header" >
                   <img src="img/mike.png">
                   <h2>Venkman&nbsp<i class="icon fa fa-smile-o icolor"></i></h2>
                   <p>活跃度.</p>
@@ -181,7 +181,7 @@
         <ion-content >
 
           <div class="list">
-              <a id="item-header"class="item item-avatar" href="#account">
+              <a class="item item-avatar item-header" href="#account">
                   <img src="img/mike.png">
                   <h2 >Venkman</h2>
                   <p>
@@ -293,7 +293,7 @@
         <ion-content>
         <ul class="list">
             <li class="item">
-              <a id="item-header" class="item item-avatar" href="#account">
+              <a class="item item-avatar item-header" href="#account">
                   <img src="img/mike.png">
                   <h2 >Venkman</h2>
                   <p>
@@ -306,15 +306,17 @@
               Request
             </li>
             </a>
+            <a href='#offering'>
             <li class="item">
               Offering
             </li>
+            </a>
+            <a href='#record'>
             <li class="item">
               Record
             </li>
+            </a>
         </ul>
-
-
         <button class="button button-block button-stable" ng-click = "LogOut()">
           Log Out
         </button>
@@ -340,9 +342,51 @@
                 <div class="">
                 <button class="button button-clear button-text ion-ios-close-outline choice"></button>
                 <button class="button button-clear button-text ion-ios-checkmark-outline choice"></button>
+                </div>
             </li>
         </ul>
+        </ion-content>
+      </ion-view>
+    </script>
 
+    <script id="templates/record.html" type="text/ng-template">
+      <ion-view>
+
+        <ion-header-bar class="bar-col bar bar-header">
+          <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
+          </a>
+          <h2 class="title rest-bar">Record</h2>
+        </ion-header-bar>
+
+        <ion-content>
+        <ul class="list">
+            <li class="item item-avatar">
+                <img src="img/mike.png">
+                <h2 >Venkman</h2>
+                <button class="{{head()}}"></button>
+            </li>
+        </ul>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/offering.html" type="text/ng-template">
+      <ion-view>
+
+        <ion-header-bar class="bar-col bar bar-header">
+          <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
+          </a>
+          <h2 class="title rest-bar">Offering</h2>
+        </ion-header-bar>
+
+        <ion-content>
+        <ul class="list">
+            <li class="item item-avatar">
+                <img src="img/mike.png">
+                <h2 >Venkman</h2>
+                <button class="{{head()}}}"></button>
+            </li>
+        </ul>
         </ion-content>
       </ion-view>
     </script>

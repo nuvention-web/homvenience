@@ -1,4 +1,8 @@
 /*-----间隙背景-----*/
+a{
+	text-decoration: none;
+}
+
 .content-back{
 	background-color: #eee;
 }
@@ -22,11 +26,13 @@
 }
 
 /*----Signin部分----*/
+
 #sign-button{
 
 }
 
 /*----home部分----*/
+
 #home-bar{
 	color: #fff !important;
 	font-size: 28px;
@@ -51,6 +57,7 @@
 }
 
 /*-----可以定义icon的颜色-----*/
+
 #item-bar .icolor{
 	color: #9BDDFF;
 }
@@ -61,11 +68,12 @@
 	background-color: #fff;
 }
 
-#item-header{
+.item-header{
 	border-width: 0px !important;
 }
 
 /*-----home超链接-----*/
+
 #home-a{
 	display: block;
 	text-decoration: none;
@@ -73,6 +81,7 @@
 }
 
 /*-----评论-----*/
+
 #detail-comment{
 
 }
@@ -84,12 +93,14 @@
 }
 
 /*-----个人信息-----*/
+
 .right{
 	text-align: right;
 
 }
 
 /*-----request-record-----*/
+
 .choice{
 	float: right;
 	font-size: 40px;
