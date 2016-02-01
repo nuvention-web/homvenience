@@ -55,7 +55,9 @@ var display = new Display();
 var Request = Parse.Object.extend("Request",{
   itemId:null,
   requesterId:null,
-  time:null
+  time:null,
+  requesterName: null,
+  itemName:""
 
 });
 
@@ -94,27 +96,32 @@ var Customer = Parse.Object.extend("Customer" , {
       obj.set("State","LentOut");
       obj.set("Holder",requesterId);
       obj.clearRequests();
+
       obj.save().then(function(obj){
         console.log("Start moving");
         app.set("ListOfPostItem",delArray(itemId,app.get("ListOfPostItem")));
         app.get("ListOfLent").push(itemId);
-        app.save();
+        checkRequest();
         if(app.get("ListOfPostItem").length == 0){
           window.clearInterval(RequestTimer);
         }
       });
       console.log("accpeted!");
 
+    },function(err){
+      alert("This item has been lent out!");
     });
     //this.set("ListOfPostItem", this.get("ListOfPostItem").slice(0,))
   },
 
-  request : function(itemId){
+  request : function(itemId,itemName){
     var app = this;
     var newRequest = new Request();
     newRequest.set("itemId",itemId);
     newRequest.set("requesterId",currentUser.id);
     newRequest.set("time",new Date());
+    newRequest.set("requesterName",currentUser.get("username"));
+    newRequest.set("itemName",itemName);
     newRequest.save().then(function(obj){
       var query = new Parse.Query(Item);
       query.get(itemId).then(function(res){
@@ -185,15 +192,6 @@ var RequestTimer;
 
 var checkRequest = function(){
   //Only for test
-  if(APP.get("ListOfRequest").length!=0){
-    var a = APP.get("ListOfRequest");
-    var id = a[0];
-    var testq = new Parse.Query(Request);
-    testq.get(id).then(function(obj){
-      console.log("start accept");
-      APP.accept(id,obj.get("itemId"),obj.get("requesterId"));
-    });
-  }
   //
   console.log("start check request");
   var posted = APP.get("ListOfPostItem");
