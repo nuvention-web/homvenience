@@ -57,8 +57,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       console.log("ready to fetch");
       APP.search($scope, 1);
     };
-    $scope.Request = function(itemId){
-      APP.request(itemId);
+    $scope.Request = function(itemId,itemName){
+      APP.request(itemId,itemName);
     };
   })
 
@@ -75,6 +75,35 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 */
 
 
+  })
+  .controller('RequestCtrl',function($scope){
+    $scope.reqs=[];
+    $scope.Refresh = function(){
+      var list = APP.get("ListOfRequest");
+      var query = new Parse.Query(Request);
+      query.containedIn("objectId",list);
+      query.find().then(function(results){
+        $scope.reqs = results;
+        $scope.$apply();
+      });
+    }
+    $scope.Accept = function(requestObject,$index) {
+      console.log("start accept");
+      $scope.reqs.splice($index,1);
+      APP.accept(requestObject.id, requestObject.get("itemId"), requestObject.get("requesterId"));
+    }
+  })
+
+  .controller('RecordCtrl',function($scope){
+    $scope.getItems=[];
+    $scope.Refresh = function() {
+      var list = APP.get("ListOfGet");
+      var query = new Parse.Query(Item);
+      query.containedIn("objectId", list);
+      query.find().then(function (results) {
+        $scope.getItems = results;
+      });
+    }
   })
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
@@ -190,11 +219,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       Parse.User.logIn(u.username, u.password, {
         success: function(user) {
           currentUser = Parse.User.current();
-          alert(currentUser.get("username"));
           isLogin = true;
           APP = currentUser.get("customer");
           APP.fetch().then(function(obj){
-            alert(APP.id);
             if(APP.get("Requests").length != 0){
               AcceptTimer = setInterval(checkAccept,1000);
             }
@@ -204,7 +231,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           });
           var GP = new Parse.GeoPoint.current({
             success: function (point){
-             alert("GP success");
+             console.log("GP success");
             },
             error: function (error){
               alert(error);

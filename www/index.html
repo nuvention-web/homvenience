@@ -251,7 +251,7 @@
               </label>
             </div>
 
-            <div class="list card"  ng-repeat="x in search_res" ng-click="Request(x.id)">
+            <div class="list card"  ng-repeat="x in search_res" ng-click="Request(x.id,x.get('Title'))">
               <div class="item item-avatar">
                 <img src="img/ben.png">
                 <h2>{{x.get("Title")}}</h2>
@@ -334,23 +334,25 @@
           <h2 class="title rest-bar">Request</h2>
         </ion-header-bar>
 
-        <ion-content>
-        <ul class="list" ng-repeat="x in reqs">
-            <li class="item item-avatar">
-                <img src="img/mike.png">
-                <h2 >Venkman</h2>
-                <div class="">
-                <button class="button button-clear button-text ion-ios-close-outline choice"></button>
-                <button class="button button-clear button-text ion-ios-checkmark-outline choice"></button>
-                </div>
-            </li>
-        </ul>
+        <ion-content  ng-init="Refresh()">
+          <ion-list>
+            <ion-item class="item item-avatar" ng-repeat="x in reqs">
+              <img src="img/mike.png">
+              <h2 >{{x.get("requesterName")}}</h2>
+              <div class="">
+                <p>{{x.get("itemName")}}</p>
+                <button class="button button-clear button-text ion-ios-close-outline choice" ng-click="reqs.splice($index,1)"></button>
+                <button class="button button-clear button-text ion-ios-checkmark-outline choice" ng-click="Accept(x,$index)"></button>
+              </div>
+            </ion-item>
+          </ion-list>
+
         </ion-content>
       </ion-view>
     </script>
 
     <script id="templates/record.html" type="text/ng-template">
-      <ion-view>
+      <ion-view ng-init="Refresh()">
 
         <ion-header-bar class="bar-col bar bar-header">
           <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
@@ -359,13 +361,16 @@
         </ion-header-bar>
 
         <ion-content>
-        <ul class="list">
-            <li class="item item-avatar">
-                <img src="img/mike.png">
-                <h2 >Venkman</h2>
-                <button class="{{head()}}"></button>
-            </li>
-        </ul>
+          <ion-list>
+            <ion-item class="item item-avatar" ng-repeat="x in getItems">
+              <img src="img/mike.png">
+              <h2 >{{x.get("Title")}}</h2>
+              <div class="">
+                <p>{{x.get("Owner")}}</p>
+              </div>
+            </ion-item>
+            </ul>
+          </ion-list>
         </ion-content>
       </ion-view>
     </script>
