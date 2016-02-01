@@ -93,6 +93,9 @@ var Customer = Parse.Object.extend("Customer" , {
     var app = this;
     var query = new Parse.Query(Item);
     query.get(itemId).then(function(obj){
+      if(obj.get("State") == "LentOut"){
+        alert("Oops! This item has been lent out!");
+      }
       obj.set("State","LentOut");
       obj.set("Holder",requesterId);
       obj.clearRequests();
@@ -107,9 +110,6 @@ var Customer = Parse.Object.extend("Customer" , {
         }
       });
       console.log("accpeted!");
-
-    },function(err){
-      alert("This item has been lent out!");
     });
     //this.set("ListOfPostItem", this.get("ListOfPostItem").slice(0,))
   },
