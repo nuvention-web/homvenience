@@ -133,14 +133,14 @@
         <ion-content class='content-back'>
           <ion-refresher
               pulling-text="Pull to refresh..."
-              on-refresh="doRefresh()">
+              on-refresh="init()">
           </ion-refresher>
 
           <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
 
               <a class="item item-avatar item-header" >
                   <img src="img/mike.png">
-                  <h2>"aaaaaa"<i class="icon fa fa-smile-o icolor"></i></h2>
+                  <h2>{{x.get("Owner")}}<i class="icon fa fa-smile-o icolor"></i></h2>
                   <p>活跃度.</p>
               </a>
 
@@ -148,7 +148,7 @@
                 <div class='item-detail'>
                   <img class="full-image" src="img/ps.png">
                   <p>
-                      This is my PS3！I bought it in 2013. Anyone want play with it? It's free to lend！'
+                      {{x.get("Desc")}}
                   </p>
                   <div id='item-bar'class="row">
                       <div class="col col-67"><i class="icon ion-ios-location icon-site"></i>
@@ -422,7 +422,7 @@
         <button class = "button button-icon icon ion-camera" ng-click = showDetails()></button>
 
         <label class="item item-input">
-          <textarea placeholder="Write description here" rows = "20" ng-model ="newItem.Desc"></textarea></label>
+          <textarea placeholder="Write description here" rows = "5" ng-model ="newItem.Desc"></textarea></label>
 
         <button class="button button-block button-stable" ng-click="createPost()">
           Post
