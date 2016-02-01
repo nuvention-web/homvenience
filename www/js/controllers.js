@@ -27,7 +27,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.search_res = []
     $scope.init = function () {
       console.log('ready to fetch');
-      APP.search($scope, 1);
+      APP.search($scope, 1,true);
     }
     $scope.esc = function() {
       $state.go('detail');
@@ -44,7 +44,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.search_res = []
     $scope.init = function () {
       console.log("ready to fetch");
-      APP.search($scope, 1);
+      APP.search($scope, 1,false);
     }
     $scope.request = function(){
       APP.request();
@@ -58,7 +58,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
     $scope.init = function () {
       console.log("ready to fetch");
-      APP.search($scope, 1);
+      APP.search($scope, 1,false);
     };
     $scope.Request = function(itemId,itemName){
       APP.request(itemId,itemName);
@@ -69,7 +69,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.search_res = []
     $scope.init = function () {
       console.log("ready to fetch");
-      APP.search($scope, 1);
+      APP.search($scope, 1,false);
     }
 /*
     $scope.settings = {
@@ -117,7 +117,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
     $scope.init = function () {
       console.log("ready to fetch");
-      APP.search($scope, 1);
+      APP.search($scope, 1,true);
     };
     $scope.Request = function(itemId,itemName){
       APP.request(itemId,itemName);
@@ -260,7 +260,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             }
           });
           APP.set("CurrentGP", GP);
-          APP.search($scope, 1);
+          APP.search($scope, 1,false);
           $state.go('tabs.home');
         },
         error: function(user, error) {

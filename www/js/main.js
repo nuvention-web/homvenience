@@ -179,10 +179,12 @@ var Customer = Parse.Object.extend("Customer" , {
         alert("Customer Upload Failed");
       });
   },
-  search : function ($scope, distance) {
+  search : function ($scope, distance,self) {
     var query = new Parse.Query(Item);
-    query.notEqualTo("Owner",currentUser.get("username"));
-    query.notEqualTo("Holder",currentUser.id);
+    if(self == false) {
+      query.notEqualTo("Owner", currentUser.get("username"));
+      query.notEqualTo("Holder", currentUser.id);
+    }
     query.find().then(function(result) {
       $scope.search_res = result;
       $scope.$apply();
