@@ -1,7 +1,7 @@
 /*-----间隙背景-----*/
-.ng-binding{
+.popup-buttons .ng-binding{
 	border-radius:10px !important;
-
+	background-color: #9BDDFF !important; 
 }
 
 a{
