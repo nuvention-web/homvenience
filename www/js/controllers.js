@@ -106,6 +106,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       query.containedIn("objectId", list);
       query.find().then(function (results) {
         $scope.getItems = results;
+        console.log("find borrowed results" + results.length);
+        $scope.$apply();
       });
     }
   })
@@ -120,7 +122,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.Request = function(itemId,itemName){
       APP.request(itemId,itemName);
     };
-    
+
 
     $scope.photo_arry = [];
 
@@ -145,7 +147,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
        });
      };
     $scope.createPost = function() {
-      
+
       if($scope.newItem.Title == "")
       {
         alert("no title");

@@ -94,6 +94,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     .state('record', {
       url: '/record',
+      controller: 'RecordCtrl',
       templateUrl: 'templates/record.html',
     })
 

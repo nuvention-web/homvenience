@@ -237,7 +237,16 @@ var checkAccept = function(){
       query4item.get(itemid).then(function(item){
         if(item.get("State") == "LentOut") {
           if (item.get("Holder") == currentUser.id) {
-            APP.get("ListOfGet").push(itemid);
+            var list = APP.get("ListOfGet");
+            var find = false;
+            for(var i =0;i<list.length;i++){
+              if(list[i] == itemid){
+                find = true;
+                break;
+              }
+            }
+            if(find == false)
+              APP.get("ListOfGet").push(itemid);
           }
           obj.destroy();
           APP.set("Requests",delArray(obj.id,APP.get("Requests")));
