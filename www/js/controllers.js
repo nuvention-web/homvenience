@@ -87,6 +87,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       query.containedIn("objectId",list);
       query.find().then(function(results){
         $scope.reqs = results;
+        console.log("find results" + results.length);
         $scope.$apply();
       });
     }
