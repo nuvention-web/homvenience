@@ -133,7 +133,7 @@
         <ion-content class='content-back'>
           <ion-refresher
               pulling-text="Pull to refresh..."
-              on-refresh="doRefresh()">
+              on-refresh="init()">
           </ion-refresher>
 
           <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
