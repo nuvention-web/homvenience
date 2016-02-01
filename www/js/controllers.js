@@ -111,6 +111,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
 
+
+    $scope.init = function () {
+      console.log("ready to fetch");
+      APP.search($scope, 1);
+    };
+    $scope.Request = function(itemId,itemName){
+      APP.request(itemId,itemName);
+    };
+    
+
     $scope.photo_arry = [];
 
 
