@@ -104,20 +104,21 @@ var Customer = Parse.Object.extend("Customer" , {
       if(obj.get("State") == "LentOut"){
         alert("Oops! This item has been lent out!");
       }
-      obj.set("State","LentOut");
-      obj.set("Holder",requesterId);
-      obj.clearRequests();
-
-      obj.save().then(function(obj){
-        console.log("Start moving");
-        app.set("ListOfPostItem",delArray(itemId,app.get("ListOfPostItem")));
-        app.get("ListOfLent").push(itemId);
-        checkRequest();
-        if(app.get("ListOfPostItem").length == 0){
-          window.clearInterval(RequestTimer);
-        }
-      });
-      console.log("accpeted!");
+      else {
+        obj.set("State", "LentOut");
+        obj.set("Holder", requesterId);
+        obj.clearRequests();
+        obj.save().then(function (obj) {
+          console.log("Start moving");
+          app.set("ListOfPostItem", delArray(itemId, app.get("ListOfPostItem")));
+          app.get("ListOfLent").push(itemId);
+          checkRequest();
+          if (app.get("ListOfPostItem").length == 0) {
+            window.clearInterval(RequestTimer);
+          }
+        });
+        console.log("accpeted!");
+      }
     });
     //this.set("ListOfPostItem", this.get("ListOfPostItem").slice(0,))
   },
