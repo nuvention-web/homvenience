@@ -28,7 +28,6 @@ Parse.User.logOut();
 
 photo_Arry = [];
 
-alert(photo_Arry.length);
 
 var currentUser = Parse.User.current();
 if(currentUser){

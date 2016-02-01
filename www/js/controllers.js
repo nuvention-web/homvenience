@@ -112,6 +112,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
 
+
+    $scope.init = function () {
+      console.log("ready to fetch");
+      APP.search($scope, 1);
+    };
+    $scope.Request = function(itemId,itemName){
+      APP.request(itemId,itemName);
+    };
+    
+
     $scope.photo_arry = [];
 
 
@@ -260,7 +270,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   $scope.showAlert = function() {
      var alertPopup = $ionicPopup.alert({
-       title: 'Request successful',
+       title: 'Request successfully',
      });
      alertPopup.then(function(res) {
        console.log('Thank you for not eating my delicious ice cream cone');

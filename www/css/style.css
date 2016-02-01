@@ -1,4 +1,9 @@
 /*-----间隙背景-----*/
+.popup-buttons .ng-binding{
+	border-radius:10px !important;
+	background-color: #9BDDFF !important; 
+}
+
 a{
 	text-decoration: none;
 }
