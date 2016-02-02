@@ -136,7 +136,7 @@
               on-refresh="init()">
           </ion-refresher>
 
-          <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
+          <div class="list" ng-repeat = "x in search_res" ng-click="esc(x)">
 
               <a class="item item-avatar item-header" >
                   <img src={{HeadProfile[x.get("Owner")]}}>
@@ -146,7 +146,7 @@
 
               <a id='home-a' href="#/detail">
                 <div class='item-detail'>
-                  <img class="full-image" ng-repeat = "y in x.get('ImageArry')" src={{y.url()}}></img>
+                  <img class="full-image" ng-repeat = "y in x.get('ImageArry')" src={{y.url()}}/>
                   <p>
                       {{x.get("Desc")}}
                   </p>
@@ -173,7 +173,7 @@
 
 <!--item详情页面-->
     <script id="templates/detail.html" type="text/ng-template">
-      <ion-view ng-init="init()">
+      <ion-view>
 
         <ion-header-bar class="bar-col bar bar-header">
         <a href='#/tab/home'>
@@ -187,26 +187,28 @@
           <div class="list">
               <a class="item item-avatar item-header" href="#account">
                   <img src="img/mike.png">
-                  <h2 >Venkman</h2>
+                  <h2 >{{targetItem.get("Owner")}}</h2>
                   <p>
-                    Back. I am going to zhuang B.
+                    //what to put here?
                   </p>
+
               </a>
               <div class='item-detail'>
                 <p>
-                    This is my PS3！I bought it in 2013. Anyone want play with it? Free to lend
+                  {{targetItem.get("Desc")}}
                 </p>
                 <div id='itembar'class="row">
                   <i class="icon ion-ios-location icon-site"></i>
-<!--传定位进来-->
+<!--传定位进来
                   <p>&nbsp Evanston</p>
                   <p>&nbsp 多久之前</p>
+                  -->
                 </div>
-              <img class="full-image" src="img/ps.png">
+                <img class="full-image" ng-repeat = "y in targetItem.get('ImageArry')" src={{y.url()}}/>
               </div>
           </div>
 
-          <button class="button button-block button-outline button-calm" ng-click="showAlert()" >
+          <button class="button button-block button-outline button-calm" ng-click="showAlert(targetItem.id,targetItem.get('Title'))" >
             Want
           </button>
 

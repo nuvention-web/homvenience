@@ -29,9 +29,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       console.log('ready to fetch');
       APP.search($scope, 1,true);
     }
-    $scope.esc = function() {
-      $state.go('detail');
-    }
+
   })
 
 //.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -137,7 +135,22 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       APP.request(itemId,itemName);
     };
 
+    
+    $scope.photo_arry = [];
 
+    //This is for detail page use only
+    $scope.targetItem=null;
+
+    //
+    $scope.esc = function(item) {
+      $scope.targetItem = item;
+      $state.go('detail');
+    }
+
+    $scope.newItem = {
+      Title : "",
+      Desc : ""
+    };
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
@@ -280,13 +293,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       });
    }
 
-  $scope.showAlert = function() {
+  $scope.showAlert = function(itemId,itemName) {
      var alertPopup = $ionicPopup.alert({
        title: 'Request successfully',
      });
-     alertPopup.then(function(res) {
-       console.log('Thank you for not eating my delicious ice cream cone');
-     });
+     APP.request(itemId,itemName);
    }
 
    $scope.LogOut = function() {
