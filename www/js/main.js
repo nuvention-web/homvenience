@@ -27,7 +27,7 @@ var isLogin = false;
 
 Parse.User.logOut();
 
-photo_Arry = [];
+photo_Arry = [null];
 
 
 var currentUser = Parse.User.current();
