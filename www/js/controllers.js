@@ -391,7 +391,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                           //alert("photo save success");
                         }
                         $scope.photo_arry.push(IMG);
-                        alert($scope.photo_arry.length);
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });

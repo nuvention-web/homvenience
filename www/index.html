@@ -428,21 +428,21 @@
     <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-col">
-          <h2 class="title rest-bar">I can help</h2>
+          <h2 class="title rest-bar">I {{showLabel(LABEL)}}</h2>
           <button class="button button-clear" ng-click="modal.hide()"><i class='ion-close-round'></i></button>
         </ion-header-bar>
 
         <ion-content>
-        <img class="full-image" ng-repeat = "x in photo_arry" src={{imgURI}}></img>
         <label class="item item-input">
           <input type="text" placeholder="Subject" ng-model="newItem.Title"></label>
 
-        <img class="full-image" ng-repeat = "x in photo_arry" src={{x.url()}}></img>
         <button class = "button button-icon icon ion-camera" ng-click = showDetails()></button>
 
         <label class="item item-input">
           <textarea placeholder="Write description here" rows = "8" ng-model ="newItem.Desc"></textarea></label>
-
+        <div ng-repeat = "x in photo_arry">
+        <img class="full-image" src={{imgURI}}></img>
+        </div>
         <button class="button button-block button-stable" ng-click="createPost()">
           Post
         </button>
