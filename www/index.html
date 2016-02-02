@@ -344,6 +344,10 @@
         </ion-header-bar>
 
         <ion-content  ng-init="Refresh()">
+          <ion-refresher
+              pulling-text="Pull to refresh..."
+              on-refresh="Refresh()">
+          </ion-refresher>
           <ion-list>
             <ion-item class="item item-avatar" ng-repeat="x in reqs">
               <img src="img/mike.png">
@@ -370,6 +374,10 @@
         </ion-header-bar>
 
         <ion-content  ng-init="Refresh()">
+          <ion-refresher
+              pulling-text="Pull to refresh..."
+              on-refresh="Refresh()">
+          </ion-refresher>
           <ion-list>
             <ion-item class="item item-avatar" ng-repeat="x in getItems">
               <img src="img/mike.png">
@@ -422,7 +430,7 @@
         <button class = "button button-icon icon ion-camera" ng-click = showDetails()></button>
 
         <label class="item item-input">
-          <textarea placeholder="Write description here" rows = "5" ng-model ="newItem.Desc"></textarea></label>
+          <textarea placeholder="Write description here" rows = "8" ng-model ="newItem.Desc"></textarea></label>
 
         <button class="button button-block button-stable" ng-click="createPost()">
           Post
