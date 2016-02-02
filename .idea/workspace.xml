@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="91d35159-0f18-4d20-949f-b9b7a9c6a74d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/controllers.js" afterPath="$PROJECT_DIR$/www/js/controllers.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/main.js" afterPath="$PROJECT_DIR$/www/js/main.js" />
     </list>
     <ignored path="homvenience.iws" />
@@ -23,21 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5897436">
-              <caret line="414" column="28" selection-start-line="414" selection-start-column="28" selection-end-line="414" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.61864406">
+              <caret line="353" column="53" selection-start-line="353" selection-start-column="53" selection-end-line="353" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.62540716">
-              <caret line="149" column="14" selection-start-line="149" selection-start-column="14" selection-end-line="149" selection-end-column="14" />
+            <state vertical-scroll-proportion="-5.259259">
+              <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -46,8 +48,8 @@
       <file leaf-file-name="controllers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.148148">
-              <caret line="385" column="33" selection-start-line="385" selection-start-column="28" selection-end-line="385" selection-end-column="33" />
+            <state vertical-scroll-proportion="9.740741">
+              <caret line="217" column="33" selection-start-line="217" selection-start-column="33" selection-end-line="217" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -82,9 +84,9 @@
         <option value="$PROJECT_DIR$/www/index2.html" />
         <option value="$USER_HOME$/Downloads/index.html" />
         <option value="$PROJECT_DIR$/www/js/app.js" />
-        <option value="$PROJECT_DIR$/www/index.html" />
-        <option value="$PROJECT_DIR$/www/js/controllers.js" />
         <option value="$PROJECT_DIR$/www/js/main.js" />
+        <option value="$PROJECT_DIR$/www/js/controllers.js" />
+        <option value="$PROJECT_DIR$/www/index.html" />
       </list>
     </option>
   </component>
@@ -587,26 +589,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/index.html">
+    <entry file="file://$PROJECT_DIR$/www/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5897436">
-          <caret line="414" column="28" selection-start-line="414" selection-start-column="28" selection-end-line="414" selection-end-column="28" />
+        <state vertical-scroll-proportion="-5.259259">
+          <caret line="108" column="39" selection-start-line="108" selection-start-column="39" selection-end-line="108" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.148148">
-          <caret line="385" column="33" selection-start-line="385" selection-start-column="28" selection-end-line="385" selection-end-column="33" />
+        <state vertical-scroll-proportion="9.740741">
+          <caret line="217" column="33" selection-start-line="217" selection-start-column="33" selection-end-line="217" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/main.js">
+    <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62540716">
-          <caret line="149" column="14" selection-start-line="149" selection-start-column="14" selection-end-line="149" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.61864406">
+          <caret line="353" column="53" selection-start-line="353" selection-start-column="53" selection-end-line="353" selection-end-column="53" />
           <folding />
         </state>
       </provider>

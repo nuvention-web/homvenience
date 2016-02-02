@@ -351,7 +351,7 @@
               on-refresh="Refresh()">
           </ion-refresher>
           <ion-list>
-            <ion-item class="item item-avatar" ng-repeat="x in reqs">
+            <ion-item class="item item-thumbnail-left" ng-repeat="x in reqs">
               <img src={{HeadProfile[x.get('requesterName')]}}>
               <h2 >{{x.get("requesterName")}}</h2>
               <div class="">
@@ -381,8 +381,8 @@
               on-refresh="Refresh()">
           </ion-refresher>
           <ion-list>
-            <ion-item class="item item-avatar" ng-repeat="x in getItems">
-              <!--<img src="img/mike.png">-->
+            <ion-item class="item item-thumbnail-left" ng-repeat="x in getItems">
+              <img src={{x.get('ImageArry')[0].url()}}></img>
               <h2 >{{x.get("Title")}}</h2>
               <div class="">
                 <p>{{x.get("Owner")}}</p>
@@ -409,8 +409,8 @@
             on-refresh="Refresh()">
           </ion-refresher>
           <ion-list>
-            <ion-item class="item item-avatar" ng-repeat="x in lentItem">
-              <!--<img src="img/mike.png">-->
+            <ion-item class="item item-thumbnail-left" ng-repeat="x in lentItem">
+              <img src={{x.get('ImageArry')[0].url()}}></img>
               <h2 >{{x.get("Title")}}</h2>
               <div class="">
                 <p>{{x.get("Owner")}}</p>

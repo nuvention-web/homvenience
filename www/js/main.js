@@ -143,7 +143,7 @@ var Customer = Parse.Object.extend("Customer" , {
           var req = app.get("Requests");
           req.push(obj.id);
           if(req.length==1) {
-            AcceptTimer = setInterval(checkAccept, 1000);
+            AcceptTimer = setInterval(checkAccept, 2000);
             console.log("set Interval finished");
           }
           app.save().then(function(saved){
