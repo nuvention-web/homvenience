@@ -81,6 +81,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
   .controller('RequestCtrl',function($scope){
     $scope.reqs=[];
+
     $scope.Refresh = function(){
       var list = APP.get("ListOfRequest");
       var query = new Parse.Query(Request);
@@ -89,13 +90,19 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         $scope.reqs = results;
         console.log("find results" + results.length);
         $scope.$apply();
+      }).then(function (){
+          $scope.$broadcast('scroll.refreshComplete');
       });
     }
+
     $scope.Accept = function(requestObject,$index) {
       console.log("start accept");
       $scope.reqs.splice($index,1);
       APP.accept(requestObject.id, requestObject.get("itemId"), requestObject.get("requesterId"));
     }
+
+
+
   })
 
   .controller('RecordCtrl',function($scope){
