@@ -147,7 +147,7 @@ var Customer = Parse.Object.extend("Customer" , {
             console.log("set Interval finished");
           }
           app.save().then(function(saved){
-            alert("Request Sent");
+            //alert("Request Sent");
           },function(err){
             alert("Request Failure2");
           });
@@ -158,7 +158,7 @@ var Customer = Parse.Object.extend("Customer" , {
         alert("Item Request Failed");
       });
     },function(err){
-      alert("Request Failed"+err);
+      alert("You may have had this");
     });
   },
 
