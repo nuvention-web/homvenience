@@ -20,8 +20,6 @@ var ID = function () {
 };
 
 
-var base64 = "V29ya2luZyBhdCBQYXJzZSBpcyBncmVhdCE=";
-
 var isLogin = false;
 
 Parse.User.logOut();
@@ -47,7 +45,6 @@ var Item = Parse.Object.extend("Item",{
   Holder:"",
   ImageArry:[],
   requestList:[],
-
   clearRequests : function(){
     this.set("requestList" ,[]);
   }
@@ -188,6 +185,7 @@ var Customer = Parse.Object.extend("Customer" , {
     query.equalTo("State","Available");
     query.find().then(function(result) {
       $scope.search_res = result;
+      $scope.search_res.reverse();
       $scope.$apply();
       console.log($scope.search_res.length);
     },

@@ -358,6 +358,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                           //alert("photo save success");
                         }
                         photo_Arry.push(IMG);
+                        currentUser.set("Profile", IMG);
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
