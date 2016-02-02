@@ -123,6 +123,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
     $scope.photo_arry = [];
 
+    $scope.test = [1,2,3];
+    
+    
+
     $scope.newItem = {
       Title : "",
       Desc : ""
@@ -183,7 +187,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         }
       });
       item.set("Title", $scope.newItem.Title);
-      item.set("ImageArry",photo_Arry);
+      item.set("ImageArry",$scope.photo_arry);
       item.set("Desc",$scope.newItem.Desc);
       item.set("Holder",currentUser.id);
       item.set("Owner", currentUser.get("username"));
@@ -199,7 +203,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.newItem.Desc = null;
           $scope.modal.hide();
           APP.get("ListOfPostItem").push(item.id);
-          photo_Arry = [];
+          $scope.photo_arry = [];
           APP.save();
         },
         error: function(item, error) {
@@ -211,6 +215,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   }
 
     $scope.showDetails = function() {
+
      // Show the action sheet
      var hideSheet = $ionicActionSheet.show({
        buttons: [
@@ -234,7 +239,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    }
 
     $scope.postShow = function() {
-      photo_Arry = [];
+      $scope.photo_arry = [];
      // Show the action sheet
      var hideSheet = $ionicActionSheet.show({
        buttons: [
@@ -339,7 +344,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                         }else{
                           //alert("photo save success");
                         }
-                        photo_Arry.push(IMG);
+                        $scope.photo_arry.push(IMG);
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
@@ -370,7 +375,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                         }else{
                           //alert("photo save success");
                         }
-                        photo_Arry.push(IMG);
+                        $scope.photo_arry.push(IMG);
+                        alert($scope.photo_arry.length);
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
