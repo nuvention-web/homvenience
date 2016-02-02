@@ -158,8 +158,8 @@
                         7
                        </div>
                        <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
-                        10 
-                      </div> 
+                        10
+                      </div>
                   </div>
                 </div>
               </a>
@@ -221,7 +221,7 @@
                 <p>Back off, man. Im a scientist.</p>
               </a>
               <p>adfasdfaf</p>
-          </div> 
+          </div>
           <div class="tabs tabs-icon-only">
             <a class="tab-item">
               <i class="icon ion-home"></i>
@@ -352,7 +352,7 @@
           </ion-refresher>
           <ion-list>
             <ion-item class="item item-avatar" ng-repeat="x in reqs">
-              <img src="img/mike.png">
+              <img src={{HeadProfile[x.get('requesterName')]}}>
               <h2 >{{x.get("requesterName")}}</h2>
               <div class="">
                 <p>{{x.get("itemName")}}</p>
@@ -382,7 +382,7 @@
           </ion-refresher>
           <ion-list>
             <ion-item class="item item-avatar" ng-repeat="x in getItems">
-              <img src="img/mike.png">
+              <!--<img src="img/mike.png">-->
               <h2 >{{x.get("Title")}}</h2>
               <div class="">
                 <p>{{x.get("Owner")}}</p>
@@ -403,14 +403,21 @@
           <h2 class="title rest-bar">Offering</h2>
         </ion-header-bar>
 
-        <ion-content>
-        <ul class="list">
-            <li class="item item-avatar">
-                <img src="img/mike.png">
-                <h2 >Venkman</h2>
-                <button class="{{head()}}}"></button>
-            </li>
-        </ul>
+        <ion-content  ng-init="Refresh()">
+          <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="Refresh()">
+          </ion-refresher>
+          <ion-list>
+            <ion-item class="item item-avatar" ng-repeat="x in lentItem">
+              <!--<img src="img/mike.png">-->
+              <h2 >{{x.get("Title")}}</h2>
+              <div class="">
+                <p>{{x.get("Owner")}}</p>
+                <p>{{x.get("Holder")}}</p>
+              </div>
+            </ion-item>
+          </ion-list>
         </ion-content>
       </ion-view>
     </script>

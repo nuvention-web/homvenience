@@ -77,6 +77,21 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 
   })
+  .controller('OfferingCtrl',function($scope){
+    $scope.lentItem=[];
+    $scope.Refresh = function(){
+      var list = APP.get("ListOfLent");
+      var query = new Parse.Query(Item);
+      query.containedIn("objectId",list);
+      query.find().then(function(results){
+        $scope.lentItem = results;
+        console.log("lent results" + results.length);
+        $scope.$apply();
+      }).then(function (){
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }
+  })
   .controller('RequestCtrl',function($scope){
     $scope.reqs=[];
 
@@ -98,9 +113,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       $scope.reqs.splice($index,1);
       APP.accept(requestObject.id, requestObject.get("itemId"), requestObject.get("requesterId"));
     }
-
-
-
   })
 
   .controller('RecordCtrl',function($scope){
@@ -139,7 +151,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       APP.request(itemId,itemName);
     };
 
-    
+
     $scope.photo_arry = [];
 
     //This is for detail page use only
@@ -203,7 +215,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.newItem.Desc = null;
           $scope.modal.hide();
           APP.get("ListOfPostItem").push(item.id);
+<<<<<<< HEAD
           $scope.photo_arry = [];
+||||||| merged common ancestors
+          photo_Arry = [];
+=======
+          if(APP.get("ListOfPostItem").length ==1){
+            RequestTimer = setInterval(checkRequest,3000);
+          }
+          photo_Arry = [];
+>>>>>>> 08f72b240310d5c0a39bc4a359a1bd523f051b51
           APP.save();
         },
         error: function(item, error) {
@@ -273,7 +294,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           APP = currentUser.get("customer");
           APP.fetch().then(function(obj){
             if(APP.get("Requests").length != 0){
-              AcceptTimer = setInterval(checkAccept,1000);
+              AcceptTimer = setInterval(checkAccept,3000);
             }
             if(APP.get("ListOfPostItem").length!=0){
               RequestTimer = setInterval(checkRequest,3000);
