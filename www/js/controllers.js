@@ -303,6 +303,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    $scope.LogOut = function() {
     Parse.User.logIn();
     isLogin = false;
+    $state.go('signin');
   }
   //bar上面的两种状态
    $scope.Header = function(){
@@ -330,7 +331,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
                         var ImageName = ID() + ".jpeg";
-                        alert(ImageName);
                         var IMG = new Parse.File(ImageName, { base64: imageData });
                         if(IMG == null){
                           alert("photo save failed");
@@ -362,7 +362,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
                         var ImageName = ID() + ".jpeg";
-                        alert(ImageName);
                         var IMG = new Parse.File(ImageName, { base64: imageData });
                         if(IMG == null){
                           alert("photo save failed");
@@ -375,6 +374,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
+                }
+
+                $scope.showLabel = function(u){
+                  if(u == "GET"){
+                    return " need HELP!";
+                  }else{
+                    return " can HELP!";
+                  }
                 }
    ;
   });

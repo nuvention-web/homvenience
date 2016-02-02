@@ -55,17 +55,17 @@
             <ion-nav-view name="home-tab"></ion-nav-view>
           </ion-tab>
 
-          <ion-tab title="Search" icon="ion-ios-search-strong" href="#/tab/search">
+         <!-- <ion-tab title="Search" icon="ion-ios-search-strong" href="#/tab/search">
             <ion-nav-view name="search-tab"></ion-nav-view>
-          </ion-tab>
+          </ion-tab> -->
 
           <ion-tab title="Post" icon="icon ion-ios-plus-outline" ng-click="postShow()">
               <ion-nav-view name="post-tab" ></ion-nav-view>
           </ion-tab>
 
-          <ion-tab title="Chat" icon="ion-chatbubble" href="#/tab/chat">
+       <!--   <ion-tab title="Chat" icon="ion-chatbubble" href="#/tab/chat">
             <ion-nav-view name="chat-tab" ></ion-nav-view>
-          </ion-tab>
+          </ion-tab> -->
 
           <ion-tab title="Account" icon="ion-person" href="#/tab/account">
             <ion-nav-view name="account-tab" ></ion-nav-view>
@@ -140,13 +140,13 @@
 
               <a class="item item-avatar item-header" >
                   <img src={{HeadProfile[x.get("Owner")]}}>
-                  <h2>{{x.get("Owner")}}<i class="icon fa fa-smile-o icolor"></i></h2>
-                  <p>Active</p>
+                  <h2>{{x.get("Title")}}<i class="icon fa fa-smile-o icolor"></i></h2>
+                  <p>{{x.get("Owner") + showLabel(x.get('Label'))}}</p>
               </a>
 
               <a id='home-a' href="#/detail">
                 <div class='item-detail'>
-                  <img class="full-image" ng-repeat = "y in x.get('ImageArry')" src={{y.url()}}/>
+                  <img class="full-image" ng-repeat = "y in x.get('ImageArry')" src={{y.url()}}>
                   <p>
                       {{x.get("Desc")}}
                   </p>
@@ -155,11 +155,11 @@
                       &nbspEvanston
                       </div>
                       <div class="col col-13"><i class="ion-thumbsup icolor"></i>
-                       7
+                        7
                        </div>
-                      <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
-                       10
-                       </div>
+                       <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
+                        10 
+                      </div> 
                   </div>
                 </div>
               </a>
@@ -185,11 +185,11 @@
         <ion-content >
 
           <div class="list">
-              <a class="item item-avatar item-header" href="#account">
-                  <img src="img/mike.png">
-                  <h2 >{{targetItem.get("Owner")}}</h2>
+              <a class="item item-avatar item-header"> <!--href="#account">-->
+                  <img src={{HeadProfile[targetItem.get("Owner")]}}>
+                  <h2 >{{targetItem.get("Title")}}</h2>
                   <p>
-                    //what to put here?
+                    {{targetItem.get("Owner") +  showLabel(targetItem.get('Label'))}}
                   </p>
 
               </a>
@@ -204,16 +204,16 @@
                   <p>&nbsp 多久之前</p>
                   -->
                 </div>
-                <img class="full-image" ng-repeat = "y in targetItem.get('ImageArry')" src={{y.url()}}/>
+                <img class="full-image" ng-repeat = "y in targetItem.get('ImageArry')" src={{y.url()}}>
               </div>
-          </div>
-
           <button class="button button-block button-outline button-calm" ng-click="showAlert(targetItem.id,targetItem.get('Title'))" >
             Want
           </button>
+          </div>
 
 
-          <div id='detail-comment' class="list" ng-repeat = "x in search_res">
+
+    <!--      <div id='detail-comment' class="list" ng-repeat = "x in search_res">
               <a class="item item-avatar" href="#">
 
                 <img src="venkman.jpg">
@@ -221,7 +221,7 @@
                 <p>Back off, man. Im a scientist.</p>
               </a>
               <p>adfasdfaf</p>
-          </div>
+          </div> 
           <div class="tabs tabs-icon-only">
             <a class="tab-item">
               <i class="icon ion-home"></i>
@@ -232,7 +232,7 @@
             <a class="tab-item">
               <i class="icon ion-gear-a"></i>
             </a>
-          </div>
+          </div> -->
 
         </ion-content>
       </ion-view>
@@ -428,7 +428,7 @@
         <ion-content>
         <label class="item item-input">
           <input type="text" placeholder="Subject" ng-model="newItem.Title"></label>
-
+        <button class = "button button-icon icon ion-camera"  ng-repeat = "x in photo_arry" ng-click = showDetails()></button>
         <button class = "button button-icon icon ion-camera" ng-click = showDetails()></button>
 
         <label class="item item-input">
