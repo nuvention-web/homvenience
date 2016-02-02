@@ -19,7 +19,10 @@ var ID = function () {
   return Math.random().toString(36).substr(2, 9);
 };
 
-
+var headProfile = {};
+headProfile["maktf"] = "img/fun.png";
+headProfile["maounan"] = "img/Profile2.png";
+headProfile["hszwk"] = "/img/DOGE.png"
 var isLogin = false;
 
 Parse.User.logOut();
@@ -45,6 +48,7 @@ var Item = Parse.Object.extend("Item",{
   Holder:"",
   ImageArry:[],
   requestList:[],
+  Label:"",
   clearRequests : function(){
     this.set("requestList" ,[]);
   }

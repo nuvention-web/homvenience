@@ -120,8 +120,15 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
+    $scope.HeadProfile = headProfile;
+    $scope.LABEL = "GET";
 
+    $scope.photo_arry = [];
 
+    $scope.newItem = {
+      Title : "",
+      Desc : ""
+    };
     $scope.init = function () {
       console.log("ready to fetch");
       APP.search($scope, 1,true);
@@ -131,13 +138,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     };
 
 
-    $scope.photo_arry = [];
-
-
-    $scope.newItem = {
-      Title : "",
-      Desc : ""
-    };
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
@@ -177,6 +177,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       item.set("State", "Available");
       item.set("GeoPoint", GP);
       item.set("requestList", []);
+      item.set("Label", $scope.LABEL)
       item.save(null, {
         success: function(item) {
           // Execute any logic that should take place after the object is saved.
@@ -233,9 +234,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
        },
        buttonClicked: function(index) {
         if(index == 0){
+          $scope.LABEL = "GIVE";
           $scope.modal.show();
         }
         if(index == 1){
+          $scope.LABEL = "GET";
           $scope.modal.show();
         }
          return true;
@@ -358,7 +361,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                           //alert("photo save success");
                         }
                         photo_Arry.push(IMG);
-                        currentUser.set("Profile", IMG);
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });

@@ -139,9 +139,9 @@
           <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
 
               <a class="item item-avatar item-header" >
-                  <img src="img/mike.png">
+                  <img src={{HeadProfile[x.get("Owner")]}}>
                   <h2>{{x.get("Owner")}}<i class="icon fa fa-smile-o icolor"></i></h2>
-                  <p>活跃度.</p>
+                  <p>Active</p>
               </a>
 
               <a id='home-a' href="#/detail">
