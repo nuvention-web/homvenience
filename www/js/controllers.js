@@ -135,7 +135,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       APP.request(itemId,itemName);
     };
 
-    
+
     $scope.photo_arry = [];
 
     //This is for detail page use only
