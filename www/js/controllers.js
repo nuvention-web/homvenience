@@ -215,16 +215,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.newItem.Desc = null;
           $scope.modal.hide();
           APP.get("ListOfPostItem").push(item.id);
-<<<<<<< HEAD
           $scope.photo_arry = [];
-||||||| merged common ancestors
-          photo_Arry = [];
-=======
           if(APP.get("ListOfPostItem").length ==1){
             RequestTimer = setInterval(checkRequest,3000);
           }
-          photo_Arry = [];
->>>>>>> 08f72b240310d5c0a39bc4a359a1bd523f051b51
           APP.save();
         },
         error: function(item, error) {
