@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -30,56 +30,98 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
-  })
-
-  // Each tab has its own nav history stack:
-
-  .state('tab.dash', {
-    url: '/dash',
-    views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
-      }
-    }
-  })
-
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
+    .state('signin', {
+      url: '/sign-in',
+      templateUrl: 'templates/sign-in.html',
+      controller: 'SignInCtrl'
     })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
+    .state('forgotpassword', {
+      url: '/forgot-password',
+      templateUrl: 'templates/forgot-password.html'
+    })
+    .state('tabs', {
+      url: '/tab',
+      abstract: true,
+      templateUrl: 'templates/tabs.html'
+    })
+    .state('tabs.home', {
+      url: '/home',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
+        'home-tab': {
+          templateUrl: 'templates/home.html',
+          controller: 'HomeTabCtrl'
         }
       }
     })
 
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+    .state('detail', {
+      url: '/detail',
+      templateUrl: 'templates/detail.html',
+      controller: 'DetailCtrl'
+    })
+
+    .state('tabs.search',{
+      url: '/search',
+      cache:false,
+      views:{
+        'search-tab':{
+          templateUrl: 'templates/search.html',
+          controller:'SearchCtrl'
+        }
       }
-    }
-  });
+    })
+
+    .state('tabs.chat',{
+      url: '/chat',
+      views:{
+        'chat-tab':{
+          templateUrl: 'templates/chat.html',
+          controller:''
+        }
+      }
+    })
+
+    .state('request', {
+      url: '/request',
+      controller: 'RequestCtrl',
+      templateUrl: 'templates/request.html',
+    })
+
+    .state('offering', {
+      url: '/offering',
+      templateUrl: 'templates/offering.html',
+    })
+
+    .state('record', {
+      url: '/record',
+      controller: 'RecordCtrl',
+      templateUrl: 'templates/record.html',
+    })
+
+
+
+
+    .state('tabs.account', {
+      url: '/account',
+      views: {
+        'account-tab': {
+          templateUrl: 'templates/account.html',
+          controller: 'AccountCtrl'
+        }
+      }
+    });
+    // .state("tabs.post", {
+    //   url: '/post',
+    //   views:{
+    //     'post-tab':{
+    //       templateUrl: 'templates/home.html',
+    //       controller: 'HomeTabCtrl'
+    //     }
+    //   }
+    // });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/sign-in');
 
 });
+
