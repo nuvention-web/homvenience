@@ -89,6 +89,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     .state('offering', {
       url: '/offering',
+      controller:'OfferingCtrl',
       templateUrl: 'templates/offering.html',
     })
 

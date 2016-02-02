@@ -110,8 +110,9 @@ var Customer = Parse.Object.extend("Customer" , {
         obj.clearRequests();
         obj.save().then(function (obj) {
           console.log("Start moving");
-          app.set("ListOfPostItem", delArray(itemId, app.get("ListOfPostItem")));
-          app.get("ListOfLent").push(itemId);
+          app.set("ListOfPostItem", delArray(obj.id, app.get("ListOfPostItem")));
+          app.get("ListOfLent").push(obj.id);
+          console.log("Item "+obj.id+" moved");
           checkRequest();
           if (app.get("ListOfPostItem").length == 0) {
             window.clearInterval(RequestTimer);
@@ -141,9 +142,9 @@ var Customer = Parse.Object.extend("Customer" , {
         res.save().then(function(call){
           var req = app.get("Requests");
           req.push(obj.id);
-          if(req.length!=0) {
+          if(req.length==1) {
             AcceptTimer = setInterval(checkAccept, 1000);
-            console.log("set finished");
+            console.log("set Interval finished");
           }
           app.save().then(function(saved){
             alert("Request Sent");
@@ -214,7 +215,19 @@ var checkRequest = function(){
   var res = [];
   var temp;
   var itemid;
-  for(var j in posted){
+  query.containedIn("objectId",posted);
+  query.find().then(function(results){
+    for(var i = 0;i<results.length;i++){
+      temp = results[i].get("requestList");
+      for(var j in temp) {
+        res.push(temp[j]);
+      }
+    }
+    APP.set("ListOfRequest",res);
+    APP.save();
+    console.log("Request Updated!");
+  });
+  /*for(var j in posted){
     itemid = posted[j];
     query.get(itemid).then(function(item){
       temp = item.get("requestList");
@@ -226,8 +239,10 @@ var checkRequest = function(){
       APP.set("ListOfRequest",res);
       APP.save();
       console.log("Request Fetched");
+    },function(err){
+      alert("Item Error");
     });
-  }
+  }*/
 };
 
 var checkAccept = function(){
