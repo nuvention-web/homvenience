@@ -141,12 +141,12 @@
               <a class="item item-avatar item-header" >
                   <img src={{HeadProfile[x.get("Owner")]}}>
                   <h2>{{x.get("Title")}}<i class="icon fa fa-smile-o icolor"></i></h2>
-                  <p>{{x.get("Owner")}}</p>
+                  <p>{{x.get("Owner") + showLabel(x.get('Label'))}}</p>
               </a>
 
               <a id='home-a' href="#/detail">
                 <div class='item-detail'>
-                  <img class="full-image" ng-repeat = "y in x.get('ImageArry')" src={{y.url()}}/>
+                  <img class="full-image" ng-repeat = "y in x.get('ImageArry')" src={{y.url()}}>
                   <p>
                       {{x.get("Desc")}}
                   </p>
@@ -155,11 +155,11 @@
                       &nbspEvanston
                       </div>
                       <div class="col col-13"><i class="ion-thumbsup icolor"></i>
-                       7
+                        7
                        </div>
-                      /*<div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
-                       10
-                       </div>*/)
+                       <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
+                        10 
+                      </div> 
                   </div>
                 </div>
               </a>
@@ -187,9 +187,9 @@
           <div class="list">
               <a class="item item-avatar item-header" href="#account">
                   <img src={{HeadProfile[targetItem.get("Owner")]}}>
-                  <h2 >{{targetItem.get("Owner")}}</h2>
+                  <h2 >{{targetItem.get("Title")}}</h2>
                   <p>
-                    //what to put here?
+                    {{targetItem.get("Owner") +  showLabel(targetItem.get('Label'))}}
                   </p>
 
               </a>
@@ -204,7 +204,7 @@
                   <p>&nbsp 多久之前</p>
                   -->
                 </div>
-                <img class="full-image" ng-repeat = "y in targetItem.get('ImageArry')" src={{y.url()}}/>
+                <img class="full-image" ng-repeat = "y in targetItem.get('ImageArry')" src={{y.url()}}>
               </div>
           </div>
 

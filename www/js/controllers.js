@@ -376,6 +376,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                         // An error occured. Show a message to the user
                     });
                 }
+
+                $scope.showLabel = function(u){
+                  if(u == "GET"){
+                    return " need HELP!";
+                  }else{
+                    return " can HELP!";
+                  }
+                }
    ;
   });
 
