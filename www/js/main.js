@@ -121,7 +121,9 @@ var Customer = Parse.Object.extend("Customer" , {
 
   request : function(itemId,itemName){
     var app = this;
+    console.log("request"+itemId+itemName);
     var newRequest = new Request();
+
     newRequest.set("itemId",itemId);
     newRequest.set("requesterId",currentUser.id);
     newRequest.set("time",new Date());
@@ -148,7 +150,7 @@ var Customer = Parse.Object.extend("Customer" , {
           alert("Request Failure");
         });
       },function(err){
-        alert(err);
+        alert("Item Request Failed");
       });
     },function(err){
       alert("Request Failed"+err);
