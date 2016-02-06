@@ -151,6 +151,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       APP.request(itemId,itemName);
     };
 
+    $scope.ImgURL = function(imageData){
+      URL = "data:image/jpeg;base64," + imageData;
+      return URL;
+    }
 
     $scope.photo_arry = [];
 
@@ -179,7 +183,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
          template: 'Post Success!'
        });
        alertPopup.then(function(res) {
-         console.log('Thank you for not eating my delicious ice cream cone');
        });
      };
     $scope.createPost = function() {
@@ -198,11 +201,18 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           console.log(error);
         }
       });
+      var temp_arry = [];
+      for(i = 0; i < $scope.photo_arry.length; i++){
+        var ImageName = ID() + ".jpeg";
+        var IMG = new Parse.File(ImageName, { base64: $scope.photo_arry[i] });
+        temp_arry.push(IMG);
+      }
+      alert("!");
       item.set("Title", $scope.newItem.Title);
-      item.set("ImageArry",$scope.photo_arry);
+      item.set("ImageArry", temp_arry);
       item.set("Desc",$scope.newItem.Desc);
-      item.set("Holder",currentUser.id);
-      item.set("Owner", currentUser.get("username"));
+      item.set("Owner", currentUser);
+      item.set("Holder",currentUser);
       item.set("State", "Available");
       item.set("GeoPoint", GP);
       item.set("requestList", []);
@@ -253,6 +263,33 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
      });
    }
 
+    $scope.deleteImage = function(u) {
+
+     // Show the action sheet
+     var hideSheet = $ionicActionSheet.show({
+       buttons: [
+         { text: 'View Photo' },
+         { text: 'Remove Photo' }
+       ],
+       cancelText: 'Cancel',
+       cancel: function() {
+            // add cancel code..
+       },
+       buttonClicked: function(index) {
+        if(index == 0){
+        }
+        else if(index == 1){
+            for(i = 0; i < $scope.photo_arry.length; i++){
+              if($scope.photo_arry[i] == u){
+                $scope.photo_arry.splice(i, 1);
+                return true;
+              }
+            }
+        }
+         return true;
+       }
+     });
+   }
     $scope.postShow = function() {
       $scope.photo_arry = [];
      // Show the action sheet
@@ -281,9 +318,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 
    $scope.SignIn = function(u) {
-      Parse.User.logIn(u.username, u.password, {
+      H_User.logIn(u.username, u.password, {
         success: function(user) {
-          currentUser = Parse.User.current();
+          currentUser = H_User.current();
+          alert(currentUser.get("SelfDes"));
           isLogin = true;
           APP = currentUser.get("customer");
           APP.fetch().then(function(obj){
@@ -350,16 +388,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        var ImageName = ID() + ".jpeg";
-                        var IMG = new Parse.File(ImageName, { base64: imageData });
-                        if(IMG == null){
-                          alert("photo save failed");
-                          scope.imgURI = "";
-                          return;
-                        }else{
-                          //alert("photo save success");
-                        }
-                        $scope.photo_arry.push(IMG);
+                        $scope.photo_arry.push(imageData);
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });
@@ -381,16 +410,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
                     $cordovaCamera.getPicture(options).then(function (imageData) {
                         $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        var ImageName = ID() + ".jpeg";
-                        var IMG = new Parse.File(ImageName, { base64: imageData });
-                        if(IMG == null){
-                          alert("photo save failed");
-                          scope.imgURI = "";
-                          return;
-                        }else{
-                          //alert("photo save success");
-                        }
-                        $scope.photo_arry.push(IMG);
+                        $scope.photo_arry.push(imageData);
                     }, function (err) {
                         // An error occured. Show a message to the user
                     });

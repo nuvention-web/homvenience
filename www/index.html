@@ -127,7 +127,7 @@
       <ion-view ng-init="init()">
 
         <ion-header-bar  class="bar-col bar bar-header">
-          <h2 id='home-bar' class="title">Neighborship</h2>
+          <h2 id='home-bar' class="title">Homvenience</h2>
         </ion-header-bar>
 
         <ion-content class='content-back'>
@@ -139,9 +139,9 @@
           <div class="list" ng-repeat = "x in search_res" ng-click="esc(x)">
 
               <a class="item item-avatar item-header" >
-                  <img src={{HeadProfile[x.get("Owner")]}}>
+                  <img src={{HeadProfile[x.get("Owner").get("username")]}}>
                   <h2>{{x.get("Title")}}<i class="icon fa fa-smile-o icolor"></i></h2>
-                  <p>{{x.get("Owner") + showLabel(x.get('Label'))}}</p>
+                  <p>{{x.get("Owner").get("username") + showLabel(x.get('Label'))}}</p>
               </a>
 
               <a id='home-a' href="#/detail">
@@ -186,10 +186,10 @@
 
           <div class="list">
               <a class="item item-avatar item-header"> <!--href="#account">-->
-                  <img src={{HeadProfile[targetItem.get("Owner")]}}>
+                  <img src={{HeadProfile[targetItem.get("Owner").get("username")]}}>
                   <h2 >{{targetItem.get("Title")}}</h2>
                   <p>
-                    {{targetItem.get("Owner") +  showLabel(targetItem.get('Label'))}}
+                    {{targetItem.get("Owner").get("username") +  showLabel(targetItem.get('Label'))}}
                   </p>
 
               </a>
@@ -262,7 +262,7 @@
                 <img src="img/ben.png">
                 <h2>{{x.get("Title")}}</h2>
 
-                <p>{{x.get("Owner")}}</p>
+                <p>{{x.get("Owner").get("username")}}</p>
               </div>
               <div class="item item-body">
                 <p>{{x.get("Desc")}}</p>
@@ -385,7 +385,7 @@
               <img src={{x.get('ImageArry')[0].url()}}></img>
               <h2 >{{x.get("Title")}}</h2>
               <div class="">
-                <p>{{x.get("Owner")}}</p>
+                <p>{{x.get("Owner").get("username")}}</p>
               </div>
             </ion-item>
             </ul>
@@ -413,8 +413,8 @@
               <img src={{x.get('ImageArry')[0].url()}}></img>
               <h2 >{{x.get("Title")}}</h2>
               <div class="">
-                <p>{{x.get("Owner")}}</p>
-                <p>{{x.get("Holder")}}</p>
+                <p>{{x.get("Owner").get("username")}}</p>
+                <p>{{x.get("Holder").get("username")}}</p>
               </div>
             </ion-item>
           </ion-list>
@@ -428,26 +428,26 @@
     <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-col">
-          <h2 class="title rest-bar">I {{showLabel(LABEL)}}</h2>
+          <h1 class="title rest-bar">POST</h1>
           <button class="button button-clear" ng-click="modal.hide()"><i class='ion-close-round'></i></button>
+          <button class="button button-clear" ng-click="createPost()"><i class='ion-checkmark-round'></i></button>
         </ion-header-bar>
 
-        <ion-content>
+        <ion-content scroll = "false" has-bouncing = "false" padding = "false">
         <label class="item item-input">
-          <input type="text" placeholder="Subject" ng-model="newItem.Title"></label>
-
-        <button class = "button button-icon icon ion-camera" ng-click = showDetails()></button>
-
-        <label class="item item-input">
-          <textarea placeholder="Write description here" rows = "8" ng-model ="newItem.Desc"></textarea></label>
-        <div ng-repeat = "x in photo_arry">
-        <img class="full-image" src={{imgURI}}></img>
+          <input type="text" placeholder="Add a subject" ng-model="newItem.Title"></label>
+          <div class = "padding">
+          <textarea placeholder=" Write a message" rows = 8 ng-model ="newItem.Desc"/>
+          </div>
+        <div class="row">
+          <div class = "col col-20" ng-repeat = "x in photo_arry">
+          <img src="{{ImgURL(x)}}" height="60" width="60" ng-click = "deleteImage(x)">
+          </div>
         </div>
-        <button class="button button-block button-stable" ng-click="createPost()">
-          Post
-        </button>
-
         </ion-content>
+        <ion-footer-bar keyboard-attach class = "bar bar-footer">
+          <button class="button button-icon icon ion-camera pull-right" ng-click = showDetails()></button>
+        </ion-footer-bar>
       </ion-modal-view>
     </script>
 

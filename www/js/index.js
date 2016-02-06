@@ -1,4 +1,4 @@
-angular.module('ionicApp', ['ionic'])
+angular.module('starter', ['ionic'])
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -86,4 +86,4 @@ angular.module('ionicApp', ['ionic'])
 });
 
 
-$(document).ready("MainCtrl")；
+$document.ready("MainCtrl");

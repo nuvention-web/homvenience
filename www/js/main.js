@@ -38,14 +38,21 @@ else{
   console.log('Failed');
 }
 
+var H_User = Parse.User.extend("H_User", {
+  Profile_image:null,
+  SelfDes:"",
+  tags:[],
+  posts:[]
+});
+
 
 // Item class
 var Item = Parse.Object.extend("Item",{
   Title:"",
   Desc:"",
-  Owner:"",
+  Owner:null,
   State:"",
-  Holder:"",
+  Holder:null,
   ImageArry:[],
   requestList:[],
   Label:"",
@@ -162,32 +169,11 @@ var Customer = Parse.Object.extend("Customer" , {
     });
   },
 
-  post : function (title, image, desc, owner){
-    var app = this;
-    var item = new Item();
-    item.set("Title", title)
-    item.set("Desc",desc);
-    item.set("Owner",currentUser.get("username"));
-    item.set("State","Available");
-    item.set("Holder",currentUser.id);
-
-    item.save().then(function(object){
-        this.get("ListOfPostItem")[object.id] = item;
-      },
-      function(err){
-        alert("Upload Failed");
-      }).then(function (object){
-        app.save();
-      },
-      function (err){
-        alert("Customer Upload Failed");
-      });
-  },
   search : function ($scope, distance,self) {
     var query = new Parse.Query(Item);
     if(self == false) {
-      query.notEqualTo("Owner", currentUser.get("username"));
-      query.notEqualTo("Holder", currentUser.id);
+      query.notEqualTo("Owner", currentUser);
+      query.notEqualTo("Holder", currentUser);
     }
     query.equalTo("State","Available");
     query.find().then(function(result) {
