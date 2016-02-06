@@ -130,6 +130,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
+    if(isLogin == true){
+      $state.go('tabs.home');
+    }
+
     $scope.HeadProfile = headProfile;
     $scope.LABEL = "GET";
 
@@ -320,8 +324,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    $scope.SignIn = function(u) {
       H_User.logIn(u.username, u.password, {
         success: function(user) {
-          currentUser = H_User.current();
-          alert(currentUser.get("SelfDes"));
+          currentUser = H_User.current();;
           isLogin = true;
           APP = currentUser.get("customer");
           APP.fetch().then(function(obj){
@@ -359,7 +362,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    }
 
    $scope.LogOut = function() {
-    Parse.User.logIn();
+    H_User.logIn();
     isLogin = false;
     $state.go('signin');
   }

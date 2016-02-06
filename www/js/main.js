@@ -18,32 +18,18 @@ testObject.save({Message: "Hello World"}, {
 var ID = function () {
   return Math.random().toString(36).substr(2, 9);
 };
-
+var isLogin = false;
 var headProfile = {};
 headProfile["maktf"] = "img/fun.png";
 headProfile["maounan"] = "img/Profile2.png";
 headProfile["hszwk"] = "/img/DOGE.png"
-var isLogin = false;
-
-Parse.User.logOut();
-
-photo_Arry = [null];
-
-
-var currentUser = Parse.User.current();
-if(currentUser){
-  isLogin = true;
-}
-else{
-  console.log('Failed');
-}
-
 var H_User = Parse.User.extend("H_User", {
   Profile_image:null,
   SelfDes:"",
   tags:[],
   posts:[]
 });
+
 
 
 // Item class
@@ -278,4 +264,33 @@ var delArray = function (target,array){
     }
   }
   return res;
+}
+
+
+
+var currentUser = H_User.current();
+if(currentUser){
+  isLogin = true;
+  APP = currentUser.get("customer");
+  APP.fetch().then(function(obj){
+    if(APP.get("Requests").length != 0){
+      AcceptTimer = setInterval(checkAccept,3000);
+    }
+    if(APP.get("ListOfPostItem").length!=0){
+      RequestTimer = setInterval(checkRequest,3000);
+    }
+  });
+  var GP = new Parse.GeoPoint.current({
+    success: function (point){
+      console.log("GP Success");
+    },
+    error: function (error){
+      alert(error);
+    }
+  });
+  APP.set("CurrentGP", GP);
+  APP.search($scope, 1,false);
+}
+else{
+  console.log('Failed');
 }
