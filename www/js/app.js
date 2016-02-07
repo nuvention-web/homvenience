@@ -44,6 +44,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       abstract: true,
       templateUrl: 'templates/tabs.html'
     })
+    .state('tabs.neighbors', {
+      url: '/neighbors',
+      views: {
+        'neighbors-tab': {
+          templateUrl: 'templates/neighbors.html',
+          controller: 'NeighborsTabCtrl'
+        }
+      }
+    })
     .state('tabs.home', {
       url: '/home',
       views: {

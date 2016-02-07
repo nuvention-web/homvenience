@@ -11,6 +11,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   };
 })
 
+.controller('NeighborsTabCtrl', function($scope) {})
+
 
 .controller('SignInCtrl', function($scope, $state) {
 

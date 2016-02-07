@@ -77,6 +77,10 @@ a{
 	border-width: 0px !important;
 }
 
+.icolor .item-avatar{
+	color: #9BDDFF;
+}
+
 /*-----home超链接-----*/
 
 #home-a{
@@ -112,6 +116,18 @@ a{
 	color: #666 !important;
 }
 
+.adic-modal .modal {
+    min-height: 0 !important;
+}
 
+.adic-popup {
+    width: 90%;
+    height: 60%;
+    top: 20%;
+    bottom: 20%;
+    right: 5%;
+    left: 5%;
+    background-color: #ffffff;
+}
 
 
