@@ -42,6 +42,7 @@ var Item = Parse.Object.extend("Item",{
   ImageArry:[],
   requestList:[],
   Label:"",
+  Date: null,
   clearRequests : function(){
     this.set("requestList" ,[]);
   }
@@ -266,31 +267,23 @@ var delArray = function (target,array){
   return res;
 }
 
-
-
-var currentUser = H_User.current();
-if(currentUser){
-  isLogin = true;
-  APP = currentUser.get("customer");
-  APP.fetch().then(function(obj){
-    if(APP.get("Requests").length != 0){
-      AcceptTimer = setInterval(checkAccept,3000);
-    }
-    if(APP.get("ListOfPostItem").length!=0){
-      RequestTimer = setInterval(checkRequest,3000);
-    }
-  });
-  var GP = new Parse.GeoPoint.current({
-    success: function (point){
-      console.log("GP Success");
+var userQuery = function ($scope, user){
+  var UserQuery = new Parse.Query(H_User);
+  UserQuery.notEqualTo("username", user.get("username"));
+  UserQuery.find({
+    success: function(results) {
+      alert("Successfully retrieved " + results.length + " H_User.");
+      // Do something with the returned Parse.Object values
+      for (var i = 0; i < results.length; i++) {
+        var object = results[i];
+        alert(object.id + ' - ' + object.get('username'));
+      }
+      $scope.neighborList = results;
     },
-    error: function (error){
-      alert(error);
+    error: function(error) {
+      alert("Error: " + error.code + " " + error.message);
     }
   });
-  APP.set("CurrentGP", GP);
-  APP.search($scope, 1,false);
 }
-else{
-  console.log('Failed');
-}
+
+

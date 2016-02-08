@@ -132,23 +132,50 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
-    if(isLogin == true){
-      $state.go('tabs.home');
-    }
+    
+
 
     $scope.HeadProfile = headProfile;
     $scope.LABEL = "GET";
 
     $scope.photo_arry = [];
 
-    $scope.test = [1,2,3];
-
+    $scope.neighborList = [];
+    
 
 
     $scope.newItem = {
       Title : "",
       Desc : ""
     };
+
+
+    currentUser = H_User.current();
+    if(currentUser){
+      isLogin = true;
+      APP = currentUser.get("customer");
+      APP.fetch().then(function(obj){
+        if(APP.get("Requests").length != 0){
+          AcceptTimer = setInterval(checkAccept,3000);
+        }
+        if(APP.get("ListOfPostItem").length!=0){
+          RequestTimer = setInterval(checkRequest,3000);
+        }
+      });
+      var GP = new Parse.GeoPoint.current({
+        success: function (point){
+          console.log("GP Success");
+        },
+        error: function (error){
+          alert(error);
+        }
+      });
+      APP.set("CurrentGP", GP);
+      APP.search($scope, 1, false);
+      userQuery($scope, currentUser);
+      $state.go('tabs.home');
+    }
+
     $scope.init = function () {
       console.log("ready to fetch");
       APP.search($scope, 1,true);
@@ -161,8 +188,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       URL = "data:image/jpeg;base64," + imageData;
       return URL;
     }
-
-    $scope.photo_arry = [];
 
     //This is for detail page use only
     $scope.targetItem=null;
@@ -213,7 +238,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         var IMG = new Parse.File(ImageName, { base64: $scope.photo_arry[i] });
         temp_arry.push(IMG);
       }
-      alert("!");
+      var d = new Date();
       item.set("Title", $scope.newItem.Title);
       item.set("ImageArry", temp_arry);
       item.set("Desc",$scope.newItem.Desc);
@@ -222,7 +247,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       item.set("State", "Available");
       item.set("GeoPoint", GP);
       item.set("requestList", []);
-      item.set("Label", $scope.LABEL)
+      item.set("Label", $scope.LABEL);
       item.save(null, {
         success: function(item) {
           // Execute any logic that should take place after the object is saved.
@@ -347,7 +372,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           });
           APP.set("CurrentGP", GP);
           APP.search($scope, 1,false);
-          $state.go('tabs.home');
+          $state.go('tabs.neighbors');
         },
         error: function(user, error) {
           alert(error);
