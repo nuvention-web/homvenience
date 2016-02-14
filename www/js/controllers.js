@@ -132,7 +132,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
-    
+
 
 
     $scope.HeadProfile = headProfile;
@@ -141,7 +141,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.photo_arry = [];
 
     $scope.neighborList = [];
-    
+
 
 
     $scope.newItem = {
@@ -355,6 +355,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           isLogin = true;
           APP = currentUser.get("customer");
           APP.fetch().then(function(obj){
+            console.log("Customer Fetched");
+            APP.get("MessageBox").fetch().then(function (obj)
+            {
+              console.log("Message Box fetched");
+              MessageCheckTimer=setInterval(reload,5000);
+              console.log("Message Timer Set!");
+            },
+            function (err){
+              console.log("Box corrupted!");
+            });
             if(APP.get("Requests").length != 0){
               AcceptTimer = setInterval(checkAccept,3000);
             }
