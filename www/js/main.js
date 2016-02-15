@@ -70,6 +70,8 @@ var Customer = Parse.Object.extend("Customer" , {
   ListOfLent:[],
   Requests:[],// to store sent requests
   Denied:[],
+  MessageBox:null,
+
 
   checkRequest : function($scope){
     var ids = [];
