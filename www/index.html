@@ -109,7 +109,6 @@
                 Register
               </button>
             </div>
-              <a href="#/forgot-password">Forgot password</a>
           </div>
         </ion-content>
       </ion-view>
@@ -136,12 +135,16 @@
         </ion-header-bar>
 
         <ion-content class='content-back'>
+            <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="getNeighbors()">
+            </ion-refresher>
           <div class="list">
            <a class="item item-avatar" href="#" ng-repeat = "x in neighborList">
-              <img src="img/mike.png">
-              <h2>Venkman <i class="ion-heart icolor"><font size = "2" > 211 likes</font></i></h2>
-              <font size="2" color = "grey">Evanston IL.</font>
-              <p><font size="2" color = "blue">#Computer Engineer,</font></p>
+              <img src={{x.get("Profile").url()}}>
+              <h2>{{x.get("username")}} <i class="ion-heart icolor"><font size = "2" > 211 likes</font></i></h2>
+              <font size="2" color = "grey">Evanston,IL.</font>
+              <p><font size="2" color = "blue">{{x.get("SelfDes")}}</font></p>
            </a> 
 
         </ion-content>
@@ -203,7 +206,6 @@
 <!--item详情页面-->
     <script id="templates/detail.html" type="text/ng-template">
       <ion-view>
-
         <ion-header-bar class="bar-col bar bar-header">
         <a href='#/tab/home'>
           <button class="button button-clear button-text button-back"><i class='ion-ios-arrow-back'>&nbsp back</i></button>

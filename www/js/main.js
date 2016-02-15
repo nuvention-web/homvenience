@@ -30,7 +30,7 @@ var H_User = Parse.User.extend("H_User", {
   posts:[]
 });
 
-
+H_User.logOut();
 
 // Item class
 var Item = Parse.Object.extend("Item",{
@@ -42,7 +42,7 @@ var Item = Parse.Object.extend("Item",{
   ImageArry:[],
   requestList:[],
   Label:"",
-  Date: null,
+  CreateDate: null,
   clearRequests : function(){
     this.set("requestList" ,[]);
   }
@@ -275,8 +275,6 @@ var userQuery = function ($scope, user){
       alert("Successfully retrieved " + results.length + " H_User.");
       // Do something with the returned Parse.Object values
       for (var i = 0; i < results.length; i++) {
-        var object = results[i];
-        alert(object.id + ' - ' + object.get('username'));
       }
       $scope.neighborList = results;
     },

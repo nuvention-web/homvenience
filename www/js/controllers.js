@@ -180,6 +180,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       console.log("ready to fetch");
       APP.search($scope, 1,true);
     };
+    $scope.getNeighbors = function() {
+      userQuery($scope, currentUser);
+    }
     $scope.Request = function(itemId,itemName){
       APP.request(itemId,itemName);
     };
@@ -372,6 +375,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           });
           APP.set("CurrentGP", GP);
           APP.search($scope, 1,false);
+          userQuery($scope, currentUser);
           $state.go('tabs.neighbors');
         },
         error: function(user, error) {
