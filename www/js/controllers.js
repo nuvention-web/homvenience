@@ -1,6 +1,8 @@
 
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
+
+
 .controller('DashCtrl', function($scope) {})
 
 .controller('ChatsCtrl', function($scope, Chats) {
@@ -14,13 +16,75 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 .controller('NeighborsTabCtrl', function($scope) {})
 
 
-.controller('SignInCtrl', function($scope, $state) {
+.controller('SignInCtrl', function($scope, $state, $ionicModal) {
+    console.log('SignInCtrl');
 
-    $scope.signIn = function(user) {
-      console.log('Sign-In', user);
-      $state.go('tabs.home');
+    $ionicModal.fromTemplateUrl('templates/Register-modal.html', {
+    scope: $scope,
+    animation: 'jelly'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+    $scope.SignUp = function(newUser) {
+      var user = new H_User();
+      user.set("username", newUser.username);
+      user.set("email", newUser.email);
+      user.set("Address", newUser.address);
+      user.set("password", newUser.password);
+      user.signUp(null,{
+        success: function(user){
+          alert(user.get("username"));
+          $scope.closeModal();
+          currentUser = user;
+          if(currentUser){
+            isLogin = true;
+            APP = currentUser.get("customer");
+            APP.fetch().then(function(obj){
+              if(APP.get("Requests").length != 0){
+                AcceptTimer = setInterval(checkAccept,3000);
+              }
+              if(APP.get("ListOfPostItem").length!=0){
+                RequestTimer = setInterval(checkRequest,3000);
+              }
+            });
+            var GP = new Parse.GeoPoint.current({
+              success: function (point){
+                console.log("GP Success");
+              },
+              error: function (error){
+                alert(error);
+              }
+            });
+            APP.set("CurrentGP", GP);
+            APP.search($scope, 1, false);
+            userQuery($scope, currentUser);
+            $state.go('tabs.home');
+          }
+        },
+        error: function(user, error){
+          alert("Error: " + error.code + " " + error.message);
+        }
+      });
     };
-
+    $scope.openModal = function() {
+      console.log("Register Start!");
+      $scope.modal.show();
+    };
+    $scope.closeModal = function() {
+      $scope.modal.hide();
+    };
+    //Cleanup the modal when we're done with it!
+    $scope.$on('$destroy', function() {
+      $scope.modal.remove();
+    });
+    // Execute action on hide modal
+    $scope.$on('modal.hidden', function() {
+      // Execute action
+    });
+    // Execute action on remove modal
+    $scope.$on('modal.removed', function() {
+      // Execute action
+    });
   })
 
 
@@ -132,7 +196,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
-
+    console.log("MainCtrl");
 
 
     $scope.HeadProfile = headProfile;
@@ -207,7 +271,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     };
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
-      scope: $scope
+      scope: $scope,
+      animation: 'slide-in-up'
     }).then(function(modal) {
       $scope.modal = modal;
     });

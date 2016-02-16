@@ -20,14 +20,13 @@ var ID = function () {
 };
 var isLogin = false;
 var headProfile = {};
-headProfile["maktf"] = "img/fun.png";
-headProfile["maounan"] = "img/Profile2.png";
-headProfile["hszwk"] = "/img/DOGE.png"
 var H_User = Parse.User.extend("H_User", {
   Profile_image:null,
   SelfDes:"",
   tags:[],
-  posts:[]
+  posts:[],
+  Address:"",
+  Friends:null
 });
 
 H_User.logOut();
@@ -70,8 +69,6 @@ var Customer = Parse.Object.extend("Customer" , {
   ListOfLent:[],
   Requests:[],// to store sent requests
   Denied:[],
-  MessageBox:null,
-
 
   checkRequest : function($scope){
     var ids = [];

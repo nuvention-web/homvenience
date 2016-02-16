@@ -82,7 +82,7 @@
 
 <!--登录页面-->
     <script id="templates/sign-in.html" type="text/ng-template">
-      <ion-view >
+      <ion-view  ng-controller = "SignInCtrl">
         <ion-header-bar class="bar-col bar-header bar">
 
           <h2 class="title rest-bar">Sign-In</h2>
@@ -106,7 +106,7 @@
                </button>
             </div>
             <div class="col col-50">
-              <button id='sign-button' class="button button-block button-outline button-calm">
+              <button id='sign-button' class="button button-block button-outline button-calm"ng-click="openModal()">
                 Register
               </button>
             </div>
@@ -483,6 +483,36 @@
       </ion-modal-view>
     </script>
 
+
+    <script id="templates/Register-modal.html" type="text/ng-template">
+      <ion-modal-view>
+      <ion-header-bar class="bar bar-header bar-col">
+        <h1 class="title rest-bar">Join your neighborhood!</h1>
+          <button class="button button-clear" ng-click="closeModal()"><i class='ion-close-round'></i></button>
+      </ion-header-bar>
+        <ion-content>
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="Enter your Address" ng-model="newUser.address">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Enter your E-mail" ng-model="newUser.email">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Enter your username" ng-model="newUser.username">
+          </label>
+          <label class="item item-input">
+            <input type="password" placeholder="Enter your password" ng-model="newUser.password">
+          </label>
+        <div class="col">
+          <button id='sign-button' class="button button-block button-outline button-calm" ng-click="SignUp(newUser)">
+                 Sign Up
+          </button>
+        </div>
+        </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
 
 <feature name="Camera">
     <param name="ios-package" value="CDVCamera">
