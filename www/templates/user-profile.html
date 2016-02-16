@@ -1,0 +1,36 @@
+  <ion-view>
+    <ion-header-bar class="bar-col bar bar-header">
+    <a href='#/tab/home'>
+      <button class="button button-clear button-text button-back"><i class='ion-ios-arrow-back'>&nbsp back</i></button>
+    </a>
+
+    </ion-header-bar>
+
+    <ion-content >
+
+      <div class="list">
+          <a class="item item-avatar item-header"> <!--href="#account">-->
+              <img src={{HeadProfile[targetItem.get("Owner").get("username")]}}>
+              <h2 >{{targetItem.get("Title")}}</h2>
+              <p>
+                {{targetItem.get("Owner").get("username") +  showLabel(targetItem.get('Label'))}}
+              </p>
+
+          </a>
+          <div class='item-detail'>
+            <p>
+              {{targetItem.get("Desc")}}
+            </p>
+            <div id='itembar'class="row">
+              <i class="icon ion-ios-location icon-site"></i>
+            </div>
+            <img class="full-image" ng-repeat = "y in targetItem.get('ImageArry')" src={{y.url()}}>
+          </div>
+      <button class="button button-block button-outline button-calm" ng-click="showAlert(targetItem.id,targetItem.get('Title'))" >
+        Want
+      </button>
+      </div>
+
+    </ion-content>
+  </ion-view>
+</script>

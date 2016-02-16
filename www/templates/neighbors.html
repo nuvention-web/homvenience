@@ -1,21 +1,24 @@
-      <ion-view>
+<ion-view>
 
-        <ion-header-bar  class="bar-col bar bar-header">
-          <h2 id='home-bar' class="title">Neighbors</h2>
-        </ion-header-bar>
+  <ion-header-bar  class="bar-col bar bar-header">
+    <h2 id='home-bar' class="title">Neighbors</h2>
+  </ion-header-bar>
 
-        <ion-content class='content-back'>
-            <ion-refresher
-                pulling-text="Pull to refresh..."
-                on-refresh="getNeighbors()">
-            </ion-refresher>
-          <div class="list">
-           <a class="item item-avatar" href="#" ng-repeat = "x in neighborList">
-              <img src={{x.get("Profile").url()}}>
-              <h2>{{x.get("username")}} <i class="ion-heart icolor"><font size = "2" > 211 likes</font></i></h2>
-              <font size="2" color = "grey">Evanston,IL.</font>
-              <p><font size="2" color = "blue">{{x.get("SelfDes")}}</font></p>
-           </a> 
+  <ion-content class='content-back'>
+      <ion-refresher
+          pulling-text="Pull to refresh..."
+          on-refresh="getNeighbors()">
+      </ion-refresher>
 
-        </ion-content>
-      </ion-view>
+    <div class="list">
+     <a class="item item-avatar" href="href="#/user-profile" ng-repeat = "x in neighborList">
+        <img class='user-head' src={{x.get("Profile").url()}}>
+        <div id='user-name'>{{x.get("username")}}</div>
+        <div id='user-time'>500m | Evanston, IL</div>
+        <div id='user-char'>500m | Evanston, IL</div>
+        <div id='user-tags'>{{x.get("SelfDes")}}</div>
+     </a>
+   </div>
+  </ion-content>
+
+</ion-view>
