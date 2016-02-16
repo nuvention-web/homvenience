@@ -84,7 +84,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       url: '/chat',
       views:{
         'chat-tab':{
-          templateUrl: 'templates/chat.html',
+          templateUrl: 'templates/tab-chats.html',
           controller:''
         }
       }
@@ -107,9 +107,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       controller: 'RecordCtrl',
       templateUrl: 'templates/record.html',
     })
-
-
-
 
     .state('tabs.account', {
       url: '/account',
@@ -134,4 +131,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   $urlRouterProvider.otherwise('/sign-in');
 
 });
+
 

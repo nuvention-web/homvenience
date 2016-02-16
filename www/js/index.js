@@ -85,5 +85,3 @@ angular.module('starter', ['ionic'])
   console.log('HomeTabCtrl');
 });
 
-
-$document.ready("MainCtrl");
