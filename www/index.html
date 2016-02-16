@@ -128,6 +128,29 @@
 
 
 
+    <script id="templates/neighbors.html" type="text/ng-template">
+      <ion-view>
+
+        <ion-header-bar  class="bar-col bar bar-header">
+          <h2 id='home-bar' class="title">Neighbors</h2>
+        </ion-header-bar>
+
+        <ion-content class='content-back'>
+            <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="getNeighbors()">
+            </ion-refresher>
+          <div class="list">
+           <a class="item item-avatar" href="#" ng-repeat = "x in neighborList">
+              <img class='user-head' src={{x.get("Profile").url()}}>
+              <div id='user-name'>{{x.get("username")}} </div>
+              <div id='user-time'>Evanston, IL</div>
+              <p><{{x.get("SelfDes")}}</p>
+           </a>
+
+        </ion-content>
+      </ion-view>
+    </script>
 
 
 
@@ -500,4 +523,3 @@
   </body>
 
 </html>
-
