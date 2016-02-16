@@ -1,1 +1,133 @@
-/* Empty. Add your own CSS if you like */
+/*-----间隙背景-----*/
+.popup-buttons .ng-binding{
+	border-radius:10px !important;
+	background-color: #9BDDFF !important; 
+}
+
+a{
+	text-decoration: none;
+}
+
+.content-back{
+	background-color: #eee;
+}
+
+.button-text{
+	color: #000;
+}
+
+.view{
+	background-color: #ddd;
+}
+
+.bar-col{
+	background-color: #9BDDFF !important;
+}
+
+.rest-bar{
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-size: 26px;
+}
+
+/*----Signin部分----*/
+
+#sign-button{
+
+}
+
+/*----home部分----*/
+
+#home-bar{
+	color: #fff !important;
+	font-size: 28px;
+	font-family: 'Oleo Script', cursive;
+}
+
+#itembar{
+	font-size: 15px !important;
+}
+
+.icon-site{
+	color: #9BDDFF;
+}
+
+#user-item{
+	padding-bottom: 0px !important;
+}
+
+#item-bar{
+	font-size: 16px !important;
+	color: #777;
+}
+
+/*-----可以定义icon的颜色-----*/
+
+#item-bar .icolor{
+	color: #9BDDFF;
+}
+
+.item-detail{
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #fff;
+}
+
+.item-header{
+	border-width: 0px !important;
+}
+
+.icolor .item-avatar{
+	color: #9BDDFF;
+}
+
+/*-----home超链接-----*/
+
+#home-a{
+	display: block;
+	text-decoration: none;
+	color: inherit;
+}
+
+/*-----评论-----*/
+
+#detail-comment{
+
+}
+
+
+
+#comment-title{
+	background-color: #ddd;
+}
+
+/*-----个人信息-----*/
+
+.right{
+	text-align: right;
+
+}
+
+/*-----request-record-----*/
+
+.choice{
+	float: right;
+	font-size: 40px;
+	color: #666 !important;
+}
+
+.adic-modal .modal {
+    min-height: 0 !important;
+}
+
+.adic-popup {
+    width: 90%;
+    height: 60%;
+    top: 20%;
+    bottom: 20%;
+    right: 5%;
+    left: 5%;
+    background-color: #ffffff;
+}
+
+
