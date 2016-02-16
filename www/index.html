@@ -142,11 +142,11 @@
             </ion-refresher>
           <div class="list">
            <a class="item item-avatar" href="#" ng-repeat = "x in neighborList">
-              <img src={{x.get("Profile").url()}}>
-              <h2>{{x.get("username")}} <i class="ion-heart icolor"><font size = "2" > 211 likes</font></i></h2>
-              <font size="2" color = "grey">Evanston,IL.</font>
-              <p><font size="2" color = "blue">{{x.get("SelfDes")}}</font></p>
-           </a> 
+              <img class='user-head' src={{x.get("Profile").url()}}>
+              <div id='user-name'>{{x.get("username")}} </div>
+              <div id='user-time'>Evanston, IL</div>
+              <p><{{x.get("SelfDes")}}</p>
+           </a>
 
         </ion-content>
       </ion-view>
@@ -523,4 +523,3 @@
   </body>
 
 </html>
-
