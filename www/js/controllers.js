@@ -34,7 +34,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       user.signUp(null,{
         success: function(user){
           alert(user.get("username"));
-          $scope.closeModal();
+            var newCstm = new Customer();  
+            newCstm.set("ListOfPostItem", []);
+            newCstm.set("ListOfRequest", []);
+            newCstm.set("ListOfGet", []);
+            newCstm.set("ListOfLent", []);
+            newCstm.set("Requests", []);
+            user.set("customer", newCstm);
           currentUser = user;
           if(currentUser){
             isLogin = true;
@@ -60,6 +66,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             userQuery($scope, currentUser);
             $state.go('tabs.home');
           }
+          $scope.closeModal();
         },
         error: function(user, error){
           alert("Error: " + error.code + " " + error.message);

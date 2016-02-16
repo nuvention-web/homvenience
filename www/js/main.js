@@ -26,7 +26,8 @@ var H_User = Parse.User.extend("H_User", {
   tags:[],
   posts:[],
   Address:"",
-  Friends:null
+  Friends:null,
+  customer:null
 });
 
 H_User.logOut();
