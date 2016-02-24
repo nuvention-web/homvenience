@@ -1,3 +1,18 @@
+/*-----Home-----*/
+.portrait{
+	max-height: 53px !important;
+	max-width: 53px !important;
+	top: 8px !important;
+	left: 12px !important;
+}
+
+.item-avatar{
+	background-color: #fff !important;
+}
+
+/*-----Home-----*/
+
+
 /*-----附近的人-----*/
 #user-head{
 	max-height: 60px !important;
