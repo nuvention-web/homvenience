@@ -5,20 +5,43 @@
   </ion-header-bar>
 
   <ion-content class='content-back'>
-      <ion-refresher
-          pulling-text="Pull to refresh..."
-          on-refresh="getNeighbors()">
-      </ion-refresher>
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="getNeighbors()">
+    </ion-refresher>
 
+
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <img src="avatar.jpg">
+        <h2>Pretty Hate Machine</h2>
+        <p>Nine Inch Nails</p>
+      </div>
+
+      <div class="item item-image">
+        <img src="cover.jpg">
+      </div>
+
+      <a class="item item-icon-left assertive" href="#">
+        <i class="icon ion-music-note"></i>
+        Start listening
+      </a>
+
+    </div>
+
+<!--
     <div class="list">
-     <a class="item item-avatar" href="href="#/user-profile" ng-repeat = "x in neighborList">
+     <a class="item item-avatar" href="#/user-profile" ng-repeat = "x in neighborList">
         <img class='user-head' src={{x.get("Profile").url()}}>
         <div id='user-name'>{{x.get("username")}}</div>
         <div id='user-time'>500m | Evanston, IL</div>
         <div id='user-char'>500m | Evanston, IL</div>
         <div id='user-tags'>{{x.get("SelfDes")}}</div>
+        <div id='user-tags'>{{x.get("SelfDes")}}</div>
      </a>
    </div>
+ -->
   </ion-content>
 
 </ion-view>

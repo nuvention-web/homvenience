@@ -44,22 +44,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       abstract: true,
       templateUrl: 'templates/tabs.html'
     })
-    
+
     .state('tabs.neighbors', {
       url: '/neighbors',
       views: {
         'neighbors-tab': {
           templateUrl: 'templates/neighbors.html',
           controller: 'NeighborsTabCtrl'
-        }
-      }
-    })
-
-    .state('tabs.user-profile', {
-      url: '/user-profile',
-      views: {
-        'user-profile-tab': {
-          templateUrl: 'templates/user-profile.html',
         }
       }
     })
@@ -78,6 +69,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       url: '/detail',
       templateUrl: 'templates/detail.html',
       controller: 'DetailCtrl'
+    })
+
+    .state('user-profile', {
+      url: '/user-profile',
+      templateUrl: 'templates/user-profile.html',
     })
 
     .state('tabs.search',{
@@ -139,6 +135,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/sign-in');
+  $urlRouterProvider.otherwise('/tabs.home');
 
 });

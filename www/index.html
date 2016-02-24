@@ -46,39 +46,6 @@
 
     <ion-nav-view></ion-nav-view>
 
-<!--固定导航栏-->
-
-    <script id="templates/tabs.html" type="text/ng-template">
-      <ion-view >
-        <ion-tabs class="tabs-icon-only">
-
-          <ion-tab title="Neighbors" icon="ion-person-stalker" href="#/tab/neighbors">
-            <ion-nav-view name="neighbors-tab"></ion-nav-view>
-          </ion-tab>
-
-          <ion-tab title="Home" icon="ion-aperture" href="#/tab/home">
-            <ion-nav-view name="home-tab"></ion-nav-view>
-          </ion-tab>
-
-         <!-- <ion-tab title="Search" icon="ion-ios-search-strong" href="#/tab/search">
-            <ion-nav-view name="search-tab"></ion-nav-view>
-          </ion-tab> -->
-
-          <ion-tab title="Post" icon="icon ion-ios-plus-outline" ng-click="postShow()">
-              <ion-nav-view name="post-tab" ></ion-nav-view>
-          </ion-tab>
-
-          <ion-tab title="Chat" icon="ion-chatbubble" href="#/tab/chat">
-            <ion-nav-view name="chat-tab" ></ion-nav-view>
-          </ion-tab>
-
-          <ion-tab title="Account" icon="ion-person" href="#/tab/account">
-            <ion-nav-view name="account-tab" ></ion-nav-view>
-          </ion-tab>
-        </ion-tabs>
-      </ion-view>
-    </script>
-
 
 <!--登录页面-->
     <script id="templates/sign-in.html" type="text/ng-template">
@@ -126,126 +93,41 @@
       </ion-view>
     </script>
 
-<!--Homepage   <script id="templates/neighbors.html" type="text/ng-template">
+<script id="templates/neighbors.html" type="text/ng-template">
+<ion-view>
+
+  <ion-header-bar  class="bar-col bar bar-header">
+    <h2 id='home-bar' class="title">Neighbors</h2>
+  </ion-header-bar>
+
+  <ion-content class='content-back'>
+      <ion-refresher
+          pulling-text="Pull to refresh..."
+          on-refresh="getNeighbors()">
+      </ion-refresher>
+
+    <div class="list">
+     <a class="item item-avatar" href="#/user-profile" ng-repeat = "x in neighborList">
+        <img id='user-head' src={{x.get("Profile").url()}}>
+        <div id='user-name'>{{x.get("username")}}</div>
+        <div id='user-time'>500m | Evanston, IL</div>
+        <div id='user-char'>500m | Evanston, IL</div>
+        <div id='user-tags'>{{x.get("SelfDes")}}</div>
+        <div id='user-tags'>{{x.get("SelfDes")}}</div>
+     </a>
+   </div>
+  </ion-content>
+
+</ion-view>
     </script>
     !!!!!-->
 
 
-<!--Homepage!!!!!-->
 
-    <script id="templates/home.html" type="text/ng-template">
-      <ion-view ng-init="init()">
-
-        <ion-header-bar  class="bar-col bar bar-header">
-          <h2 id='home-bar' class="title">Homvenience</h2>
-        </ion-header-bar>
-
-        <ion-content class='content-back'>
-          <ion-refresher
-              pulling-text="Pull to refresh..."
-              on-refresh="init()">
-          </ion-refresher>
-
-          <div class="list" ng-repeat = "x in search_res" ng-click="esc(x)">
-
-              <a class="item item-avatar item-header" >
-                  <img src={{HeadProfile[x.get("Owner").get("username")]}}>
-                  <h2>{{x.get("Title")}}<i class="icon fa fa-smile-o icolor"></i></h2>
-                  <p>{{x.get("Owner").get("username") + showLabel(x.get('Label'))}}</p>
-              </a>
-
-              <a id='home-a' href="#/detail">
-                <div class='item-detail'>
-                  <img class="full-image" ng-repeat = "y in x.get('ImageArry')" src={{y.url()}}>
-                  <p>
-                      {{x.get("Desc")}}
-                  </p>
-                  <div id='item-bar'class="row">
-                      <div class="col col-67"><i class="icon ion-ios-location icon-site"></i>
-                      &nbspEvanston
-                      </div>
-                      <div class="col col-13"><i class="ion-thumbsup icolor"></i>
-                        7
-                       </div>
-                       <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
-                        10
-                      </div>
-                  </div>
-                </div>
-              </a>
-
-            </div>
-        </ion-content>
-      </ion-view>
-    </script>
 
 
 
 <!--item详情页面-->
-    <script id="templates/detail.html" type="text/ng-template">
-      <ion-view>
-        <ion-header-bar class="bar-col bar bar-header">
-        <a href='#/tab/home'>
-          <button class="button button-clear button-text button-back"><i class='ion-ios-arrow-back'>&nbsp back</i></button>
-        </a>
-
-        </ion-header-bar>
-
-        <ion-content >
-
-          <div class="list">
-              <a class="item item-avatar item-header"> <!--href="#account">-->
-                  <img src={{HeadProfile[targetItem.get("Owner").get("username")]}}>
-                  <h2 >{{targetItem.get("Title")}}</h2>
-                  <p>
-                    {{targetItem.get("Owner").get("username") +  showLabel(targetItem.get('Label'))}}
-                  </p>
-
-              </a>
-              <div class='item-detail'>
-                <p>
-                  {{targetItem.get("Desc")}}
-                </p>
-                <div id='itembar'class="row">
-                  <i class="icon ion-ios-location icon-site"></i>
-<!--传定位进来
-                  <p>&nbsp Evanston</p>
-                  <p>&nbsp 多久之前</p>
-                  -->
-                </div>
-                <img class="full-image" ng-repeat = "y in targetItem.get('ImageArry')" src={{y.url()}}>
-              </div>
-          <button class="button button-block button-outline button-calm" ng-click="showAlert(targetItem.id,targetItem.get('Title'))" >
-            Want
-          </button>
-          </div>
-
-
-
-    <!--      <div id='detail-comment' class="list" ng-repeat = "x in search_res">
-              <a class="item item-avatar" href="#">
-
-                <img src="venkman.jpg">
-                <h2>Venkman</h2>
-                <p>Back off, man. Im a scientist.</p>
-              </a>
-              <p>adfasdfaf</p>
-          </div>
-          <div class="tabs tabs-icon-only">
-            <a class="tab-item">
-              <i class="icon ion-home"></i>
-            </a>
-            <a class="tab-item">
-              <i class="icon ion-star"></i>
-            </a>
-            <a class="tab-item">
-              <i class="icon ion-gear-a"></i>
-            </a>
-          </div> -->
-
-        </ion-content>
-      </ion-view>
-    </script>
 
 
     <script id="templates/search.html" type="text/ng-template">

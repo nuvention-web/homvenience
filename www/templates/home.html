@@ -1,0 +1,88 @@
+<ion-view ng-init="init()">
+
+  <ion-header-bar  class="bar-col bar bar-header">
+    <button class="button button-icon icon ion-navicon"></button>
+    <h2 id='home-bar' class="title">Homvenience</h2>
+    <button class="button button-icon icon ion-ios-chatbubble"></button>
+  </ion-header-bar>
+
+  <ion-content class='content-back'>
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="init()">
+    </ion-refresher>
+
+    <div class="list card">
+      <div class="item item-divider">
+          I'm a Header in a Card!
+        </div>
+
+      <div class="item item-avatar">
+        <img src="mcfly.jpg">
+        <h2>Marty McFly</h2>
+        <p>November 05, 1955</p>
+      </div>
+
+      <div class="item item-body">
+        <img class="full-image" src="delorean.jpg">
+        <p>
+          This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+          the content is from a card-body consisting of an image and paragraph text. The footer
+          consists of tabs, icons aligned left, within the card-footer.
+        </p>
+        <p>
+          <a href="#" class="subdued">1 Like</a>
+          <a href="#" class="subdued">5 Comments</a>
+        </p>
+      </div>
+
+    </div>
+
+    <div class="tabs-striped tabs-top tabs-color-assertive">
+    <div class="tabs">
+      <button class="button button-icon icon ion-navicon"></button>
+      <a class="tab-item active" href="#">
+        <i class="icon ion-home"></i>
+        Test
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-star"></i>
+        Favorites
+      </a>
+    </div>
+  </div>
+
+
+
+<!--
+    <div class="list" ng-repeat = "x in search_res" ng-click="esc(x)">
+
+        <a class="item item-avatar item-header" >
+            <img src={{HeadProfile[x.get("Owner").get("username")]}}>
+            <h2>{{x.get("Title")}}<i class="icon fa fa-smile-o icolor"></i></h2>
+            <p>{{x.get("Owner").get("username") + showLabel(x.get('Label'))}}</p>
+        </a>
+
+        <a id='home-a' href="#/detail">
+          <div class='item-detail'>
+            <img class="full-image" ng-repeat = "y in x.get('ImageArry')" src={{y.url()}}>
+            <p>
+                {{x.get("Desc")}}
+            </p>
+            <div id='item-bar'class="row">
+                <div class="col col-67"><i class="icon ion-ios-location icon-site"></i>
+                &nbspEvanston
+                </div>
+                <div class="col col-13"><i class="ion-thumbsup icolor"></i>
+                  7
+                 </div>
+                 <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
+                  10
+                </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    -->
+  </ion-content>
+</ion-view>
