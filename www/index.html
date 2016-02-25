@@ -50,7 +50,7 @@
 <!--登录页面-->
     <script id="templates/sign-in.html" type="text/ng-template">
       <ion-view  ng-controller = "SignInCtrl">
-        <ion-header-bar class="bar-col bar-header bar">
+        <ion-header-bar class="bar-style  bar">
 
           <h2 class="title rest-bar">Sign-In</h2>
         </ion-header-bar>
@@ -96,15 +96,10 @@
 
 
 
-
-
-<!--item详情页面-->
-
-
     <script id="templates/search.html" type="text/ng-template">
         <ion-view view-title="Search"  ng-init="init()">
 
-          <ion-header-bar class="bar-col bar-header bar">
+          <ion-header-bar class="bar-style  bar">
           <h2 class="title rest-bar">Search</h2>
 
           <button class="button button-clear icon ion-log-in" ng-click="init()"></button>
@@ -138,7 +133,7 @@
     <script id="templates/chat.html" type="text/ng-template">
     <ion-view>
 
-        <ion-header-bar  class="bar-col bar bar-header">
+        <ion-header-bar  class="bar-style bar ">
           <h2 class="title rest-bar">Messages</h2>
         </ion-header-bar>
 
@@ -148,13 +143,11 @@
       </ion-view>
     </script>
 
-<!--个人信息页面-->
-
 
     <script id="templates/request.html" type="text/ng-template">
       <ion-view>
 
-        <ion-header-bar class="bar-col bar bar-header">
+        <ion-header-bar class="bar-style bar ">
           <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
           </a>
           <h2 class="title rest-bar">Request</h2>
@@ -186,7 +179,7 @@
     <script id="templates/record.html" type="text/ng-template">
       <ion-view>
 
-        <ion-header-bar class="bar-col bar bar-header">
+        <ion-header-bar class="bar-style bar ">
           <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
           </a>
           <h2 class="title rest-bar">Record</h2>
@@ -214,7 +207,7 @@
     <script id="templates/offering.html" type="text/ng-template">
       <ion-view>
 
-        <ion-header-bar class="bar-col bar bar-header">
+        <ion-header-bar class="bar-style bar ">
           <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
           </a>
           <h2 class="title rest-bar">Offering</h2>
@@ -244,7 +237,7 @@
 <!--发布信息页面-->
     <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-col">
+        <ion-header-bar class="bar  bar-style">
           <h1 class="title rest-bar">POST</h1>
           <button class="button button-clear" ng-click="modal.hide()"><i class='ion-close-round'></i></button>
           <button class="button button-clear" ng-click="createPost()"><i class='ion-checkmark-round'></i></button>
@@ -271,7 +264,7 @@
 
     <script id="templates/Register-modal.html" type="text/ng-template">
       <ion-modal-view>
-      <ion-header-bar class="bar bar-header bar-col">
+      <ion-header-bar class="bar  bar-style">
         <h1 class="title rest-bar">Join your neighborhood!</h1>
           <button class="button button-clear" ng-click="closeModal()"><i class='ion-close-round'></i></button>
       </ion-header-bar>

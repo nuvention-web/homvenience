@@ -1,6 +1,23 @@
-/*-----Home-----*/
+/*-----bar part-----*/
+.bar-style{
+	background-color: #333;
+	color: #fff;
+}
 
-/*-----Home-----*/
+#home-bar{
+	color: #fff !important;
+	font-size: 28px;
+	font-family: 'Oleo Script', cursive;
+}
+
+.rest-bar{
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-size: 26px;
+}
+
+
+/*-----公用-----*/
 
 
 /*-----附近的人-----*/
@@ -66,16 +83,6 @@ a{
 	background-color: #ddd;
 }
 
-.bar-col{
-	background-color: #9BDDFF !important;
-}
-
-.rest-bar{
-	color: #fff;
-	font-family: 'Roboto', sans-serif;
-	font-size: 26px;
-}
-
 /*----Signin部分----*/
 
 #sign-button{
@@ -95,11 +102,7 @@ a{
 	background-color: #D16AEA;
 }
 
-#home-bar{
-	color: #fff !important;
-	font-size: 28px;
-	font-family: 'Oleo Script', cursive;
-}
+
 
 #itembar{
 	font-size: 15px !important;
