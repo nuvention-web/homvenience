@@ -93,35 +93,6 @@
       </ion-view>
     </script>
 
-<script id="templates/neighbors.html" type="text/ng-template">
-<ion-view>
-
-  <ion-header-bar  class="bar-col bar bar-header">
-    <h2 id='home-bar' class="title">Neighbors</h2>
-  </ion-header-bar>
-
-  <ion-content class='content-back'>
-      <ion-refresher
-          pulling-text="Pull to refresh..."
-          on-refresh="getNeighbors()">
-      </ion-refresher>
-
-    <div class="list">
-     <a class="item item-avatar" href="#/user-profile" ng-repeat = "x in neighborList">
-        <img id='user-head' src={{x.get("Profile").url()}}>
-        <div id='user-name'>{{x.get("username")}}</div>
-        <div id='user-time'>500m | Evanston, IL</div>
-        <div id='user-char'>500m | Evanston, IL</div>
-        <div id='user-tags'>{{x.get("SelfDes")}}</div>
-        <div id='user-tags'>{{x.get("SelfDes")}}</div>
-     </a>
-   </div>
-  </ion-content>
-
-</ion-view>
-    </script>
-    !!!!!-->
-
 
 
 
@@ -178,52 +149,7 @@
     </script>
 
 <!--个人信息页面-->
-    <script id="templates/account.html" type="text/ng-template">
-      <ion-view>
 
-        <ion-header-bar class="bar-col bar bar-header">
-          <h2 class="title rest-bar">Account</h2>
-          <button class="button button-clear icon ion-ios-gear"></button>
-
-        </ion-header-bar>
-
-        <ion-content>
-        <ul class="list">
-            <li class="item">
-              <a class="item item-avatar item-header" href="#account">
-                  <img src="img/mike.png">
-                  <h2 >Venkman</h2>
-                  <p>
-                    Back. I am going to zhuang B.
-                  </p>
-              </a>
-            </li>
-            <a href='#request'>
-            <li class="item">
-              Request
-            </li>
-            </a>
-            <a href='#offering'>
-            <li class="item">
-              Offering
-            </li>
-            </a>
-            <a href='#record'>
-            <li class="item">
-              Record
-            </li>
-            </a>
-        </ul>
-
-
-        <button class="button button-block button-outline button-stable" ng-click = "LogOut()">
-
-          Log Out
-        </button>
-
-        </ion-content>
-      </ion-view>
-    </script>
 
     <script id="templates/request.html" type="text/ng-template">
       <ion-view>

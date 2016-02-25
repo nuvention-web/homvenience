@@ -1,14 +1,4 @@
 /*-----Home-----*/
-.portrait{
-	max-height: 53px !important;
-	max-width: 53px !important;
-	top: 8px !important;
-	left: 12px !important;
-}
-
-.item-avatar{
-	background-color: #fff !important;
-}
 
 /*-----Home-----*/
 
@@ -92,7 +82,18 @@ a{
 
 }
 
-/*----home部分----*/
+/*----home部分 2.24 added----*/
+.portrait{
+	max-height: 53px !important;
+	max-width: 53px !important;
+	top: 8px !important;
+	left: 12px !important;
+}
+
+.post-type{
+	padding: 0px;
+	background-color: #D16AEA;
+}
 
 #home-bar{
 	color: #fff !important;
@@ -185,3 +186,39 @@ a{
     left: 5%;
     background-color: #ffffff;
 }
+
+/*-----Details-----*/
+.wrapper{
+	padding-top: 80px;
+	padding-bottom:50px;
+	min-height: 150px;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.protrait-back{
+	background-image: url("../img/ivy-back.jpg");
+	min-height: 150px;
+}
+
+.protrait{
+	margin: 0 auto;
+	height: 160px;
+	width: 160px;
+	border-radius: 80px;
+	background-image: url("../img/ivy.jpg");
+ 	background-size: cover;
+}
+
+#myname{
+	font-size: 30px;
+	text-align: center;
+	margin: 20px auto;
+	color: #fff;
+}
+
+.pro-gender{
+	height: 25px;
+	width: 25px;
+}
+
+/*-----Details-----*/

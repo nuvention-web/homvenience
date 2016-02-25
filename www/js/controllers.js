@@ -33,8 +33,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       user.set("password", newUser.password);
       user.signUp(null,{
         success: function(user){
-          alert(user.get("username"));
-            var newCstm = new Customer();  
+            var newCstm = new Customer();
             newCstm.set("ListOfPostItem", []);
             newCstm.set("ListOfRequest", []);
             newCstm.set("ListOfGet", []);
@@ -202,9 +201,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }
   })
 
-  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
+  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet,
+    $ionicPopup, $state, $cordovaCamera, $timeout, $ionicSideMenuDelegate) {
     console.log("MainCtrl");
 
+    $scope.toggleLeft = function() {
+      $ionicSideMenuDelegate.toggleLeft();
+    };
 
     $scope.HeadProfile = headProfile;
     $scope.LABEL = "GET";
@@ -222,6 +225,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 
     currentUser = H_User.current();
+
     if(currentUser){
       isLogin = true;
       APP = currentUser.get("customer");
@@ -541,6 +545,3 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                 }
    ;
   });
-
-
-

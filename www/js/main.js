@@ -272,7 +272,7 @@ var userQuery = function ($scope, user){
   UserQuery.notEqualTo("username", user.get("username"));
   UserQuery.find({
     success: function(results) {
-      alert("Successfully retrieved " + results.length + " H_User.");
+      // alert("Successfully retrieved " + results.length + " H_User.");
       // Do something with the returned Parse.Object values
       for (var i = 0; i < results.length; i++) {
       }

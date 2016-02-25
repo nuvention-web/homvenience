@@ -119,7 +119,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       url: '/account',
       views: {
         'account-tab': {
-          templateUrl: 'templates/account.html',
+          templateUrl: 'templates/tab-account.html',
           controller: 'AccountCtrl'
         }
       }
@@ -135,6 +135,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tabs.home');
+  $urlRouterProvider.otherwise('/home');
 
 });
