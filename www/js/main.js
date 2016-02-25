@@ -70,7 +70,7 @@ var Customer = Parse.Object.extend("Customer" , {
   ListOfLent:[],
   Requests:[],// to store sent requests
   Denied:[],
-  MessageBox:null,
+  MBox:null,
 
 
   checkRequest : function($scope){
@@ -278,7 +278,7 @@ var userQuery = function ($scope, user){
       // Do something with the returned Parse.Object values
       for (var i = 0; i < results.length; i++) {
         var object = results[i];
-        alert(object.id + ' - ' + object.get('username'));
+        console.log(object.id + ' - ' + object.get('username'));
       }
       $scope.neighborList = results;
     },

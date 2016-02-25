@@ -131,6 +131,52 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }
   })
 
+  .controller('ChatCtrl',function($scope,$state){
+    $scope.users;
+
+
+
+    $scope.reloadUser = function (){
+      APP.get("MBox").showUsers($scope);
+    }
+
+
+    $scope.chatDetail = function(user){
+      console.log(user.get('username'));
+      $state.go('chatdetail',{"toUser":user});
+    }
+
+
+  })
+
+  .controller('ChatDetailCtrl',function($scope,$stateParams){
+    $scope.toUser = $stateParams.toUser;
+    console.log("Received user "+$scope.toUser.get("username") );
+    $scope.doneLoading = false;
+    $scope.messages;
+
+
+    $scope.loadChat = function (){
+      $scope.chats = APP.get("MBox").showMessage();
+      $scope.$apply();
+    }
+
+
+    $scope.getMessages = function(){
+      APP.get("MBox").showMessage($scope,$scope.toUser.get("username"));
+    }
+
+    $scope.sendMessage = function (){
+      var mes = new Message();
+      mes.set("Content",$scope.input);
+      mes.set("Receiver", $scope.toUser.get("username"));
+      mes.set("Username", currentUser.get("username"));
+      mes.save();
+      $scope.messages.push(mes);
+      $scope.$apply();
+    }
+  })
+
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet, $ionicPopup, $state, $cordovaCamera, $timeout) {
 
 
@@ -202,6 +248,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       Title : "",
       Desc : ""
     };
+
+    $scope.addFriend = function(user){
+      var friends = currentUser.relation("Friends");
+      friends.add(user);
+      currentUser.save();
+    }
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope
@@ -356,15 +408,23 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           APP = currentUser.get("customer");
           APP.fetch().then(function(obj){
             console.log("Customer Fetched");
-            APP.get("MessageBox").fetch().then(function (obj)
-            {
-              console.log("Message Box fetched");
-              MessageCheckTimer=setInterval(reload,5000);
-              console.log("Message Timer Set!");
-            },
-            function (err){
-              console.log("Box corrupted!");
-            });
+            if(APP.get("MBox") == null){
+              var temp = new MessageBox();
+              temp.set("User",currentUser.get("username"));
+              temp.set("Messages",[]);
+              APP.set("MessageBox", temp);
+              temp.save();
+            }
+            else {
+              APP.get("MBox").fetch().then(function (res) {
+                  console.log("Message Box fetched");
+                  MessageCheckTimer = setInterval(APP.get("MBox").reload, 5000);
+                  console.log("Message Timer Set!");
+                },
+                function (err) {
+                  console.log("Box corrupted!");
+                });
+            }
             if(APP.get("Requests").length != 0){
               AcceptTimer = setInterval(checkAccept,3000);
             }

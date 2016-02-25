@@ -16,24 +16,25 @@ var MessageBox = Parse.Object.extend("MessageBox",{
   Messages:[],
 
 
-  reload : function(){
+  reload : function(obj){
     console.log("Reload messages");
-    var box = this;
+    var box = APP.get("MBox");
     var messageQuery = new Parse.Query(Message);
     messageQuery.equalTo("Fetched",false);
     messageQuery.equalTo("Receiver", currentUser.get("username"));
+    box.get("Messages");
     messageQuery.find().then(function (res){
       for(var i = 0;i<res.length;i++) {
         res.set("Fetched", true);
         res.save();
-        box.Messages.push(res);
+        box.get("Messages").push(res);
       }
-      box.save();
     });
+    box.save();
   },
 
   post : function(content, receiver){
-    var box = this;
+    var box = APP.get("MBox");
     var message = new Message();
     message.set("Username",currentUser.get("username"));
     message.set("Content",content);
@@ -41,38 +42,39 @@ var MessageBox = Parse.Object.extend("MessageBox",{
     message.save();
   },
 
-  showUsers : function(){
-    var names = {};
-    var box = this;
-    for(var i =0;i<Messages.length;i++){
-      var name = box.Messages[i].get("Username");
-      if(!names.contains(name)){
-        names[name] = 1;
-      }
-      else{
-        names[name] +=1;
-      }
-    }
-    return names;
+  showUsers : function(scope){
+    console.log("Load Friend information");
+    var friends = currentUser.relation("Friends");
+    var query = friends.query();
+    query.find().then(function (res){
+      console.log("Find friends" + res.length);
+      scope.users = res;
+      scope.$apply();
+    },function (err){
+      console.log("Log friends Failed!!!");
+    });
   },
 
-  showMessage : function(username){
-    var box = this;
+  showMessage : function(scope, username){
+    var box = APP.get("MBox");
     var messages = [];
     var messageName;
-    for(var i = 0; i<box.Messages.length;i++){
-      messageName  = box.Messages[i].get("Username");
-      if(messageName  == username){
-        messages.push(box.Messages[i]);
+    var raw = box.get("Messages");
+    for(var i = 0; i<raw.length;i++){
+      messageName  = raw[i].get("Username");
+      if(messageName  == username || messageName == currentUser.get("username")){
+        messages.push(raw[i]);
       }
+      scope.doneLoading = true;
+      scope.messages = messages;
+      scope.$apply();
     }
-    return messages;
   }
 });
 
 var MessageCheckTimer;
 
-var reload  = function() {
+/*var reload  = function() {
   console.log("Reload messages");
   var messageQuery = new Parse.Query(Message);
   messageQuery.equalTo("Fetched", false);
@@ -85,6 +87,6 @@ var reload  = function() {
     }
     APP.get("MessageBox").save();
   });
-}
+}*/
 
 

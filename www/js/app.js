@@ -82,12 +82,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     .state('tabs.chat',{
       url: '/chat',
+      cache:false,
       views:{
         'chat-tab':{
           templateUrl: 'templates/chat.html',
-          controller:''
+          controller:'ChatCtrl'
         }
       }
+    })
+
+    .state('chatdetail',{
+      url: '/chatDetail',
+      templateUrl: 'templates/chatDetail.html',
+      controller:'ChatDetailCtrl'
     })
 
     .state('request', {
