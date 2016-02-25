@@ -1,11 +1,13 @@
 <ion-view>
     <ion-header-bar class="bar-style">
       <a href='#/tab/home'>
-        <button class="button button-clear button-text button-back"><i class='ion-ios-arrow-back'>&nbsp back</i></button>
+        <button class="button button-icon button-clear button-light ion-ios-arrow-back">
+        </button>
       </a>
 <!--      <h2 id='home-bar' class="title">Me</h2> -->
     </ion-header-bar>
 
+    <ion-content>
       <div class="protrait-back">
         <div class="wrapper">
         <div class="protrait"></div>
@@ -16,8 +18,30 @@
       </div>
     </div>
 
+    <div class="user-record row">
+      <div class="col">
+        <img class='record-img' src="../img/camera.png" alt="#" />
+        <div class='record-num'>8</div>
+      </div>
+      <div class="col">
+        <img class='record-img' src="../img/camera.png" alt="#" />
+        <div class='record-num'>1</div>
+      </div>
+      <div class="col">
+        <img class='record-img' src="../img/camera.png" alt="#" />
+        <div class='record-num'>3</div>
+      </div>
+      <div class="col">
+        <img class='record-img' src="../img/camera.png" alt="#" />
+        <div class='record-num'>0</div>
+      </div>
+      <div class="col">
+        <img class='record-img' src="../img/camera.png" alt="#" />
+        <div class='record-num'>10</div>
+      </div>
 
 
+    </div>
     <ion-list>
       <ion-item>Hello!</ion-item>
       <ion-item>
@@ -28,6 +52,21 @@
         Link to detail page
       </ion-item>
     </ion-list>
+
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">First Name</span>
+        <input type="text" placeholder="John">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Last Name</span>
+        <input type="text" placeholder="Suhr">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Email</span>
+        <input type="text" placeholder="john@suhr.com">
+      </label>
+    </div>
 
 
   </ion-content>

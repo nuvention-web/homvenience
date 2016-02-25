@@ -1,35 +1,39 @@
-  <ion-view>
-    <ion-header-bar class="bar-col bar bar-header">
+<ion-view>
+  <ion-header-bar class="bar-style post-type">
     <a href='#/tab/home'>
-      <button class="button button-clear button-text button-back"><i class='ion-ios-arrow-back'>&nbsp back</i></button>
+      <button class="button button-icon button-clear button-dark ion-ios-arrow-back">
+      </button>
     </a>
-    <h2 id='home-bar' class="title">Me</h2>
+<!--<h2 id='home-bar' class="title">Me</h2> -->
+  </ion-header-bar>
 
-    </ion-header-bar>
-
-        <div class="protrait-back">
-          <div class="wrapper">
-          <div class="protrait"></div>
-          <div id="myname">
-            Ivy
-            <img class='pro-gender' src="../img/female.png" alt="female" />
-          </div>
-        </div>
+  <ion-content>
+    <a id='home-a' href="#/user-profile">
+      <div class="item item-avatar">
+        <img class='portrait' src="img/ivy.jpg">
+        <div id='user-time'>10 mins ago</div>
+        <h2>Ivy</h2>
+        <p><i class="icon ion-ios-location icon-site"></i>
+        &nbspEvanston 500m</p>
       </div>
+    </a>
+    
+    <div class="item item-body">
+      <h2 class='item-title' style='margin-top:0px;'> Party!</h2>
+      <p>
+        This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+        the content is from a card-body consisting of an image and paragraph text. The footer
+        consists of tabs, icons aligned left, within the card-footer.
+      </p>
+      <img class="full-image" src="img/party.jpg">
+    </div>
+    <div class="item">
+      <p>
+        <a href="#" class="subdued">1 Like</a>
+        <a href="#" class="subdued">5 Comments</a>
+      </p>
+    </div>
 
 
-
-      <ion-list>
-        <ion-item>Hello!</ion-item>
-        <ion-item>
-          Link to detail page
-        </ion-item>
-        <ion-item>Hello!</ion-item>
-        <ion-item>
-          Link to detail page
-        </ion-item>
-      </ion-list>
-
-
-    </ion-content>
-  </ion-view>
+  </ion-content>
+</ion-view>
