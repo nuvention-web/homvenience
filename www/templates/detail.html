@@ -9,24 +9,22 @@
   </ion-header-bar>
 
   <ion-content>
-    <a id='home-a' href="#/user-profile">
+    <a id='home-a' ng-click="userDetail(Item.get('Owner').id)">
       <div class="item item-avatar">
         <img class='portrait' src="img/ivy.jpg">
-        <div id='user-time'>10 mins ago</div>
-        <h2>Ivy</h2>
+        <div id='user-time'>{{Item.createdAt}}</div>
+        <h2>{{Item.get("Owner").get("username")}}</h2>
         <p><i class="icon ion-ios-location icon-site"></i>
         &nbspEvanston 500m</p>
       </div>
     </a>
 
     <div class="item item-body">
-      <h2 class='item-title' style='margin-top:0px;'> Party!</h2>
+      <h2 class='item-title' style='margin-top:0px;'> {{Item.get("Title")}}</h2>
       <p>
-        This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
-        the content is from a card-body consisting of an image and paragraph text. The footer
-        consists of tabs, icons aligned left, within the card-footer.
+        {{Item.get("Desc")}}
       </p>
-      <img class="full-image" src="img/party.jpg">
+      <img class="full-image" ng-repeat="y in Item.get('ImageArry')" src={{y.url()}}>
     </div>
     <div class="item">
       <p>
