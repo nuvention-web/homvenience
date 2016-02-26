@@ -1,0 +1,133 @@
+<ion-view ng-init="init()">
+
+  <ion-header-bar  class="bar-style">
+    <button class="button button-icon icon ion-navicon" ng-click = "toggleLeft()"></button>
+    <h2 id='home-bar' class="title">Aroundme</h2>
+    <button class="button button-icon icon ion-plus" ng-click="postShow()"></button>
+  </ion-header-bar>
+
+
+  <ion-content class='content-back'>
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="init()">
+    </ion-refresher>
+
+
+    <div class="list card" ng-repeat="x in search_res">
+      <div class="item item-divider post-type">
+        </div>
+
+      <div id='home-a' ng-click="userDetail(x.get('Owner').id)">
+        <div class="item item-avatar">
+          <img class='portrait' src={{x.get('Owner').get("Profile").url()}}>
+          <div id='user-time'>{{x.createdAt}}</div>
+          <h2>{{x.get("Owner").get("username")}}</h2>
+          <p><i class="icon ion-ios-location icon-site"></i>
+          &nbspEvanston 500m</p>
+        </div>
+      </div>
+
+      <div ng-click="eventDetail(x.id)">
+        <div class="item item-body">
+          <h2 class='item-title' style='margin-top:0px;'> {{x.get("Title")}}</h2>
+          <p>
+            {{x.get("Desc")}}
+          </p>
+          <img class="full-image" src={{x.get("ImageArry")[0].url()}}>
+        </div>
+        <div class="item">
+          <p>
+            <a href="#" class="subdued">1 Like</a>
+            <a href="#" class="subdued">5 Comments</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+<!--    <div class="list card">
+      <div class="item item-divider post-type">
+        </div>
+
+      <a id='home-a' href="#/account">
+        <div class="item item-avatar">
+          <img class='portrait' src="img/ivy.jpg">
+          <div id='user-time'>10 mins ago</div>
+          <h2>Ivy</h2>
+          <p><i class="icon ion-ios-location icon-site"></i>
+          &nbspEvanston 500m</p>
+        </div>
+      </a>
+
+      <a href="#/detail">
+        <div class="item item-body">
+          <h2 class='item-title' style='margin-top:0px;'> Party!</h2>
+          <p>
+            This is a "Facebook" styled Card. The header is created from a Thumbnail List item,
+            the content is from a card-body consisting of an image and paragraph text. The footer
+            consists of tabs, icons aligned left, within the card-footer.
+          </p>
+          <img class="full-image" src="img/party.jpg">
+        </div>
+        <div class="item">
+          <p>
+            <a href="#" class="subdued">1 Like</a>
+            <a href="#" class="subdued">5 Comments</a>
+          </p>
+        </div>
+      </a>
+    </div> -->
+
+
+
+
+<!--
+    <div class="tabs-striped tabs-top tabs-color-assertive">
+    <div class="tabs">
+      <button class="button button-icon icon ion-navicon"></button>
+      <a class="tab-item active" href="#">
+        <i class="icon ion-home"></i>
+        Test
+      </a>
+      <a class="tab-item" href="#">
+        <i class="icon ion-star"></i>
+        Favorites
+      </a>
+      <button class="button button-icon icon ion-ios-chatbubble"></button>
+    </div>
+  </div>
+-->
+
+
+<!--
+    <div class="list" ng-repeat = "x in search_res" ng-click="esc(x)">
+
+        <a class="item item-avatar item-header" >
+            <img src={{HeadProfile[x.get("Owner").get("username")]}}>
+            <h2>{{x.get("Title")}}<i class="icon fa fa-smile-o icolor"></i></h2>
+            <p>{{x.get("Owner").get("username") + showLabel(x.get('Label'))}}</p>
+        </a>
+
+        <a id='home-a' href="#/detail">
+          <div class='item-detail'>
+            <img class="full-image" ng-repeat = "y in x.get('ImageArry')" src={{y.url()}}>
+            <p>
+                {{x.get("Desc")}}
+            </p>
+            <div id='item-bar'class="row">
+                <div class="col col-67"><i class="icon ion-ios-location icon-site"></i>
+                &nbspEvanston
+                </div>
+                <div class="col col-13"><i class="ion-thumbsup icolor"></i>
+                  7
+                 </div>
+                 <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
+                  10
+                </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    -->
+  </ion-content>
+</ion-view>

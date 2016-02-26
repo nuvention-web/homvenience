@@ -1,0 +1,30 @@
+<ion-view  ng-controller = "SignInCtrl">
+  <ion-header-bar class="bar-col bar-header bar">
+    <h2 class="title rest-bar">Sign-In</h2>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <br>
+      <label class="item item-input">
+        <span class="input-label">Username</span>
+        <input type="text" ng-model="user.username">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Password</span>
+        <input type="password" ng-model="user.password">
+      </label>
+    </div>
+    <div class="row">
+      <div class="col col-50">
+        <button id='sign-button' class="button button-block button-outline button-calm" ng-click="SignIn(user)">
+           Sign In
+         </button>
+      </div>
+      <div class="col col-50">
+        <button id='sign-button' class="button button-block button-outline button-calm"ng-click="openModal()">
+          Register
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

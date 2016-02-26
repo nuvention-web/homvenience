@@ -1,7 +1,70 @@
+/*-----bar part-----*/
+.bar-style{
+	background-color: #333;
+	color: #fff;
+}
+
+#home-bar{
+	color: #fff !important;
+	font-size: 28px;
+	font-family: 'Oleo Script', cursive;
+}
+
+.rest-bar{
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-size: 26px;
+}
+
+
+/*-----公用-----*/
+
+
+/*-----附近的人-----*/
+#user-head{
+	max-height: 60px !important;
+	max-width: 60px !important;
+	border-radius: 5px !important;
+	top:10px !important;
+	left:10px !important;
+}
+
+.item-avatar{
+	padding-left: 80px !important;
+	min-height: 70px !important;
+	padding: 10px;
+}
+
+#user-name{
+	display: inline-block;
+	font-size: 12px;
+}
+
+#user-time{
+	float: right;
+	font-size:10px !important;
+}
+
+#user-char{
+
+}
+
+#user-tags{
+	display: inline-block;
+	background-color: #ff9832;
+	color: #fff;
+	border-radius: 9px;
+	padding: 0 5px;
+	font-size: 10px;
+}
+
+/*-----附近的人-----*/
+
+
 /*-----间隙背景-----*/
 .popup-buttons .ng-binding{
 	border-radius:10px !important;
-	background-color: #9BDDFF !important; 
+	background-color: #9BDDFF !important;
 }
 
 a{
@@ -20,29 +83,26 @@ a{
 	background-color: #ddd;
 }
 
-.bar-col{
-	background-color: #9BDDFF !important;
-}
-
-.rest-bar{
-	color: #fff;
-	font-family: 'Roboto', sans-serif;
-	font-size: 26px;
-}
-
 /*----Signin部分----*/
 
 #sign-button{
 
 }
 
-/*----home部分----*/
-
-#home-bar{
-	color: #fff !important;
-	font-size: 28px;
-	font-family: 'Oleo Script', cursive;
+/*----home部分 2.24 added----*/
+.portrait{
+	max-height: 53px !important;
+	max-width: 53px !important;
+	top: 8px !important;
+	left: 12px !important;
 }
+
+.post-type{
+	padding: 0px;
+	background-color: #D16AEA;
+}
+
+
 
 #itembar{
 	font-size: 15px !important;
@@ -130,4 +190,38 @@ a{
     background-color: #ffffff;
 }
 
+/*-----Details-----*/
+.wrapper{
+	padding-top: 80px;
+	padding-bottom:50px;
+	min-height: 150px;
+	background-color: rgba(0, 0, 0, 0.5);
+}
 
+.protrait-back{
+	background-image: url("../img/ivy-back.jpg");
+	min-height: 150px;
+}
+
+.protrait{
+	margin: 0 auto;
+	height: 160px;
+	width: 160px;
+	border-radius: 80px;
+	background-image: url("../img/ivy.jpg");
+ 	background-size: cover;
+}
+
+#myname{
+	font-size: 30px;
+	text-align: center;
+	margin: 20px auto;
+	color: #fff;
+}
+
+.pro-gender{
+	height: 25px;
+	width: 25px;
+}
+
+/*-----Details-----*/

@@ -44,6 +44,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       abstract: true,
       templateUrl: 'templates/tabs.html'
     })
+
     .state('tabs.neighbors', {
       url: '/neighbors',
       views: {
@@ -53,6 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       }
     })
+
     .state('tabs.home', {
       url: '/home',
       views: {
@@ -64,9 +66,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
 
     .state('detail', {
-      url: '/detail',
+      url: '/detail/:itemObj',
       templateUrl: 'templates/detail.html',
       controller: 'DetailCtrl'
+    })
+
+    .state('user-profile', {
+      url: '/user-profile/:user',
+      templateUrl: 'templates/user-profile.html',
+      controller:'ProfileCtrl'
     })
 
     .state('tabs.search',{
@@ -115,14 +123,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       templateUrl: 'templates/record.html',
     })
 
-
-
-
     .state('tabs.account', {
       url: '/account',
       views: {
         'account-tab': {
-          templateUrl: 'templates/account.html',
+          templateUrl: 'templates/tab-account.html',
           controller: 'AccountCtrl'
         }
       }
@@ -138,7 +143,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/sign-in');
+  $urlRouterProvider.otherwise('/home');
 
 });
-
