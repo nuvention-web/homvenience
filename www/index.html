@@ -47,6 +47,7 @@
     <ion-nav-view></ion-nav-view>
 
 
+
 <!--登录页面-->
     <script id="templates/sign-in.html" type="text/ng-template">
       <ion-view  ng-controller = "SignInCtrl">
@@ -93,9 +94,6 @@
       </ion-view>
     </script>
 
-
-
-
     <script id="templates/search.html" type="text/ng-template">
         <ion-view view-title="Search"  ng-init="init()">
 
@@ -131,15 +129,97 @@
 
 <!--Chat页面-->
     <script id="templates/chat.html" type="text/ng-template">
-    <ion-view>
+    <ion-view ng-init="reloadUser()">
 
         <ion-header-bar  class="bar-style bar ">
           <h2 class="title rest-bar">Messages</h2>
         </ion-header-bar>
-
-
-
+        <ion-content >
+          <ion-list>
+            <ion-item class="item item-thumbnail-left" ng-repeat="x in users" ng-click="chatDetail(x)">
+              <img src={{HeadProfile[x.get("username")]}}>
+              <h2 >{{x.get("username")}}</h2>
+              <div class="">
+                <p>{{x.get("email")}}</p>
+              </div>
+            </ion-item>
+          </ion-list>
         </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/chatDetail.html" type="text/ng-template">
+      <ion-view cache-view="false">
+
+        <ion-header-bar  class="bar-col bar bar-header">
+          <h2 class="title rest-bar">{{toUser.get('username')}}</h2>
+        </ion-header-bar>
+
+        <div class="loader-center" ng-if="!doneLoading">
+          <div class="loader">
+            <i class="icon ion-loading-c"></i>
+          </div>
+        </div>
+
+        <ion-content has-bouncing="true" class="has-header has-footer">
+
+          <div ng-repeat="m in messages" class="message-wrapper"
+               on-hold="onMessageHold($event, $index, message)">
+
+            <div ng-if="currentUser.id !== m.id">
+
+              <img  class="profile-pic left"
+                    ng-src={{HeadProfile[toUser.get("username")]}} />
+
+              <div class="chat-bubble left">
+
+                <div class="message" ng-bind-html="m.get('Content')"r>
+                </div>
+
+                <div class="message-detail">
+                  <span am-time-ago="m.createdAt"></span>
+                </div>
+
+              </div>
+            </div>
+
+            <div ng-if="currentUser.id == m.id">
+
+              <img class="profile-pic right"
+                   ng-src={{HeadProfile[currentUser.get("username")]}} />
+
+              <div class="chat-bubble right">
+
+                <div class="message" ng-bind-html="m.get('Content')">
+                </div>
+
+                <div class="message-detail">
+                  <span am-time-ago="m.createdAt">></span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="cf"></div>
+
+          </div>
+        </ion-content>
+
+        <form name="sendMessageForm" ng-submit="sendMessage()" novalidate>
+          <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+            <label class="item-input-wrapper">
+              <textarea ng-model="input" value="" placeholder="Send {{toUser.get('username')}} a message..." required minlength="1" maxlength="1500" msd-elastic></textarea>
+            </label>
+            <div class="footer-btn-wrap">
+              <button class="button button-icon icon ion-android-send footer-btn" type="submit"
+                      ng-disabled="!input || input === ''">
+              </button>
+            </div>
+          </ion-footer-bar>
+        </form>
+
       </ion-view>
     </script>
 
@@ -220,11 +300,10 @@
           </ion-refresher>
           <ion-list>
             <ion-item class="item item-thumbnail-left" ng-repeat="x in lentItem">
-              <img src={{x.get('ImageArry')[0].url()}}></img>
+              <img ng-repeat="y in x.get('ImageArry')" src={{y.url()}}></img>
               <h2 >{{x.get("Title")}}</h2>
               <div class="">
                 <p>{{x.get("Owner").get("username")}}</p>
-                <p>{{x.get("Holder").get("username")}}</p>
               </div>
             </ion-item>
           </ion-list>

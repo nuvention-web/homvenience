@@ -94,7 +94,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
 
-.controller('HomeTabCtrl', function($scope) {
+.controller('HomeTabCtrl', function($scope,$state) {
     console.log('HomeTabCtrl');
     $scope.search_res = []
     $scope.init = function () {
@@ -102,6 +102,23 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       APP.search($scope, 1,true);
     }
 
+    $scope.eventDetail = function(itemObj){
+      $state.go('detail',{itemObj:itemObj});
+    }
+
+  $scope.userDetail = function (user){
+    $state.go('user-profile',{user:user});
+  }
+
+
+  })
+
+  .controller('ProfileCtrl', function($scope,$stateParams){
+    $scope.targetUser = new H_User();
+    $scope.targetUser.id = $stateParams.user;
+    $scope.targetUser.fetch().then(function (obj){
+      console.log($scope.targetUser.get("username"));
+    });
   })
 
 //.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -110,16 +127,44 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 
 
-.controller('DetailCtrl',function($scope){
-    $scope.search_res = []
+.controller('DetailCtrl',function($scope,$state,$stateParams){
+    $scope.Item = new Item();
+    $scope.Comments = [];
     $scope.init = function () {
-      console.log("ready to fetch");
-      APP.search($scope, 1,false);
+      $scope.Item.id = $stateParams.itemObj;
+      console.log("Initializing " +$scope.Item);
+      $scope.Item.fetch().then(function(obj){
+        obj.relation("Comments").query().find().then(function(list){
+          $scope.Comments = list;
+          refresh();
+        })
+        $scope.$apply();
+      });
+      console.log("Registering Timer");
+      $scope.postUpdate = setInterval(refresh,5000);
     }
     $scope.request = function(){
       APP.request();
     }
 
+    $scope.postComment = function(content){
+      APP.postComment($scope.Item,content);
+      $scope.$apply();
+    }
+
+    function refresh (){
+      console.log("too young");
+      $scope.Item.relation("Comments").query().find().then(function(list){
+        $scope.Comments = list;
+        for(var i=0;i<$scope.Comments.length;i++){
+          console.log($scope.Comments[i].get("Content"));
+        }
+        $scope.$apply();
+      })
+    }
+    $scope.cancelTimer = function (){
+      clearInterval($scope.postUpdate);
+    }
   })
 
 
@@ -152,7 +197,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   .controller('OfferingCtrl',function($scope){
     $scope.lentItem=[];
     $scope.Refresh = function(){
-      var list = APP.get("ListOfLent");
+      var list = APP.get("ListOfPost");
       var query = new Parse.Query(Item);
       query.containedIn("objectId",list);
       query.find().then(function(results){
@@ -162,7 +207,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       }).then(function (){
         $scope.$broadcast('scroll.refreshComplete');
       });
-    }
+    };
+
   })
   .controller('RequestCtrl',function($scope){
     $scope.reqs=[];
@@ -198,6 +244,52 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         console.log("find borrowed results" + results.length);
         $scope.$apply();
       });
+    }
+  })
+
+  .controller('ChatCtrl',function($scope,$state){
+    $scope.users;
+
+
+
+    $scope.reloadUser = function (){
+      APP.get("MBox").showUsers($scope);
+    }
+
+
+    $scope.chatDetail = function(user){
+      console.log(user.get('username'));
+      $state.go('chatdetail',{"toUser":user});
+    }
+
+
+  })
+
+  .controller('ChatDetailCtrl',function($scope,$stateParams){
+    $scope.toUser = $stateParams.toUser;
+    console.log("Received user "+$scope.toUser.get("username") );
+    $scope.doneLoading = false;
+    $scope.messages;
+
+
+    $scope.loadChat = function (){
+      $scope.chats = APP.get("MBox").showMessage();
+      $scope.$apply();
+    }
+
+
+    $scope.getMessages = function(){
+      APP.get("MBox").showMessage($scope,$scope.toUser.get("username"));
+    }
+
+    $scope.sendMessage = function (){
+      var mes = new Message();
+      mes.set("Content",$scope.input);
+      mes.set("Receiver", $scope.toUser.get("username"));
+      mes.set("Username", currentUser.get("username"));
+      mes.save();
+      $scope.messages.push(mes);
+      $scope.$apply();
     }
   })
 
@@ -280,6 +372,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       Title : "",
       Desc : ""
     };
+
+    $scope.addFriend = function(user){
+      var friends = currentUser.relation("Friends");
+      friends.add(user);
+      currentUser.save();
+    }
 
     $ionicModal.fromTemplateUrl('templates/modal.html', {
       scope: $scope,
@@ -435,15 +533,23 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           APP = currentUser.get("customer");
           APP.fetch().then(function(obj){
             console.log("Customer Fetched");
-            APP.get("MessageBox").fetch().then(function (obj)
-            {
-              console.log("Message Box fetched");
-              MessageCheckTimer=setInterval(reload,5000);
-              console.log("Message Timer Set!");
-            },
-            function (err){
-              console.log("Box corrupted!");
-            });
+            if(APP.get("MBox") == null){
+              var temp = new MessageBox();
+              temp.set("User",currentUser.get("username"));
+              temp.set("Messages",[]);
+              APP.set("MessageBox", temp);
+              temp.save();
+            }
+            else {
+              APP.get("MBox").fetch().then(function (res) {
+                  console.log("Message Box fetched");
+                  MessageCheckTimer = setInterval(APP.get("MBox").reload, 5000);
+                  console.log("Message Timer Set!");
+                },
+                function (err) {
+                  console.log("Box corrupted!");
+                });
+            }
             if(APP.get("Requests").length != 0){
               AcceptTimer = setInterval(checkAccept,3000);
             }

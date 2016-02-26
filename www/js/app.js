@@ -66,14 +66,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
 
     .state('detail', {
-      url: '/detail',
+      url: '/detail/:itemObj',
       templateUrl: 'templates/detail.html',
       controller: 'DetailCtrl'
     })
 
     .state('user-profile', {
-      url: '/user-profile',
+      url: '/user-profile/:user',
       templateUrl: 'templates/user-profile.html',
+      controller:'ProfileCtrl'
     })
 
     .state('tabs.search',{
@@ -89,12 +90,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     .state('tabs.chat',{
       url: '/chat',
+      cache:false,
       views:{
         'chat-tab':{
-          templateUrl: 'templates/tab-chats.html',
-          controller:''
+          templateUrl: 'templates/chat.html',
+          controller:'ChatCtrl'
         }
       }
+    })
+
+    .state('chatdetail',{
+      url: '/chatDetail',
+      templateUrl: 'templates/chatDetail.html',
+      controller:'ChatDetailCtrl'
     })
 
     .state('request', {

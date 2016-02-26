@@ -45,6 +45,13 @@ var Item = Parse.Object.extend("Item",{
   CreateDate: null,
   clearRequests : function(){
     this.set("requestList" ,[]);
+  },
+
+  addComment: function (comment) {
+    var app = this;
+    var itemcomments = app.relation("Comments");
+    itemcomments.add(comment);
+    app.save();
   }
 });
 
@@ -63,6 +70,12 @@ var Request = Parse.Object.extend("Request",{
 
 });
 
+var Comment = Parse.Object.extend("Comment",{
+  Item :  null,
+  Content: "",
+  Poster: null
+});
+
 var Customer = Parse.Object.extend("Customer" , {
   ListOfPostItem : [],
   ListOfRequest:[],//to store received requests
@@ -70,6 +83,7 @@ var Customer = Parse.Object.extend("Customer" , {
   ListOfLent:[],
   Requests:[],// to store sent requests
   Denied:[],
+  MBox:null,
 
   checkRequest : function($scope){
     var ids = [];
@@ -156,6 +170,24 @@ var Customer = Parse.Object.extend("Customer" , {
     });
   },
 
+  addEvent : function(itemId,itemName){
+    var app = this;
+    app.get("ListOfGet").push(itemId);
+    app.save();
+  },
+
+  postComment : function (item, content){
+    var app = this;
+    var comment = new Comment();
+    comment.set("Item",item);
+    comment.set("Content", content);
+    comment.set("Poster", currentUser);
+    comment.save().then(function (obj){
+      item.addComment(obj);
+    });
+
+  },
+
   search : function ($scope, distance,self) {
     var query = new Parse.Query(Item);
     if(self == false) {
@@ -165,6 +197,9 @@ var Customer = Parse.Object.extend("Customer" , {
     query.equalTo("State","Available");
     query.find().then(function(result) {
       $scope.search_res = result;
+      //for(var i =0;i<$scope.search_res.length;i++){
+      //  $scope.search_res[i].get("Owner").fetch();
+      //}
       $scope.search_res.reverse();
       $scope.$apply();
       console.log($scope.search_res.length);
@@ -275,6 +310,8 @@ var userQuery = function ($scope, user){
       // alert("Successfully retrieved " + results.length + " H_User.");
       // Do something with the returned Parse.Object values
       for (var i = 0; i < results.length; i++) {
+        var object = results[i];
+        console.log(object.id + ' - ' + object.get('username'));
       }
       $scope.neighborList = results;
     },
