@@ -165,6 +165,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.cancelTimer = function (){
       clearInterval($scope.postUpdate);
     }
+    $scope.userDetail = function(user){
+      $state.go('user-profile',{user:user});
+    }
   })
 
 
@@ -194,10 +197,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 
   })
-  .controller('OfferingCtrl',function($scope){
+  .controller('OfferingCtrl',function($scope,$state){
     $scope.lentItem=[];
     $scope.Refresh = function(){
-      var list = APP.get("ListOfPost");
+      var list = APP.get("ListOfPostItem");
       var query = new Parse.Query(Item);
       query.containedIn("objectId",list);
       query.find().then(function(results){
@@ -207,6 +210,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       }).then(function (){
         $scope.$broadcast('scroll.refreshComplete');
       });
+      $scope.eventDetail = function (event){
+        $state.go('detail',{itemObj:event});
+      }
     };
 
   })
@@ -325,9 +331,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         if(APP.get("Requests").length != 0){
           AcceptTimer = setInterval(checkAccept,3000);
         }
-        if(APP.get("ListOfPostItem").length!=0){
-          RequestTimer = setInterval(checkRequest,3000);
-        }
+        //if(APP.get("ListOfPostItem").length!=0){
+        //  RequestTimer = setInterval(checkRequest,3000);
+        //}
       });
       var GP = new Parse.GeoPoint.current({
         success: function (point){

@@ -299,7 +299,7 @@
             on-refresh="Refresh()">
           </ion-refresher>
           <ion-list>
-            <ion-item class="item item-thumbnail-left" ng-repeat="x in lentItem">
+            <ion-item class="item item-thumbnail-left" ng-repeat="x in lentItem"  ng-click="eventDetail(x.id)">
               <img ng-repeat="y in x.get('ImageArry')" src={{y.url()}}></img>
               <h2 >{{x.get("Title")}}</h2>
               <div class="">
