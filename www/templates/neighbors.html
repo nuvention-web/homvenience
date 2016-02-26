@@ -1,9 +1,10 @@
-
-!!!!
 <ion-view>
-
-  <ion-header-bar  class="bar-col bar bar-header">
-    <h2 id='home-bar' class="title">Neighbors</h2>
+  <ion-header-bar  class="bar-style">
+    <button class="button button-icon button-light button-clear icon ion-navicon"
+    ng-click = "toggleLeft()">
+    </button>
+    <h2 id='home-bar' class="title">Aroundme</h2>
+    <button class="button button-icon  button-clear button-light icon " ng-click="postShow()"></button>
   </ion-header-bar>
 
   <ion-content class='content-back'>
@@ -16,7 +17,7 @@
      <a class="item item-avatar" href="#/user-profile" ng-repeat = "x in neighborList">
         <img id='user-head' src={{x.get("Profile").url()}}>
         <div id='user-name'>{{x.get("username")}}</div>
-        <div id='user-time'>500m | Evanston, IL</div>
+        <div id='user-time'>10 mins ago</div>
         <div id='user-char'>500m | Evanston, IL</div>
         <div id='user-tags'>{{x.get("SelfDes")}}</div>
         <div id='user-tags'>{{x.get("SelfDes")}}</div>

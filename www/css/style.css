@@ -1,6 +1,6 @@
 /*-----bar part-----*/
 .bar-style{
-	background-color: #333;
+	background-color: #000;
 	color: #fff;
 }
 
@@ -37,7 +37,7 @@
 
 #user-name{
 	display: inline-block;
-	font-size: 12px;
+	font-size: 16px;
 }
 
 #user-time{
@@ -46,7 +46,7 @@
 }
 
 #user-char{
-
+	font-size: 10px;
 }
 
 #user-tags{
@@ -98,7 +98,6 @@ a{
 }
 
 .post-type{
-	padding: 0px;
 	background-color: #D16AEA;
 }
 
@@ -190,24 +189,25 @@ a{
     background-color: #ffffff;
 }
 
-/*-----Details-----*/
+/*-----Profrile-----*/
 .wrapper{
-	padding-top: 80px;
-	padding-bottom:50px;
+	padding-top: 45px;
+	padding-bottom:25px;
 	min-height: 150px;
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.6);
 }
 
 .protrait-back{
 	background-image: url("../img/ivy-back.jpg");
 	min-height: 150px;
+	background-size: cover;
 }
 
 .protrait{
 	margin: 0 auto;
-	height: 160px;
-	width: 160px;
-	border-radius: 80px;
+	height: 140px;
+	width: 140px;
+	border-radius: 70px;
 	background-image: url("../img/ivy.jpg");
  	background-size: cover;
 }
@@ -222,6 +222,30 @@ a{
 .pro-gender{
 	height: 25px;
 	width: 25px;
+}
+
+.user-record{
+	background-color: #000;
+	color: #fff;
+	font-size: 18px;
+	border-top: 1px #aaa solid;
+	padding-top: 5px;
+	padding-bottom: 2px;
+}
+
+.record-img{
+	height: 50%;
+	width: 50%;
+}
+
+.record-num{
+		float: right;
+		margin-top: 7px;
+		margin-right: 7px;
+}
+
+.col{
+	padding: 5px;
 }
 
 /*-----Details-----*/
