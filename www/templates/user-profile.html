@@ -10,9 +10,9 @@
     <ion-content>
       <div class="protrait-back">
         <div class="wrapper">
-        <div class="protrait" src={{targetUser.get("Profile").url()}}></div>
+        <div style="background-image: url({{targetUser.get('Profile').url()}})" class="protrait"></div>
         <div id="myname">
-          {{targetUser.get("username")}}
+          Ivy
           <img class='pro-gender' src="../img/female.png" alt="female" />
         </div>
       </div>
@@ -74,10 +74,12 @@
 
     </div>
 
-
+<!--
     <button class="button button-full button-outline button-stable" ng-click = "LogOut()">
       Log Out
     </button>
+
+-->
 
 
   </ion-content>

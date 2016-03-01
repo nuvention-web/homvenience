@@ -117,7 +117,37 @@
       </div>
     </div>
 
-\
+    <div class="list card">
+        <div class="item item-divider post-type3"></div>
+
+        <div id='home-a' ng-click="userDetail(x.get('Owner').id)">
+          <div class="item item-avatar">
+            <img class='portrait' src='../img/mike.png' >
+            <div id='user-time'> 23 hours ago</div>
+            <h2>Mike</h2>
+            <p>
+              <i class="icon ion-ios-location icon-site"></i>
+              &nbsp 200m
+            </p>
+          </div>
+        </div>
+
+        <div ng-click="eventDetail(x.id)">
+          <div class="item item-body">
+            <h2 class='item-title' style='margin-top:0px;'>Anyone could fix my computer?</h2>
+            <p>
+
+            </p>
+          </div>
+          <div class="item">
+            <p>
+              <a href="#" class="subdued">1 Like</a>
+              <a href="#" class="subdued">5 Comments</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
 
 
   </ion-content>
