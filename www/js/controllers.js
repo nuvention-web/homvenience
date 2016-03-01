@@ -166,41 +166,47 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('DetailCtrl',function($scope,$state,$stateParams){
     $scope.Item = new Item();
+    $scope.input = {Comment:"Hi"};
     $scope.Comments = [];
+    $scope.loaded = [];
     $scope.init = function () {
       $scope.Item.id = $stateParams.itemObj;
       console.log("Initializing " +$scope.Item);
       $scope.Item.fetch().then(function(obj){
-        var userquery = new Parse.Query(H_User);
-        userquery.equalTo("username",obj.get("username"));
-        userquery.find().then(function(obj){
-          $scope.poster = obj.get("Profile").url();
-          $scope.$apply();
-        });
         obj.relation("Comments").query().find().then(function(list){
           $scope.Comments = list;
+          for(var i = 0;i<$scope.Comments.length;i++) {
+            $scope.loaded.push($scope.Comments[i].id);
+          }
           refresh();
         })
         $scope.$apply();
       });
       console.log("Registering Timer");
-      $scope.postUpdate = setInterval(refresh,5000);
+      $scope.postUpdate = setInterval(refresh,1000);
     }
     $scope.request = function(){
       APP.request();
     }
 
     $scope.postComment = function(content){
+      //console.log($scope.input.commentinput);
+      console.log("Comment:" + content);
+      $scope.input.commentinput = "";
+      //console.log($scope.input.commentinput);
       APP.postComment($scope.Item,content);
-      $scope.$apply();
     }
 
     function refresh (){
       console.log("too young");
-      $scope.Item.relation("Comments").query().find().then(function(list){
-        $scope.Comments = list;
-        for(var i=0;i<$scope.Comments.length;i++){
-          console.log($scope.Comments[i].get("Content"));
+
+      var q = $scope.Item.relation("Comments").query();
+      q.notContainedIn("objectId",$scope.loaded).find().then(function(list){
+        //$scope.Comments = list;
+        for(var i=0;i<list.length;i++){
+          $scope.Comments.push(list[i]);
+          $scope.loaded.push(list[i].id);
+          console.log($scope.Comments[i].get("Content")+"good!");
         }
         $scope.$apply();
       })
@@ -371,9 +377,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       isLogin = true;
       APP = currentUser.get("customer");
       APP.fetch().then(function(obj){
-        if(APP.get("Requests").length != 0){
-          AcceptTimer = setInterval(checkAccept,3000);
-        }
+        //if(APP.get("Requests").length != 0){
+        //  AcceptTimer = setInterval(checkAccept,3000);
+        //}
         //if(APP.get("ListOfPostItem").length!=0){
         //  RequestTimer = setInterval(checkRequest,3000);
         //}
@@ -483,9 +489,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.modal.hide();
           APP.get("ListOfPostItem").push(item.id);
           $scope.photo_arry = [];
-          if(APP.get("ListOfPostItem").length ==1){
-            RequestTimer = setInterval(checkRequest,3000);
-          }
+          //if(APP.get("ListOfPostItem").length ==1){
+          //  RequestTimer = setInterval(checkRequest,3000);
+          //}
           APP.save();
         },
         error: function(item, error) {
@@ -601,12 +607,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                   console.log("Box corrupted!");
                 });
             }*/
-            if(APP.get("Requests").length != 0){
+            /*if(APP.get("Requests").length != 0){
               AcceptTimer = setInterval(checkAccept,3000);
             }
             if(APP.get("ListOfPostItem").length!=0){
               RequestTimer = setInterval(checkRequest,3000);
-            }
+            }*/
           });
           var GP = new Parse.GeoPoint.current({
             success: function (point){
