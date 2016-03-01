@@ -11,7 +11,7 @@
   <ion-content>
     <a id='home-a' ng-click="userDetail(Item.get('Owner').id)">
       <div class="item item-avatar">
-        <img class='portrait' src="{{x.get('Owner').get("Profile").url()}}">
+        <img class='portrait' src={{Item.get("Owner").get("Profile").url()}}>
         <div id='user-time'>{{Item.createdAt}}</div>
         <h2>{{Item.get("Owner").get("username")}}</h2>
         <p><i class="icon ion-ios-location icon-site"></i>

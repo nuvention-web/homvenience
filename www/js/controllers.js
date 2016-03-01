@@ -146,12 +146,18 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('ChatDetailCtrl', function($scope, $stateParams) {
   var mbid = new MessageBox();
+  $scope.myId = currentUser.id;
   mbid.id = $stateParams.mb;
+
   mbid.fetch().then(function(){
     mbid.reload();
   }).then(function(obj){
-    mbid.showMessage($scope,);
-  })
+    //mbid.showMessage($scope,);
+    $scope.Messages = mbid.get("Messages");
+    $scope.$apply();
+  });
+
+
 
 
 })
@@ -165,6 +171,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       $scope.Item.id = $stateParams.itemObj;
       console.log("Initializing " +$scope.Item);
       $scope.Item.fetch().then(function(obj){
+        var userquery = new Parse.Query(H_User);
+        userquery.equalTo("username",obj.get("username"));
+        userquery.find().then(function(obj){
+          $scope.poster = obj.get("Profile").url();
+          $scope.$apply();
+        });
         obj.relation("Comments").query().find().then(function(list){
           $scope.Comments = list;
           refresh();
@@ -215,7 +227,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
 .controller('AccountCtrl', function($scope) {
-    $scope.search_res = []
+    $scope.search_res = [];
     $scope.init = function () {
       console.log("ready to fetch");
       APP.search($scope, 1,false);
@@ -572,7 +584,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           APP = currentUser.get("customer");
           APP.fetch().then(function(obj){
             console.log("Customer Fetched");
-            if(APP.get("MBox") == null){
+            /*if(APP.get("MBox") == null){
               var temp = new MessageBox();
               temp.set("User",currentUser.get("username"));
               temp.set("Messages",[]);
@@ -588,7 +600,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                 function (err) {
                   console.log("Box corrupted!");
                 });
-            }
+            }*/
             if(APP.get("Requests").length != 0){
               AcceptTimer = setInterval(checkAccept,3000);
             }
