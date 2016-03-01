@@ -1,8 +1,9 @@
 /*-----bar part-----*/
 .bar-style{
-	background-color: #ed7902;
+	background-color: #000;
 	color: #fff;
 }
+
 
 #home-bar{
 	color: #fff !important;
@@ -98,9 +99,20 @@ a{
 }
 
 .post-type{
+	background-color: #eb2226;
+}
+
+.post-type1{
 	background-color: #D16AEA;
 }
 
+.post-type2{
+	background-color: #fdca30;
+}
+
+.post-type3{
+	background-color: #D16AEA;
+}
 
 
 #itembar{
