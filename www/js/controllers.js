@@ -314,13 +314,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
     $scope.neighborList = [];
 
-
-
     $scope.newItem = {
       Title : "",
       Desc : ""
     };
-
 
     currentUser = H_User.current();
 
@@ -604,56 +601,52 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    }
 
    $scope.takePhoto = function () {
+      var options = {
+        quality: 75,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 300,
+        targetHeight: 300,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false
+    };
 
+      $cordovaCamera.getPicture(options).then(function (imageData) {
+          $scope.imgURI = "data:image/jpeg;base64," + imageData;
+          $scope.photo_arry.push(imageData);
+      }, function (err) {
+          // An error occured. Show a message to the user
+      });
+    }
 
-                  var options = {
-                    quality: 75,
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    allowEdit: true,
-                    encodingType: Camera.EncodingType.JPEG,
-                    targetWidth: 300,
-                    targetHeight: 300,
-                    popoverOptions: CameraPopoverOptions,
-                    saveToPhotoAlbum: false
-                };
+    $scope.choosePhoto = function () {
+      var options = {
+        quality: 75,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 300,
+        targetHeight: 300,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false
+    };
 
-                    $cordovaCamera.getPicture(options).then(function (imageData) {
-                        $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        $scope.photo_arry.push(imageData);
-                    }, function (err) {
-                        // An error occured. Show a message to the user
-                    });
+      $cordovaCamera.getPicture(options).then(function (imageData) {
+          $scope.imgURI = "data:image/jpeg;base64," + imageData;
+          $scope.photo_arry.push(imageData);
+      }, function (err) {
+          // An error occured. Show a message to the user
+      });
+    }
 
-                }
-
-                $scope.choosePhoto = function () {
-                  var options = {
-                    quality: 75,
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                    allowEdit: true,
-                    encodingType: Camera.EncodingType.JPEG,
-                    targetWidth: 300,
-                    targetHeight: 300,
-                    popoverOptions: CameraPopoverOptions,
-                    saveToPhotoAlbum: false
-                };
-
-                    $cordovaCamera.getPicture(options).then(function (imageData) {
-                        $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        $scope.photo_arry.push(imageData);
-                    }, function (err) {
-                        // An error occured. Show a message to the user
-                    });
-                }
-
-                $scope.showLabel = function(u){
-                  if(u == "GET"){
-                    return " need HELP!";
-                  }else{
-                    return " can HELP!";
-                  }
-                }
-   ;
+    $scope.showLabel = function(u){
+      if(u == "GET"){
+        return " need HELP!";
+      }else{
+        return " can HELP!";
+      }
+    };
   });
