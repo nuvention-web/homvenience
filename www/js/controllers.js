@@ -619,7 +619,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           APP.set("CurrentGP", GP);
           APP.search($scope, 1,false);
           userQuery($scope, currentUser);
-          $state.go('tabs.neighbors');
+          $state.go('tabs.home');
         },
         error: function(user, error) {
           alert(error);
