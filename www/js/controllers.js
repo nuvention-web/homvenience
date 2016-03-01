@@ -113,17 +113,48 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   })
 
-  .controller('ProfileCtrl', function($scope,$stateParams){
+  .controller('ProfileCtrl', function($scope,$state,$stateParams){
     $scope.targetUser = new H_User();
     $scope.targetUser.id = $stateParams.user;
     $scope.targetUser.fetch().then(function (obj){
       console.log($scope.targetUser.get("username"));
     });
+
+    $scope.chat = function (user){
+      var mboxquery = APP.relation("MBox").query();
+      mboxquery.equaltTo("Receiver", user);
+      mboxquery.find().then(function (res){
+        if(res.length == 0){
+          var mb;
+          var messagebox = new MessageBox();
+          messagebox.set("User",currentUser);
+          messagebox.set("Receiver",user);
+          APP.relation("MBox").add(messagebox);
+          messagebox.save().then(function(){
+            APP.save();
+          });
+          mb = messagebox;
+        }
+        else{
+          mb = res[0];
+        }
+        $state.go('chatdetail',{mb:mb.id});
+      })
+
+    }
   })
 
-//.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-//  $scope.chat = Chats.get($stateParams.chatId);
-//})
+.controller('ChatDetailCtrl', function($scope, $stateParams) {
+  var mbid = new MessageBox();
+  mbid.id = $stateParams.mb;
+  mbid.fetch().then(function(){
+    mbid.reload();
+  }).then(function(obj){
+    mbid.showMessage($scope,);
+  })
+
+
+})
 
 
 
