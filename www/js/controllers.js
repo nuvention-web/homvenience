@@ -506,28 +506,30 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
    }
     $scope.postShow = function() {
       $scope.photo_arry = [];
+      $scope.modal.show();
      // Show the action sheet
-     var hideSheet = $ionicActionSheet.show({
-       buttons: [
-         { text: 'I can help' },
-         { text: 'I need help' }
-       ],
-       cancelText: 'Cancel',
-       cancel: function() {
-            // add cancel code..
-       },
-       buttonClicked: function(index) {
-        if(index == 0){
-          $scope.LABEL = "GIVE";
-          $scope.modal.show();
-        }
-        if(index == 1){
-          $scope.LABEL = "GET";
-          $scope.modal.show();
-        }
-         return true;
-       }
-     });
+    //  var hideSheet = $ionicActionSheet.show({
+    //    buttons: [
+    //      { text: 'Activity' },
+    //      { text: 'Share' },
+    //      { text: 'Around me ' }
+    //    ],
+    //    cancelText: 'Cancel',
+    //    cancel: function() {
+    //         // add cancel code..
+    //    },
+    //    buttonClicked: function(index) {
+    //     if(index == 0){
+    //       $scope.LABEL = "GIVE";
+    //       $scope.modal.show();
+    //     }
+    //     if(index == 1){
+    //       $scope.LABEL = "GET";
+    //       $scope.modal.show();
+    //     }
+    //      return true;
+    //    }
+    //  });
    }
 
 
