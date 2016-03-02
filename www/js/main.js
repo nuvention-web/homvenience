@@ -30,7 +30,7 @@ var H_User = Parse.User.extend("H_User", {
   customer:null
 });
 
-H_User.logOut();
+// H_User.logOut();
 
 // Item class
 var Item = Parse.Object.extend("Item",{
