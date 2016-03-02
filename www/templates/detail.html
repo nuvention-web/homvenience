@@ -29,13 +29,14 @@
     <div class="item">
       <p>
         <a href="#" class="subdued">1 Like</a>
-        <a href="#" class="subdued">5 Comments</a>
+        <a href="#" class="subdued">{{Comments.length}} Comments</a>
       </p>
     </div>
 
 <!--评论-->
     <div class="list">
       <div class="item item-divider">Comments</div>
+<<<<<<< HEAD
         <a class="item item-avatar" href="#">
           <img src="../img/mike.png">
           <h2>Mike</h2>
@@ -48,8 +49,42 @@
         </a>
     </div>
 
+<!--
+        <a class="item item-avatar" href="#">
+          <img src="../img/mike.png">
+          <h2>Mike</h2>
+          <p>Thanks for helping me!</p>
+        </a>
+        <a class="item item-avatar" href="#">
+          <img src="venkman.jpg">
+          <h2>Venkman</h2>
+          <p></p>
+        </a>
     </div>
+-->
 
+        <div class="item item-avatar" ng-repeat="mes in Comments">
+          <img src={{mes.get("Poster").get("Profile").url()}}>
+          <h2>{{mes.get("Poster").get("username")}}</h2>
+          <p>{{mes.get("Content")}}</p>
+          <p>{{mes.createdAt}}</p>
+        </div>
+        <div class="item item-avatar">
+          <form name="addPostForm" ng-submit="postComment(input.commentinput)" novalidate>
+            <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+              <label class="item-input-wrapper">
+                <input type="text" ng-model="input.commentinput" value="" placeholder="Send {{Item.get('Owner').get('username')}} a message..." required minlength="1" maxlength="1500" msd-elastic/>
+              </label>
+              <div class="footer-btn-wrap">
+                <button class="button button-icon icon ion-android-send footer-btn" type="submit"
+                        ng-disabled="!input.commentinput || input.commentinput === ''">
+                </button>
+              </div>
+            </ion-footer-bar>
+          </form>
+        </div>
+      </div>
+    </div>
 
 
   </ion-content>
