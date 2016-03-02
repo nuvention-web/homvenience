@@ -211,7 +211,7 @@ a{
 	padding-top: 45px;
 	padding-bottom:25px;
 	min-height: 150px;
-	background-color: rgba(0, 0, 0, 0.6);
+	background-color: rgba(0, 0, 0, 0.3);
 }
 
 .protrait-back{
@@ -225,7 +225,6 @@ a{
 	height: 120px;
 	width: 120px;
 	border-radius: 60px;
-	background-image: url("../img/ivy.jpg");
  	background-size: cover;
 }
 

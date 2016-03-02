@@ -1,4 +1,9 @@
 <ion-view ng-init="init()">
+  <ion-side-menus>
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+    </ion-side-menu>
+
 
   <ion-header-bar  class="bar-style">
     <h2 id='home-bar' class="title">Aroundme</h2>
@@ -15,7 +20,7 @@
 
     <div class="list card" ng-repeat="x in search_res">
 
-      <div class= "{{'item item-divider ' + x.get('postType')}}"></div>
+      <div class="{{'item item-divider ' + x.get('postType')}}"><i class='ion-pricetags'></i></div>
 
       <div id='home-a' ng-click="userDetail(x.get('Owner').id)">
         <div class="item item-avatar">
@@ -39,8 +44,9 @@
         </div>
         <div class="item">
           <p>
-            <a href="#" class="subdued">1 Like</a>
-            <a href="#" class="subdued">5 Comments</a>
+            <a href="#" class="subdued"><i class='ion-android-star'></i>&nbspfavorite</a>
+            <a href="#" class="subdued"><i class='ion-heart'></i>&nbsp1 Like</a>
+            <a href="#" class="subdued"><i class='ion-chatbubble'></i>&nbsp5 Comments</a>
           </p>
         </div>
       </div>

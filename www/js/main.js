@@ -320,3 +320,7 @@ var userQuery = function ($scope, user){
     }
   });
 }
+
+var sortByTime = function (row1,row2){
+
+}

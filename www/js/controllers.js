@@ -1,4 +1,3 @@
-
 angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 
@@ -201,51 +200,100 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   })
 
-  .controller('ProfileCtrl', function($scope,$stateParams){
+  .controller('ProfileCtrl', function($scope,$state,$stateParams){
     $scope.targetUser = new H_User();
     $scope.targetUser.id = $stateParams.user;
     $scope.targetUser.fetch().then(function (obj){
       console.log($scope.targetUser.get("username"));
     });
+
+    $scope.chat = function (user){
+      var mboxquery = APP.relation("MBox").query();
+      mboxquery.equaltTo("Receiver", user);
+      mboxquery.find().then(function (res){
+        if(res.length == 0){
+          var mb;
+          var messagebox = new MessageBox();
+          messagebox.set("User",currentUser);
+          messagebox.set("Receiver",user);
+          APP.relation("MBox").add(messagebox);
+          messagebox.save().then(function(){
+            APP.save();
+          });
+          mb = messagebox;
+        }
+        else{
+          mb = res[0];
+        }
+        $state.go('chatdetail',{mb:mb.id});
+      })
+
+    }
   })
 
-//.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-//  $scope.chat = Chats.get($stateParams.chatId);
-//})
+.controller('ChatDetailCtrl', function($scope, $stateParams) {
+  var mbid = new MessageBox();
+  $scope.myId = currentUser.id;
+  mbid.id = $stateParams.mb;
+
+  mbid.fetch().then(function(){
+    mbid.reload();
+  }).then(function(obj){
+    //mbid.showMessage($scope,);
+    $scope.Messages = mbid.get("Messages");
+    $scope.$apply();
+  });
+
+
+
+
+})
 
 
 
 .controller('DetailCtrl',function($scope,$state,$stateParams){
     $scope.Item = new Item();
+    $scope.input = {Comment:"Hi"};
     $scope.Comments = [];
+    $scope.loaded = [];
     $scope.init = function () {
       $scope.Item.id = $stateParams.itemObj;
       console.log("Initializing " +$scope.Item);
       $scope.Item.fetch().then(function(obj){
         obj.relation("Comments").query().find().then(function(list){
           $scope.Comments = list;
+          for(var i = 0;i<$scope.Comments.length;i++) {
+            $scope.loaded.push($scope.Comments[i].id);
+          }
           refresh();
         })
         $scope.$apply();
       });
       console.log("Registering Timer");
-      $scope.postUpdate = setInterval(refresh,5000);
+      $scope.postUpdate = setInterval(refresh,1000);
     }
     $scope.request = function(){
       APP.request();
     }
 
     $scope.postComment = function(content){
+      //console.log($scope.input.commentinput);
+      console.log("Comment:" + content);
+      $scope.input.commentinput = "";
+      //console.log($scope.input.commentinput);
       APP.postComment($scope.Item,content);
-      $scope.$apply();
     }
 
     function refresh (){
       console.log("too young");
-      $scope.Item.relation("Comments").query().find().then(function(list){
-        $scope.Comments = list;
-        for(var i=0;i<$scope.Comments.length;i++){
-          console.log($scope.Comments[i].get("Content"));
+
+      var q = $scope.Item.relation("Comments").query();
+      q.notContainedIn("objectId",$scope.loaded).find().then(function(list){
+        //$scope.Comments = list;
+        for(var i=0;i<list.length;i++){
+          $scope.Comments.push(list[i]);
+          $scope.loaded.push(list[i].id);
+          console.log($scope.Comments[i].get("Content")+"good!");
         }
         $scope.$apply();
       })
@@ -272,7 +320,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
 .controller('AccountCtrl', function($scope) {
-    $scope.search_res = []
+    $scope.search_res = [];
     $scope.init = function () {
       console.log("ready to fetch");
       APP.search($scope, 1,false);
@@ -398,6 +446,44 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       Desc : ""
     };
 
+    currentUser = H_User.current();
+
+    if(currentUser){
+      isLogin = true;
+      APP = currentUser.get("customer");
+      APP.fetch().then(function(obj){
+        if(APP.get("Requests").length != 0){
+          AcceptTimer = setInterval(checkAccept,3000);
+        }
+        //if(APP.get("ListOfPostItem").length!=0){
+        //  RequestTimer = setInterval(checkRequest,3000);
+        //}
+      });
+      var GP = new Parse.GeoPoint.current({
+        success: function (point){
+          console.log("GP Success");
+        },
+        error: function (error){
+          alert(error);
+        }
+      });
+      APP.set("CurrentGP", GP);
+      APP.search($scope, 1, false);
+      userQuery($scope, currentUser);
+      $state.go('tabs.home');
+    }
+
+    $scope.init = function () {
+      console.log("ready to fetch");
+      APP.search($scope, 1,true);
+    };
+    $scope.getNeighbors = function() {
+      userQuery($scope, currentUser);
+    }
+    $scope.Request = function(itemId,itemName){
+      APP.request(itemId,itemName);
+    };
+
     $scope.ImgURL = function(imageData){
       URL = "data:image/jpeg;base64," + imageData;
       return URL;
@@ -444,9 +530,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           $scope.modal.hide();
           APP.get("ListOfPostItem").push(item.id);
           $scope.photo_arry = [];
-          if(APP.get("ListOfPostItem").length ==1){
-            RequestTimer = setInterval(checkRequest,3000);
-          }
+          //if(APP.get("ListOfPostItem").length ==1){
+          //  RequestTimer = setInterval(checkRequest,3000);
+          //}
           APP.save();
         },
         error: function(item, error) {
@@ -555,6 +641,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet,
     $ionicPopup, $state, $cordovaCamera, $timeout, $ionicSideMenuDelegate) {
+    
     console.log("MainCtrl");
 
     $scope.toggleLeft = function() {
