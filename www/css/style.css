@@ -15,7 +15,7 @@
 .rest-bar{
 	color: #fff;
 	font-family: 'Roboto', sans-serif;
-	font-size: 26px;
+	font-size: 20px;
 }
 /*-----bar part-----*/
 
@@ -109,8 +109,8 @@ a{
 	height: 46px;
 	width: 46px;
 	position: absolute;
-	top: 84%;
-	left:83%;
+	bottom: 9%;
+	right:5%;
 	background-color: #8D78E5;
 	z-index: 3;
 	border-radius: 23px;
@@ -118,7 +118,7 @@ a{
 }
 
 .post-icon:hover{
-	color: inherit;
+	color: white;
 }
 
 .item-divider-mii{
@@ -232,73 +232,3 @@ a{
     left: 5%;
     background-color: #ffffff;
 }
-
-/*-----Profile-----*/
-.item-stacked-label p{
-	padding-top: 2%;
-	padding-bottom: 1%;
-}
-
-.item-icon-left span{
-	padding-left: 1%;
-}
-
-.wrapper{
-	padding-top: 45px;
-	padding-bottom:25px;
-	min-height: 150px;
-	background-color: rgba(0, 0, 0, 0.2);
-}
-
-.protrait-back{
-	background-image: url("../img/ivy-back.jpg");
-	min-height: 150px;
-	background-size: cover;
-}
-
-.protrait{
-	margin: 0 auto;
-	height: 120px;
-	width: 120px;
-	border-radius: 60px;
- 	background-size: cover;
-	border: 2px #fff solid;
-}
-
-#myname{
-	font-size: 20px;
-	text-align: center;
-	margin: 22px auto;
-	color: #fff;
-}
-
-.pro-gender{
-	height: 20px;
-	width: 20px;
-}
-
-.user-record{
-	background-color: #fff;
-	color: #000;
-	font-size: 18px;
-	border-top: 1px #aaa solid;
-	padding-top: 5px;
-	padding-bottom: 2px;
-}
-
-.record-img{
-	height: 40%;
-	width: 40%;
-}
-
-.record-num{
-		float: right;
-		margin-top: 5px;
-		margin-right: 7px;
-}
-
-.col{
-	padding: 5px;
-}
-
-/*-----Profile-----*/

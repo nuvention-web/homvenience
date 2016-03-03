@@ -1,7 +1,7 @@
 <ion-view ng-init="init()">
   <ion-side-menus>
     <!-- Left menu -->
-    <ion-side-menu side="left">
+    <ion-side-menu side="left" class="side-font">
           <ion-content id='side-menu'>
             <div class="side-wrapper">
               <div class="side-protrait-back">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="side-item">
                   <img src="../img/events.png" title="External" width="25">
-                    <div class='sideitem-text'>Feed</div></div>
+                    <div class='sideitem-text'>Posts</div></div>
                 <div class="side-item">
                   <img src="../img/myfavorite.png" title="External" width="25">
                   <div class='sideitem-text'>Favorite</div></div>
@@ -28,7 +28,7 @@
                   <img src="../img/message.png" title="External" width="25">
                   <div class='sideitem-text'>Messages</div></div>
                 <div class="side-bottom">
-                  <i id='side-logout'>
+                  <i id='side-logout' ng-click = "LogOut()">
                     <img src="../img/logout.png" title="External" width="25"></i>
                   <i id='side-setting'>
                     <img src="../img/setting.png" title="External" width="25"></i>
@@ -44,9 +44,10 @@
   <ion-header-bar  class="bar-style">
     <h2 id='home-bar' class="title">AroundMii</h2>
     <button class="button button-icon button-white button-clear icon ion-navicon" menu-toggle="left">
-    <button class="button button-icon button-clear button-white icon ion-plus" ng-click="postShow()"></button>
+    <button class="button button-icon button-clear button-white icon ion-ios-settings" ng-click="postShow()"></button>
   </ion-header-bar>
 
+  <button class="button button-icon post-icon icon ion-ios-plus-empty" ng-click="postShow()"></button>
 
 <ion-content class='content-back'>
     <ion-refresher

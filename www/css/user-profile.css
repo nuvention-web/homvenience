@@ -1,0 +1,90 @@
+/*-----Profile-----*/
+.blur {
+    -webkit-filter: blur(10px); /* Chrome, Opera */
+       -moz-filter: blur(10px);
+        -ms-filter: blur(10px);
+            filter: blur(10px);
+            z-index: 0;
+}
+
+.user-profile{
+
+background: #6a3093; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #6a3093 , #a044ff); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #6a3093 , #a044ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.user-wrapper{
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.item-stacked-label p{
+	padding-top: 2%;
+	padding-bottom: 1%;
+}
+
+.item-icon-left span{
+	padding-left: 1%;
+}
+
+.wrapper{
+	padding-top: 45px;
+	padding-bottom:25px;
+	min-height: 150px;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.protrait-back{
+	background-image: url("../img/ivy-back.jpg");
+	min-height: 150px;
+	background-size: cover;
+}
+
+.protrait{
+	margin: 0 auto;
+	height: 120px;
+	width: 120px;
+	border-radius: 60px;
+ 	background-size: cover;
+	border: 2px #fff solid;
+  z-index: 999;
+}
+
+#myname{
+	font-size: 20px;
+	text-align: center;
+	margin: 22px auto;
+	color: #fff;
+}
+
+.pro-gender{
+	height: 20px;
+	width: 20px;
+}
+
+.user-record{
+	background-color: #fff;
+	color: #000;
+	font-size: 18px;
+	border-top: 1px #aaa solid;
+	padding-top: 5px;
+	padding-bottom: 2px;
+}
+
+.record-img{
+	height: 40%;
+	width: 40%;
+}
+
+.record-num{
+		float: right;
+		margin-top: 5px;
+		margin-right: 7px;
+}
+
+.col{
+	padding: 5px;
+}
+
+/*-----Profile-----*/

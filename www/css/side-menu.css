@@ -1,5 +1,9 @@
 
 /*-----side-menu-----*/
+.side-font{
+  font-family: 'Roboto', sans-serif;
+}
+
 .side-protrait{
 	margin: 0 auto;
 	height: 100px;
@@ -36,7 +40,7 @@
 .side-list .side-item{
   font-size: 16px;
   padding: 6.5%;
-  padding-left: 18%;
+  padding-left: 28%;
 }
 
 .side-list .side-bottom{
@@ -48,7 +52,7 @@
   display: inline-block;
   margin: auto;
   padding-top: 1%;
-  padding-left: 5%;
+  padding-left: 7%;
   position: fixed;
 }
 
