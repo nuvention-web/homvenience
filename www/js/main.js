@@ -47,6 +47,7 @@ var Item = Parse.Object.extend("Item",{
   requestList:[],
   postType:"",
   CreateDate: null,
+  Liker: [],
   clearRequests : function(){
     this.set("requestList" ,[]);
   },
@@ -56,6 +57,13 @@ var Item = Parse.Object.extend("Item",{
     var itemcomments = app.relation("Comments");
     itemcomments.add(comment);
     app.save();
+  },
+
+  like : function(user){
+    var item = this;
+    var likers = item.relation("Liker");
+    likers.add(user);
+    item.save();
   }
 });
 
@@ -88,6 +96,7 @@ var Customer = Parse.Object.extend("Customer" , {
   Requests:[],// to store sent requests
   Denied:[],
   MBox:null,
+  Likes:[],
 
   checkRequest : function($scope){
     var ids = [];
@@ -105,8 +114,6 @@ var Customer = Parse.Object.extend("Customer" , {
       alert(err);
     })
   },
-
-
 
 
   accept:function(requestId,itemId,requesterId){
