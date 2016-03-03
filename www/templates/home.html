@@ -2,10 +2,16 @@
   <ion-side-menus>
     <!-- Left menu -->
     <ion-side-menu side="left">
-          <ion-header-bar class="bar-assertive">
-            <h1 class="title">Left Menu</h1>
-          </ion-header-bar>
           <ion-content>
+            <div class="side-protrait-back">
+              <div class="wrapper">
+                <div style="background-image: url({{currentUser.get('Profile').url()}})" class="side-protrait"></div>
+                <div id="myname">
+                  {{currentUser.get("username")}}
+                  <img class='pro-gender' src= "{{getSex(currentUser.get('Sex'))}}" alt="female" />
+                </div>
+              </div>
+            </div>
             <ul class="list">
               <!-- Note each link has the 'menu-close' attribute so the menu auto closes when clicking on one of these links -->
               <a href="#/event/check-in" class="item" menu-close>Check-in</a>
@@ -13,10 +19,11 @@
             </ul>
           </ion-content>
     </ion-side-menu>
-    <ion-side-menu-content>
 
-  <ion-header-bar  class="bar-style">
-    <h2 id='home-bar' class="title">Aroundme</h2>
+<ion-side-menu-content>
+
+  <ion-header-bar  class="bar-style bar-assertive">
+    <h2 id='home-bar' class="title">AroundMii</h2>
     <button class="button button-icon button-light button-clear icon ion-navicon" menu-toggle="left">
     <button class="button button-icon button-clear button-light icon ion-plus" ng-click="postShow()"></button>
   </ion-header-bar>

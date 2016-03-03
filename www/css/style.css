@@ -266,9 +266,22 @@ a{
 
 /*-----Profile-----*/
 
-/*-----Details-----*/
+/*-----side-menu-----*/
+.side-protrait{
+	margin: 0 auto;
+	height: 100px;
+	width: 100px;
+	border-radius: 50px;
+	background-size: cover;
+}
+
+.side-protrait-back{
+	background-image: url("../img/ivy-back.jpg");
+	background-size: cover;
+
+}
 
 
 
 
-/*-----Details-----*/
+/*-----side-menu-----*/
