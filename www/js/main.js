@@ -4,7 +4,7 @@
 
 
 Parse.initialize("KnJk0tRr89V3CoheSEVz2Q89B6K1DMjLFGu6Kjj0", "YUFmkfELE7CXIHVfI8tnIjjPzcTFr7qSacEAWJmC");
-
+var FirebaseRef = new Firebase("https://aroundmii.firebaseio.com/");
 /*var TestObject = Parse.Object.extend("TestObject");
 var testObject = new TestObject();
 testObject.save({Message: "Hello World"}, {
