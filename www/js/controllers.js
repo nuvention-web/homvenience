@@ -181,13 +181,27 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
 
-.controller('HomeTabCtrl', function($scope,$state) {
+.controller('HomeTabCtrl', function($scope,$state, $http) {
     console.log('HomeTabCtrl');
-    $scope.search_res = []
+    curTime = Date.now();
+    $scope.search_res = [];
+
     $scope.init = function () {
       console.log('ready to fetch');
       APP.search($scope, 1,true);
     }
+
+    $scope.doRefresh = function() {
+    $http.get('#/tab/home')
+     .success(function() {
+      console.log('ready to fetch');
+      APP.search($scope, 1,true);
+     })
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  }
 
     $scope.eventDetail = function(itemObj){
       $state.go('detail',{itemObj:itemObj});
@@ -310,10 +324,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   .controller('SearchCtrl',function($scope){
     $scope.search_res = [];
 
-    $scope.init = function () {
-      console.log("ready to fetch");
-      APP.search($scope, 1,false);
-    };
     $scope.Request = function(itemId,itemName){
       APP.request(itemId,itemName);
     };
@@ -473,10 +483,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       $state.go('tabs.home');
     }
 
-    $scope.init = function () {
-      console.log("ready to fetch");
-      APP.search($scope, 1,true);
-    };
     $scope.getNeighbors = function() {
       userQuery($scope, currentUser);
     }
@@ -520,7 +526,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       item.set("State", "Available");
       item.set("GeoPoint", GP);
       item.set("requestList", []);
-      item.set("Label", $scope.LABEL);
+      item.set("postType", "post-type1");
       item.save(null, {
         success: function(item) {
           // Execute any logic that should take place after the object is saved.
@@ -641,8 +647,28 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet,
     $ionicPopup, $state, $cordovaCamera, $timeout, $ionicSideMenuDelegate) {
-    
+
     console.log("MainCtrl");
+    curTime = Date.now();
+    $scope.getTime = function(time) {
+      var interval = (curTime - time.valueOf())/1000;
+      interval /= 60;
+      if(interval < 60)
+        return Math.floor(interval) + "M";
+      interval /= 60;
+      if(interval < 24)
+        return Math.floor(interval) + "H";
+      interval /= 24;
+      if(interval < 7)
+        return Math.floor(interval) + "D";
+      interval /= 7;
+      if(interval < 4)
+        return Math.floor(interval) + "W";
+      interval /= 4;
+      if(interval < 12)
+        return Math.floor(interval) + "M";
+      return Math.floor(interval);
+    };
 
     $scope.toggleLeft = function() {
       $ionicSideMenuDelegate.toggleLeft();
@@ -678,10 +704,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       $state.go('tabs.home');
     }
 
-    $scope.init = function () {
-      console.log("ready to fetch");
-      APP.search($scope, 1,true);
-    };
     $scope.getNeighbors = function() {
       userQuery($scope, currentUser);
     }

@@ -2,19 +2,30 @@
   <ion-side-menus>
     <!-- Left menu -->
     <ion-side-menu side="left">
+          <ion-header-bar class="bar-assertive">
+            <h1 class="title">Left Menu</h1>
+          </ion-header-bar>
+          <ion-content>
+            <ul class="list">
+              <!-- Note each link has the 'menu-close' attribute so the menu auto closes when clicking on one of these links -->
+              <a href="#/event/check-in" class="item" menu-close>Check-in</a>
+              <a href="#/event/attendees" class="item" menu-close>Attendees</a>
+            </ul>
+          </ion-content>
     </ion-side-menu>
-
+    <ion-side-menu-content>
 
   <ion-header-bar  class="bar-style">
     <h2 id='home-bar' class="title">Aroundme</h2>
-    <button class="button button-icon  button-clear button-light icon ion-plus" ng-click="postShow()"></button>
+    <button class="button button-icon button-light button-clear icon ion-navicon" menu-toggle="left">
+    <button class="button button-icon button-clear button-light icon ion-plus" ng-click="postShow()"></button>
   </ion-header-bar>
 
 
   <ion-content class='content-back'>
     <ion-refresher
         pulling-text="Pull to refresh..."
-        on-refresh="init()">
+        on-refresh="doRefresh()">
     </ion-refresher>
 
 
@@ -25,7 +36,7 @@
       <div id='home-a' ng-click="userDetail(x.get('Owner').id)">
         <div class="item item-avatar">
           <img class='portrait' src={{x.get('Owner').get("Profile").url()}}>
-          <div id='user-time'>{{x.createdAt}}</div>
+          <div id='user-time'>{{getTime(x.createdAt)}}</div>
           <h2>{{x.get("Owner").get("username")}}</h2>
           <p>
             <i class="icon ion-ios-location icon-site"></i>
@@ -51,7 +62,7 @@
         </div>
       </div>
     </div>
-
+<!--
 <div class="list card">
     <div class= "{{'item item-divider' + ' post-type'}}"></div>
 
@@ -115,7 +126,12 @@
         </div>
       </div>
     </div>
+-->
 
+    </ion-side-menu-content>
+  </ion-side-menu>
+
+</ion-side-menus>
 
 
   </ion-content>

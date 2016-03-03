@@ -1,7 +1,23 @@
 <ion-view>
+  <ion-side-menus>
+    <!-- Left menu -->
+    <ion-side-menu side="left">
+          <ion-header-bar class="bar-assertive">
+            <h1 class="title">Left Menu</h1>
+          </ion-header-bar>
+          <ion-content>
+            <ul class="list">
+              <!-- Note each link has the 'menu-close' attribute so the menu auto closes when clicking on one of these links -->
+              <a href="#/event/check-in" class="item" menu-close>Check-in</a>
+              <a href="#/event/attendees" class="item" menu-close>Attendees</a>
+            </ul>
+          </ion-content>
+    </ion-side-menu>
+    <ion-side-menu-content>
+    
   <ion-header-bar  class="bar-style">
     <button class="button button-icon button-light button-clear icon ion-navicon"
-    ng-click = "toggleLeft()">
+     menu-toggle="left">
     </button>
     <h2 id='home-bar' class="title">Aroundme</h2>
     <button class="button button-icon  button-clear button-light icon " ng-click="postShow()"></button>
@@ -23,5 +39,10 @@
      </a>
    </div>
   </ion-content>
+
+    </ion-side-menu-content>
+  </ion-side-menu>
+
+</ion-side-menus>
 
 </ion-view>
