@@ -12,9 +12,23 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   };
 })
 
-.controller('NeighborsTabCtrl', function($scope) {
+.controller('NeighborsTabCtrl', function($scope, $http) {
     $scope.neighborList = [];
     userQuery($scope, currentUser);
+    $scope.getNeighbors = function() {
+      userQuery($scope, currentUser);
+    }
+    $scope.doRefresh = function() {
+    $http.get('#/tab/neighbors')
+     .success(function() {
+      userQuery($scope, currentUser);
+      APP.search($scope, 1,true);
+     })
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+    }    
 })
 
 
@@ -53,6 +67,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       APP.set("CurrentGP", GP);
       APP.search($scope, 1, false);
       userQuery($scope, currentUser);
+        console.log("set time");
+      currentUser.updatedAt = Date();
       $state.go('tabs.home');
     }
 
@@ -156,6 +172,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           // The login failed. Check error to see why.
         }
       });
+      $scope.user = currentUser;
    };
 
 
@@ -201,7 +218,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
        // Stop the ion-refresher from spinning
        $scope.$broadcast('scroll.refreshComplete');
      });
-  }
+    }
 
     $scope.eventDetail = function(itemObj){
       $state.go('detail',{itemObj:itemObj});
@@ -486,36 +503,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       Desc : ""
     };
 
-    currentUser = H_User.current();
-
-    if(currentUser){
-      isLogin = true;
-      APP = currentUser.get("customer");
-      APP.fetch().then(function(obj){
-        if(APP.get("Requests").length != 0){
-          AcceptTimer = setInterval(checkAccept,3000);
-        }
-        //if(APP.get("ListOfPostItem").length!=0){
-        //  RequestTimer = setInterval(checkRequest,3000);
-        //}
-      });
-      var GP = new Parse.GeoPoint.current({
-        success: function (point){
-          console.log("GP Success");
-        },
-        error: function (error){
-          alert(error);
-        }
-      });
-      APP.set("CurrentGP", GP);
-      APP.search($scope, 1, false);
-      userQuery($scope, currentUser);
-      $state.go('tabs.home');
-    }
-
-    $scope.getNeighbors = function() {
-      userQuery($scope, currentUser);
-    }
     $scope.Request = function(itemId,itemName){
       APP.request(itemId,itemName);
     };
@@ -678,6 +665,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet,
     $ionicPopup, $state, $cordovaCamera, $timeout, $ionicSideMenuDelegate) {
 
+
+    $scope.GP = new Parse.GeoPoint();
+
     console.log("MainCtrl");
     curTime = Date.now();
     $scope.getTime = function(time) {
@@ -709,6 +699,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
     currentUser = H_User.current();
 
+    $scope.currentUser = currentUser;
     if(currentUser){
       isLogin = true;
       APP = currentUser.get("customer");
@@ -716,9 +707,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         if(APP.get("Requests").length != 0){
           AcceptTimer = setInterval(checkAccept,3000);
         }
-        //if(APP.get("ListOfPostItem").length!=0){
-        //  RequestTimer = setInterval(checkRequest,3000);
-        //}
       });
       var GP = new Parse.GeoPoint.current({
         success: function (point){
@@ -728,6 +716,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           alert(error);
         }
       });
+        console.log("set time");
+        currentUser.set("updatedAt", Date());
       APP.set("CurrentGP", GP);
       APP.search($scope, 1, false);
       userQuery($scope, currentUser);
@@ -795,6 +785,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     H_User.logIn();
     isLogin = false;
     $state.go('signin');
+  }
+
+  $scope.getSex = function(user) {
+    if(true)
+      return "../img/male.png";
+    else {
+      return "../img/female.png"
+    }
   }
   //bar上面的两种状态
    // $scope.Header = function(){

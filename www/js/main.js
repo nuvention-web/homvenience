@@ -15,6 +15,7 @@ testObject.save({Message: "Hello World"}, {
     $(".error").show();
   }
 });*/
+
 var ID = function () {
   return Math.random().toString(36).substr(2, 9);
 };
@@ -27,7 +28,8 @@ var H_User = Parse.User.extend("H_User", {
   posts:[],
   Address:"",
   Friends:null,
-  customer:null
+  customer:null,
+  Sex:true
 });
 
 
