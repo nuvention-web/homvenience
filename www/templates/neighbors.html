@@ -2,15 +2,40 @@
   <ion-side-menus>
     <!-- Left menu -->
     <ion-side-menu side="left">
-          <ion-header-bar class="bar-assertive">
-            <h1 class="title">Left Menu</h1>
-          </ion-header-bar>
-          <ion-content>
-            <ul class="list">
-              <!-- Note each link has the 'menu-close' attribute so the menu auto closes when clicking on one of these links -->
-              <a href="#/event/check-in" class="item" menu-close>Check-in</a>
-              <a href="#/event/attendees" class="item" menu-close>Attendees</a>
-            </ul>
+          <ion-content id='side-menu'>
+            <div class="side-wrapper">
+              <div class="side-protrait-back">
+                <div class="wrapper">
+                  <div style="background-image: url({{currentUser.get('Profile').url()}})" class="side-protrait"></div>
+                  <div id="myname">
+                    <div class='myname-text'>{{currentUser.get("username")}}</div>
+                    <img class='pro-gender' src= "{{getSex(currentUser.get('Sex'))}}" alt="female" />
+                  </div>
+                </div>
+              </div>
+              <div class="side-list">
+                <div class="side-item" ng-click="userDetail(x.get('Owner').id)">
+                  <img src="../img/user.png" title="External" width="25">
+                  <div class='sideitem-text'>Profile</div>
+                </div>
+                <div class="side-item">
+                  <img src="../img/events.png" title="External" width="25">
+                    <div class='sideitem-text'>Feed</div></div>
+                <div class="side-item">
+                  <img src="../img/myfavorite.png" title="External" width="25">
+                  <div class='sideitem-text'>Favorite</div></div>
+                <div class="side-item">
+                  <img src="../img/message.png" title="External" width="25">
+                  <div class='sideitem-text'>Messages</div></div>
+                <div class="side-bottom">
+                  <i id='side-logout'>
+                    <img src="../img/logout.png" title="External" width="25"></i>
+                  <i id='side-setting'>
+                    <img src="../img/setting.png" title="External" width="25"></i>
+                </div>
+
+              </div>
+            </div>
           </ion-content>
     </ion-side-menu>
     <ion-side-menu-content>
@@ -19,7 +44,7 @@
     <button class="button button-icon button-light button-clear icon ion-navicon"
      menu-toggle="left">
     </button>
-    <h2 id='home-bar' class="title">Aroundme</h2>
+    <h2 id='home-bar' class="title">AroundMii</h2>
     <button class="button button-icon  button-clear button-light icon " ng-click="postShow()"></button>
   </ion-header-bar>
 

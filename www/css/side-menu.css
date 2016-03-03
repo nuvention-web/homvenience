@@ -35,12 +35,12 @@
 
 .side-list .side-item{
   font-size: 16px;
-  padding: 7.5%;
-  padding-left: 15%;
+  padding: 6.5%;
+  padding-left: 18%;
 }
 
 .side-list .side-bottom{
-  padding-top: 40%;
+  padding-top: 34%;
   color: #fff;
 }
 
@@ -50,19 +50,21 @@
   padding-top: 1%;
   padding-left: 5%;
   position: fixed;
-
-
 }
 
 #side-logout{
-  padding-left: 3%;
+  padding-left: 2%;
 }
 
 #side-setting{
   float: right;
-  padding-right: 3%;
+  padding-right: 2%;
 }
 
+.myname-text{
+  display: inline-block;
+  margin: 0 auto;
+}
 
 
 
