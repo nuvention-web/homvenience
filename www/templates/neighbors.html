@@ -1,4 +1,4 @@
-<ion-view>
+<ion-view ng-init = "getNeigbors()">
   <ion-side-menus>
     <!-- Left menu -->
     <ion-side-menu side="left">
@@ -14,7 +14,7 @@
           </ion-content>
     </ion-side-menu>
     <ion-side-menu-content>
-    
+
   <ion-header-bar  class="bar-style">
     <button class="button button-icon button-light button-clear icon ion-navicon"
      menu-toggle="left">
@@ -26,15 +26,15 @@
   <ion-content class='content-back'>
       <ion-refresher
           pulling-text="Pull to refresh..."
-          on-refresh="getNeighbors()">
+          on-refresh="doRefresh()">
       </ion-refresher>
 
     <div class="list">
      <a class="item item-avatar" href="#/user-profile" ng-repeat = "x in neighborList">
         <img id='user-head' src={{x.get("Profile").url()}}>
         <div id='user-name'>{{x.get("username")}}</div>
-        <div id='user-time'>10 mins ago</div>
-        <div id='user-char'>500m | Evanston, IL</div>
+        <div id='user-time'>{{getTime(x.updatedAt)}}</div>
+        <div id='user-char'>{{GP.milesTo(x.get("username").get("CurrentGP"))}} | Evanston, IL</div>
         <div id='user-tags'>{{x.get("SelfDes")}}</div>
      </a>
    </div>
