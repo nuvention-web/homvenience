@@ -14,7 +14,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('NeighborsTabCtrl', function($scope) {
     $scope.neighborList = [];
-    userQuery($scope, currentUser);    
+    userQuery($scope, currentUser);
 })
 
 
@@ -269,6 +269,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.Item = new Item();
     $scope.input = {Comment:"Hi"};
     $scope.Comments = [];
+    $scope.Liker = [];
     $scope.loaded = [];
     $scope.init = function () {
       $scope.Item.id = $stateParams.itemObj;
@@ -280,8 +281,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             $scope.loaded.push($scope.Comments[i].id);
           }
           refresh();
-        })
-        $scope.$apply();
+        }).then(function () {
+          obj.relation("Liker").query().find().then(function (res) {
+            $scope.Liker = res;
+          });
+          $scope.$apply();
+        }
+        )
       });
       console.log("Registering Timer");
       $scope.postUpdate = setInterval(refresh,1000);
@@ -296,6 +302,30 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       $scope.input.commentinput = "";
       //console.log($scope.input.commentinput);
       APP.postComment($scope.Item,content);
+    }
+
+    $scope.like = function(){
+      var tar = -1;
+      for(var i = 0 ;i<$scope.Liker.length;i++){
+        if($scope.Liker[i].id === currentUser.id){
+          var relation = $scope.Item.relation("Liker");
+          relation.remove(currentUser);
+          currentUser.relation("Likes").remove($scope.Item);
+          tar = i;
+          break;
+        }
+      }
+      if(tar === -1){
+        $scope.Item.relation("Liker").add(currentUser);
+        currentUser.relation("Likes").add($scope.Item);
+        $scope.Liker.push(currentUser);
+      }
+      else{
+        $scope.Liker.splice(tar,1);
+      }
+      currentUser.save();
+      $scope.Item.save();
+      $scope.$apply();
     }
 
     function refresh (){
