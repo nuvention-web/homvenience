@@ -1,0 +1,71 @@
+
+/*-----side-menu-----*/
+.side-protrait{
+	margin: 0 auto;
+	height: 100px;
+	width: 100px;
+	border-radius: 50px;
+	background-size: cover;
+	border: 2px #fff solid;
+}
+
+.side-protrait-back{
+	background-color: transparent;
+	background-size: cover;
+
+}
+
+#side-menu{
+	background: #9D50BB; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #9D50BB , #6E48AA); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #9D50BB , #6E48AA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.side-wrapper{
+	background-color: rgba(0, 0, 0, 0.2);
+	height: auto;
+}
+
+.side-list{
+  width:100%;
+  height: 100%;
+  padding: 5%;
+  color: #fff;
+}
+
+.side-list .side-item{
+  font-size: 16px;
+  padding: 7.5%;
+  padding-left: 15%;
+}
+
+.side-list .side-bottom{
+  padding-top: 40%;
+  color: #fff;
+}
+
+.side-item .sideitem-text{
+  display: inline-block;
+  margin: auto;
+  padding-top: 1%;
+  padding-left: 5%;
+  position: fixed;
+
+
+}
+
+#side-logout{
+  padding-left: 3%;
+}
+
+#side-setting{
+  float: right;
+  padding-right: 3%;
+}
+
+
+
+
+
+
+/*-----side-menu-----*/

@@ -8,8 +8,8 @@
 #home-bar{
 	color: #fff !important;
 	font-size: 20px;
-font-family: 'Merriweather Sans', sans-serif;
-font-weight: bold;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: bold;
 }
 
 .rest-bar{
@@ -280,33 +280,3 @@ a{
 }
 
 /*-----Profile-----*/
-
-/*-----side-menu-----*/
-.side-protrait{
-	margin: 0 auto;
-	height: 100px;
-	width: 100px;
-	border-radius: 50px;
-	background-size: cover;
-	border: 2px #fff solid;
-}
-
-.side-protrait-back{
-	background-color: transparent;
-	background-size: cover;
-
-}
-
-#side-menu{
-	background: #9D50BB; /* fallback for old browsers */
-	background: -webkit-linear-gradient(to left, #9D50BB , #6E48AA); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to left, #9D50BB , #6E48AA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.side-wrapper{
-	background-color: rgba(0, 0, 0, 0.2);
-	height: auto;
-}
-
-
-/*-----side-menu-----*/
