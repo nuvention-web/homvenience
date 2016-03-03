@@ -30,7 +30,9 @@ var H_User = Parse.User.extend("H_User", {
   customer:null
 });
 
-H_User.logOut();
+
+var curTime = Date.now();
+// H_User.logOut();
 
 // Item class
 var Item = Parse.Object.extend("Item",{
@@ -41,7 +43,7 @@ var Item = Parse.Object.extend("Item",{
   Holder:null,
   ImageArry:[],
   requestList:[],
-  Label:"",
+  postType:"",
   CreateDate: null,
   clearRequests : function(){
     this.set("requestList" ,[]);

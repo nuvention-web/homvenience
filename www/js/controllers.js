@@ -12,11 +12,15 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   };
 })
 
-.controller('NeighborsTabCtrl', function($scope) {})
+.controller('NeighborsTabCtrl', function($scope) {
+    $scope.neighborList = [];
+    userQuery($scope, currentUser);    
+})
 
 
 .controller('SignInCtrl', function($scope, $state, $ionicModal) {
     console.log('SignInCtrl');
+
 
     $ionicModal.fromTemplateUrl('templates/Register-modal.html', {
     scope: $scope,
@@ -24,6 +28,36 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }).then(function(modal) {
       $scope.modal = modal;
     });
+
+    currentUser = H_User.current();
+
+    if(currentUser){
+      isLogin = true;
+      APP = currentUser.get("customer");
+      APP.fetch().then(function(obj){
+        if(APP.get("Requests").length != 0){
+          AcceptTimer = setInterval(checkAccept,3000);
+        }
+        //if(APP.get("ListOfPostItem").length!=0){
+        //  RequestTimer = setInterval(checkRequest,3000);
+        //}
+      });
+      var GP = new Parse.GeoPoint.current({
+        success: function (point){
+          console.log("GP Success");
+        },
+        error: function (error){
+          alert(error);
+        }
+      });
+      APP.set("CurrentGP", GP);
+      APP.search($scope, 1, false);
+      userQuery($scope, currentUser);
+      $state.go('tabs.home');
+    }
+
+
+
     $scope.SignUp = function(newUser) {
       var user = new H_User();
       user.set("username", newUser.username);
@@ -71,6 +105,60 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         }
       });
     };
+
+   $scope.SignIn = function(u) {
+      H_User.logIn(u.username, u.password, {
+        success: function(user) {
+          currentUser = H_User.current();;
+          isLogin = true;
+          APP = currentUser.get("customer");
+          APP.fetch().then(function(obj){
+            console.log("Customer Fetched");
+            if(APP.get("MBox") == null){
+              var temp = new MessageBox();
+              temp.set("User",currentUser.get("username"));
+              temp.set("Messages",[]);
+              APP.set("MessageBox", temp);
+              temp.save();
+            }
+            else {
+              APP.get("MBox").fetch().then(function (res) {
+                  console.log("Message Box fetched");
+                  MessageCheckTimer = setInterval(APP.get("MBox").reload, 5000);
+                  console.log("Message Timer Set!");
+                },
+                function (err) {
+                  console.log("Box corrupted!");
+                });
+            }
+            if(APP.get("Requests").length != 0){
+              AcceptTimer = setInterval(checkAccept,3000);
+            }
+            if(APP.get("ListOfPostItem").length!=0){
+              RequestTimer = setInterval(checkRequest,3000);
+            }
+          });
+          var GP = new Parse.GeoPoint.current({
+            success: function (point){
+              console.log("GP Success");
+            },
+            error: function (error){
+              alert(error);
+            }
+          });
+          APP.set("CurrentGP", GP);
+          APP.search($scope, 1,false);
+          userQuery($scope, currentUser);
+          $state.go('tabs.home');
+        },
+        error: function(user, error) {
+          alert(error);
+          // The login failed. Check error to see why.
+        }
+      });
+   };
+
+
     $scope.openModal = function() {
       console.log("Register Start!");
       $scope.modal.show();
@@ -93,13 +181,27 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   })
 
 
-.controller('HomeTabCtrl', function($scope,$state) {
+.controller('HomeTabCtrl', function($scope,$state, $http) {
     console.log('HomeTabCtrl');
-    $scope.search_res = []
+    curTime = Date.now();
+    $scope.search_res = [];
+
     $scope.init = function () {
       console.log('ready to fetch');
       APP.search($scope, 1,true);
     }
+
+    $scope.doRefresh = function() {
+    $http.get('#/tab/home')
+     .success(function() {
+      console.log('ready to fetch');
+      APP.search($scope, 1,true);
+     })
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  }
 
     $scope.eventDetail = function(itemObj){
       $state.go('detail',{itemObj:itemObj});
@@ -222,10 +324,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
   .controller('SearchCtrl',function($scope){
     $scope.search_res = [];
 
-    $scope.init = function () {
-      console.log("ready to fetch");
-      APP.search($scope, 1,false);
-    };
     $scope.Request = function(itemId,itemName){
       APP.request(itemId,itemName);
     };
@@ -347,28 +445,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }
   })
 
-  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet,
+
+  .controller('ModalCtrl', function($scope, $ionicModal, $ionicActionSheet,
     $ionicPopup, $state, $cordovaCamera, $timeout, $ionicSideMenuDelegate) {
-    console.log("MainCtrl");
-
-    $scope.toggleLeft = function() {
-      $ionicSideMenuDelegate.toggleLeft();
-    };
-
-    $scope.HeadProfile = headProfile;
-    $scope.LABEL = "GET";
 
     $scope.photo_arry = [];
-
-    $scope.neighborList = [];
-
-
 
     $scope.newItem = {
       Title : "",
       Desc : ""
     };
-
 
     currentUser = H_User.current();
 
@@ -376,9 +462,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       isLogin = true;
       APP = currentUser.get("customer");
       APP.fetch().then(function(obj){
-        //if(APP.get("Requests").length != 0){
-        //  AcceptTimer = setInterval(checkAccept,3000);
-        //}
+        if(APP.get("Requests").length != 0){
+          AcceptTimer = setInterval(checkAccept,3000);
+        }
         //if(APP.get("ListOfPostItem").length!=0){
         //  RequestTimer = setInterval(checkRequest,3000);
         //}
@@ -397,10 +483,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       $state.go('tabs.home');
     }
 
-    $scope.init = function () {
-      console.log("ready to fetch");
-      APP.search($scope, 1,true);
-    };
     $scope.getNeighbors = function() {
       userQuery($scope, currentUser);
     }
@@ -413,40 +495,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       return URL;
     }
 
-    //This is for detail page use only
-    $scope.targetItem=null;
-
-    //
-    $scope.esc = function(item) {
-      $scope.targetItem = item;
-      $state.go('detail');
-    }
-
-    $scope.newItem = {
-      Title : "",
-      Desc : ""
-    };
-
-    $scope.addFriend = function(user){
-      var friends = currentUser.relation("Friends");
-      friends.add(user);
-      currentUser.save();
-    }
-
-    $ionicModal.fromTemplateUrl('templates/modal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function(modal) {
-      $scope.modal = modal;
-    });
-   // An alert dialog
-     $scope.CreatePostAlert = function() {
-       var alertPopup = $ionicPopup.alert({
-         template: 'Post Success!'
-       });
-       alertPopup.then(function(res) {
-       });
-     };
     $scope.createPost = function() {
 
       if($scope.newItem.Title == "")
@@ -478,7 +526,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       item.set("State", "Available");
       item.set("GeoPoint", GP);
       item.set("requestList", []);
-      item.set("Label", $scope.LABEL);
+      item.set("postType", "post-type1");
       item.save(null, {
         success: function(item) {
           // Execute any logic that should take place after the object is saved.
@@ -498,32 +546,50 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           // error is a Parse.Error with an error code and message.
           alert('Failed to create new object, with error code: ' + error.message);
         }
-    });
-  }
+      });
+    }
 
-    $scope.showDetails = function() {
+    $scope.takePhoto = function () {
+      var options = {
+        quality: 75,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.CAMERA,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 300,
+        targetHeight: 300,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false
+    };
 
-     // Show the action sheet
-     var hideSheet = $ionicActionSheet.show({
-       buttons: [
-         { text: 'Take a picture' },
-         { text: 'Select from Photos' }
-       ],
-       cancelText: 'Cancel',
-       cancel: function() {
-            // add cancel code..
-       },
-       buttonClicked: function(index) {
-        if(index == 0){
-          $scope.takePhoto();
-        }
-        else if(index == 1){
-          $scope.choosePhoto();
-        }
-         return true;
-       }
-     });
-   }
+      $cordovaCamera.getPicture(options).then(function (imageData) {
+          $scope.imgURI = "data:image/jpeg;base64," + imageData;
+          $scope.photo_arry.push(imageData);
+      }, function (err) {
+          // An error occured. Show a message to the user
+      });
+    }
+
+    $scope.choosePhoto = function () {
+      var options = {
+        quality: 75,
+        destinationType: Camera.DestinationType.DATA_URL,
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+        allowEdit: true,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 300,
+        targetHeight: 300,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false
+    };
+
+    $cordovaCamera.getPicture(options).then(function (imageData) {
+      $scope.imgURI = "data:image/jpeg;base64," + imageData;
+      $scope.photo_arry.push(imageData);
+      }, function (err) {
+          // An error occured. Show a message to the user
+        });
+    }
 
     $scope.deleteImage = function(u) {
 
@@ -552,86 +618,141 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
        }
      });
    }
+
+    $scope.showDetails = function() {
+
+     // Show the action sheet
+     var hideSheet = $ionicActionSheet.show({
+       buttons: [
+         { text: 'Take a picture' },
+         { text: 'Select from Photos' }
+       ],
+       cancelText: 'Cancel',
+       cancel: function() {
+            // add cancel code..
+       },
+       buttonClicked: function(index) {
+        if(index == 0){
+          $scope.takePhoto();
+        }
+        else if(index == 1){
+          $scope.choosePhoto();
+        }
+         return true;
+       }
+     });
+   }
+
+  })
+
+  .controller('MainCtrl', function($scope, $ionicModal, $ionicActionSheet,
+    $ionicPopup, $state, $cordovaCamera, $timeout, $ionicSideMenuDelegate) {
+
+    console.log("MainCtrl");
+    curTime = Date.now();
+    $scope.getTime = function(time) {
+      var interval = (curTime - time.valueOf())/1000;
+      interval /= 60;
+      if(interval < 60)
+        return Math.floor(interval) + "M";
+      interval /= 60;
+      if(interval < 24)
+        return Math.floor(interval) + "H";
+      interval /= 24;
+      if(interval < 7)
+        return Math.floor(interval) + "D";
+      interval /= 7;
+      if(interval < 4)
+        return Math.floor(interval) + "W";
+      interval /= 4;
+      if(interval < 12)
+        return Math.floor(interval) + "M";
+      return Math.floor(interval);
+    };
+
+    $scope.toggleLeft = function() {
+      $ionicSideMenuDelegate.toggleLeft();
+    };
+
+    $scope.HeadProfile = headProfile;
+    $scope.LABEL = "GET";
+
+    currentUser = H_User.current();
+
+    if(currentUser){
+      isLogin = true;
+      APP = currentUser.get("customer");
+      APP.fetch().then(function(obj){
+        if(APP.get("Requests").length != 0){
+          AcceptTimer = setInterval(checkAccept,3000);
+        }
+        //if(APP.get("ListOfPostItem").length!=0){
+        //  RequestTimer = setInterval(checkRequest,3000);
+        //}
+      });
+      var GP = new Parse.GeoPoint.current({
+        success: function (point){
+          console.log("GP Success");
+        },
+        error: function (error){
+          alert(error);
+        }
+      });
+      APP.set("CurrentGP", GP);
+      APP.search($scope, 1, false);
+      userQuery($scope, currentUser);
+      $state.go('tabs.home');
+    }
+
+    $scope.getNeighbors = function() {
+      userQuery($scope, currentUser);
+    }
+    $scope.Request = function(itemId,itemName){
+      APP.request(itemId,itemName);
+    };
+
+
+    //This is for detail page use only
+    $scope.targetItem=null;
+
+    //
+    $scope.esc = function(item) {
+      $scope.targetItem = item;
+      $state.go('detail');
+    }
+
+    $scope.newItem = {
+      Title : "",
+      Desc : ""
+    };
+
+    $scope.addFriend = function(user){
+      var friends = currentUser.relation("Friends");
+      friends.add(user);
+      currentUser.save();
+    }
+
+    $ionicModal.fromTemplateUrl('templates/modal.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+   // An alert dialog
+    $scope.CreatePostAlert = function() {
+       var alertPopup = $ionicPopup.alert({
+         template: 'Post Success!'
+       });
+       alertPopup.then(function(res) {
+       });
+    };
+
+
     $scope.postShow = function() {
       $scope.photo_arry = [];
       $scope.modal.show();
-     // Show the action sheet
-    //  var hideSheet = $ionicActionSheet.show({
-    //    buttons: [
-    //      { text: 'Activity' },
-    //      { text: 'Share' },
-    //      { text: 'Around me ' }
-    //    ],
-    //    cancelText: 'Cancel',
-    //    cancel: function() {
-    //         // add cancel code..
-    //    },
-    //    buttonClicked: function(index) {
-    //     if(index == 0){
-    //       $scope.LABEL = "GIVE";
-    //       $scope.modal.show();
-    //     }
-    //     if(index == 1){
-    //       $scope.LABEL = "GET";
-    //       $scope.modal.show();
-    //     }
-    //      return true;
-    //    }
-    //  });
    }
 
-
-   $scope.SignIn = function(u) {
-      H_User.logIn(u.username, u.password, {
-        success: function(user) {
-          currentUser = H_User.current();;
-          isLogin = true;
-          APP = currentUser.get("customer");
-          APP.fetch().then(function(obj){
-            console.log("Customer Fetched");
-            /*if(APP.get("MBox") == null){
-              var temp = new MessageBox();
-              temp.set("User",currentUser.get("username"));
-              temp.set("Messages",[]);
-              APP.set("MessageBox", temp);
-              temp.save();
-            }
-            else {
-              APP.get("MBox").fetch().then(function (res) {
-                  console.log("Message Box fetched");
-                  MessageCheckTimer = setInterval(APP.get("MBox").reload, 5000);
-                  console.log("Message Timer Set!");
-                },
-                function (err) {
-                  console.log("Box corrupted!");
-                });
-            }*/
-            /*if(APP.get("Requests").length != 0){
-              AcceptTimer = setInterval(checkAccept,3000);
-            }
-            if(APP.get("ListOfPostItem").length!=0){
-              RequestTimer = setInterval(checkRequest,3000);
-            }*/
-          });
-          var GP = new Parse.GeoPoint.current({
-            success: function (point){
-              console.log("GP Success");
-            },
-            error: function (error){
-              alert(error);
-            }
-          });
-          APP.set("CurrentGP", GP);
-          APP.search($scope, 1,false);
-          userQuery($scope, currentUser);
-          $state.go('tabs.home');
-        },
-        error: function(user, error) {
-          alert(error);
-          // The login failed. Check error to see why.
-        }
-      });
-   }
 
   $scope.showAlert = function(itemId,itemName) {
      var alertPopup = $ionicPopup.alert({
@@ -646,64 +767,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $state.go('signin');
   }
   //bar上面的两种状态
-   $scope.Header = function(){
-    if(!isLogin)
-      return "button button-clear icon ion-log-in";
-    else
-      return "button button-clear icon ion-log-out";
-   }
+   // $scope.Header = function(){
+   //  if(!isLogin)
+   //    return "button button-clear icon ion-log-in";
+   //  else
+   //    return "button button-clear icon ion-log-out";
+   // }
 
-   $scope.takePhoto = function () {
-
-
-                  var options = {
-                    quality: 75,
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    allowEdit: true,
-                    encodingType: Camera.EncodingType.JPEG,
-                    targetWidth: 300,
-                    targetHeight: 300,
-                    popoverOptions: CameraPopoverOptions,
-                    saveToPhotoAlbum: false
-                };
-
-                    $cordovaCamera.getPicture(options).then(function (imageData) {
-                        $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        $scope.photo_arry.push(imageData);
-                    }, function (err) {
-                        // An error occured. Show a message to the user
-                    });
-
-                }
-
-                $scope.choosePhoto = function () {
-                  var options = {
-                    quality: 75,
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                    allowEdit: true,
-                    encodingType: Camera.EncodingType.JPEG,
-                    targetWidth: 300,
-                    targetHeight: 300,
-                    popoverOptions: CameraPopoverOptions,
-                    saveToPhotoAlbum: false
-                };
-
-                    $cordovaCamera.getPicture(options).then(function (imageData) {
-                        $scope.imgURI = "data:image/jpeg;base64," + imageData;
-                        $scope.photo_arry.push(imageData);
-                    }, function (err) {
-                        // An error occured. Show a message to the user
-                    });
-                }
-
-                $scope.showLabel = function(u){
-                  if(u == "GET"){
-                    return " need HELP!";
-                  }else{
-                    return " can HELP!";
-                  }
-                }
-   ;
   });

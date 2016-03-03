@@ -131,6 +131,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           controller: 'AccountCtrl'
         }
       }
+    })
+
+
+    .state('eventmenu', {
+      url: "/event",
+      abstract: true,
+      templateUrl: "templates/event-menu.html"
     });
     // .state("tabs.post", {
     //   url: '/post',
