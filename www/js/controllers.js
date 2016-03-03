@@ -14,7 +14,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('NeighborsTabCtrl', function($scope) {
     $scope.neighborList = [];
-    userQuery($scope, currentUser);    
+    userQuery($scope, currentUser);
 })
 
 
@@ -156,6 +156,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           // The login failed. Check error to see why.
         }
       });
+      $scope.user = currentUser;
    };
 
 
@@ -679,6 +680,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
     currentUser = H_User.current();
 
+    $scope.currentUser = currentUser;
     if(currentUser){
       isLogin = true;
       APP = currentUser.get("customer");
@@ -765,6 +767,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     H_User.logIn();
     isLogin = false;
     $state.go('signin');
+  }
+
+  $scope.getSex = function(user) {
+    if(true)
+      return "../img/male.png";
+    else {
+      return "../img/female.png"
+    }
   }
   //bar上面的两种状态
    // $scope.Header = function(){
