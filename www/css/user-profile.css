@@ -53,7 +53,7 @@
 }
 
 #myname{
-	font-size: 24px;
+	font-size: 25px;
 	text-align: center;
 	margin: 25px auto;
 }
@@ -98,7 +98,7 @@
 }
 
 .stat-num{
-  font-size: 26px;
+  font-size: 27px;
   margin-bottom: 10px;
   font-family: 'Numans', sans-serif;
   color: #B7A1FF;
@@ -106,7 +106,7 @@
 
 .stat-title{
   color: #eee;
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 1px;
 }
 
@@ -122,7 +122,7 @@
 }
 
 .pro-item-title{
-  font-size: 17px;
+  font-size: 18px;
   color: #8D78E5;
 }
 
