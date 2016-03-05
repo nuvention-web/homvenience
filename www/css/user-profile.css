@@ -48,7 +48,7 @@
 	width: 120px;
 	border-radius: 60px;
  	background-size: cover;
-	border: 2px #fff solid;
+	border: 1px #fff solid;
   z-index: 999;
 }
 
@@ -88,8 +88,8 @@
 }
 
 .user-stat{
-  margin: 0 auto;
   margin-top: 50px;
+  margin-bottom: 5px;
 }
 
 .stat-item{
@@ -98,7 +98,7 @@
 }
 
 .stat-num{
-  font-size: 27px;
+  font-size: 28px;
   margin-bottom: 10px;
   font-family: 'Numans', sans-serif;
   color: #B7A1FF;
@@ -106,7 +106,7 @@
 
 .stat-title{
   color: #eee;
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: 1px;
 }
 

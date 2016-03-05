@@ -34,7 +34,7 @@ var H_User = Parse.User.extend("H_User", {
 
 
 var curTime = Date.now();
-  H_User.logOut();
+//  H_User.logOut();
 
 // Item class
 var Item = Parse.Object.extend("Item",{
