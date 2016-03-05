@@ -40,7 +40,8 @@
 .side-list .side-item{
   font-size: 16px;
   padding: 6.5%;
-  padding-left: 28%;
+  padding-left: 25%;
+  letter-spacing: 1px;
 }
 
 .side-list .side-bottom{

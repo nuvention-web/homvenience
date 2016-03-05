@@ -17,6 +17,7 @@ background: linear-gradient(to left, #6a3093 , #a044ff); /* W3C, IE 10+/ Edge, F
 
 .user-wrapper{
   background: rgba(0, 0, 0, 0.2);
+  color: #fff;
 }
 
 .item-stacked-label p{
@@ -55,7 +56,6 @@ background: linear-gradient(to left, #6a3093 , #a044ff); /* W3C, IE 10+/ Edge, F
 	font-size: 20px;
 	text-align: center;
 	margin: 22px auto;
-	color: #fff;
 }
 
 .pro-gender{
@@ -85,6 +85,26 @@ background: linear-gradient(to left, #6a3093 , #a044ff); /* W3C, IE 10+/ Edge, F
 
 .col{
 	padding: 5px;
+}
+
+.user-stat{
+  margin: 15px auto;
+}
+
+.stat-item{
+  text-align: center;
+
+}
+
+.stat-num{
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.stat-title{
+  color: #ccc;
+  font-size: 15px;
+  letter-spacing: 1px;
 }
 
 /*-----Profile-----*/
