@@ -9,7 +9,7 @@
                   <div style="background-image: url({{currentUser.get('Profile').url()}})" class="side-protrait"></div>
                   <div id="myname">
                     <div class='myname-text'>{{currentUser.get("username")}}</div>
-                    <img class='pro-gender' src= "{{getSex(currentUser.get('Sex'))}}" alt="female" />
+            <!--    <img class='pro-gender' src= "{{getSex(currentUser.get('Sex'))}}" alt="female" />  -->
                   </div>
                 </div>
               </div>
@@ -44,7 +44,7 @@
   <ion-header-bar  class="bar-style">
     <h2 id='home-bar' class="title">AroundMii</h2>
     <button class="button button-icon button-white button-clear icon ion-navicon" menu-toggle="left">
-    <button class="button button-icon button-clear button-white icon ion-ios-settings" ng-click="postShow()"></button>
+    <button class="button button-icon button-clear button-white icon ion-ios-settings-strong"></button>
   </ion-header-bar>
 
   <button class="button button-icon post-icon icon ion-ios-plus-empty" ng-click="postShow()"></button>

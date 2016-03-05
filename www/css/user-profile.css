@@ -1,23 +1,22 @@
 /*-----Profile-----*/
+
 .blur {
-    -webkit-filter: blur(10px); /* Chrome, Opera */
-       -moz-filter: blur(10px);
-        -ms-filter: blur(10px);
-            filter: blur(10px);
-            z-index: 0;
+    -webkit-filter: blur(2px); /* Chrome, Opera */
+       -moz-filter: blur(1px);
+        -ms-filter: blur(1px);
+            filter: blur(1px);
+            z-index: -111;
+    width: 300px;
+    height: 300px;
 }
 
 .user-profile{
-
-background: #6a3093; /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #6a3093 , #a044ff); /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #6a3093 , #a044ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+  font-family: 'Roboto', sans-serif;
 }
 
-.user-wrapper{
-  background: rgba(0, 0, 0, 0.2);
-  color: #fff;
+.header-wallpaper{
+  background-image: url("../img/london.jpg");
+  background-size: cover;
 }
 
 .item-stacked-label p{
@@ -29,11 +28,12 @@ background: linear-gradient(to left, #6a3093 , #a044ff); /* W3C, IE 10+/ Edge, F
 	padding-left: 1%;
 }
 
-.wrapper{
-	padding-top: 45px;
-	padding-bottom:25px;
+.header-wrapper{
+	padding-top: 50px;
+	padding-bottom:5px;
 	min-height: 150px;
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
 }
 
 .protrait-back{
@@ -53,9 +53,9 @@ background: linear-gradient(to left, #6a3093 , #a044ff); /* W3C, IE 10+/ Edge, F
 }
 
 #myname{
-	font-size: 20px;
+	font-size: 24px;
 	text-align: center;
-	margin: 22px auto;
+	margin: 25px auto;
 }
 
 .pro-gender{
@@ -88,7 +88,8 @@ background: linear-gradient(to left, #6a3093 , #a044ff); /* W3C, IE 10+/ Edge, F
 }
 
 .user-stat{
-  margin: 15px auto;
+  margin: 0 auto;
+  margin-top: 50px;
 }
 
 .stat-item{
@@ -97,14 +98,51 @@ background: linear-gradient(to left, #6a3093 , #a044ff); /* W3C, IE 10+/ Edge, F
 }
 
 .stat-num{
-  font-size: 32px;
+  font-size: 26px;
   margin-bottom: 10px;
+  font-family: 'Numans', sans-serif;
+  color: #B7A1FF;
 }
 
 .stat-title{
-  color: #ccc;
-  font-size: 15px;
+  color: #eee;
+  font-size: 12px;
   letter-spacing: 1px;
 }
+
+.pro-info{
+  color: #000;
+
+}
+
+.pro-item{
+  height: 70px;
+  width: auto;
+  padding: 4%;
+}
+
+.pro-item-title{
+  font-size: 17px;
+  color: #8D78E5;
+}
+
+.pro-item-content{
+    margin-top: 2%;
+
+}
+
+
+
+.pro-line{
+  height: 1px;
+  background-color: #ddd;
+  width: 92%;
+  margin: 0 auto;
+}
+
+
+
+
+
 
 /*-----Profile-----*/

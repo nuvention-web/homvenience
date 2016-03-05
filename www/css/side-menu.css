@@ -2,6 +2,14 @@
 /*-----side-menu-----*/
 .side-font{
   font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
+
+.wrapper{
+	padding-top: 45px;
+	padding-bottom:25px;
+	min-height: 150px;
+	background-color: rgba(0, 0, 0, 0.1);
 }
 
 .side-protrait{
@@ -20,9 +28,9 @@
 }
 
 #side-menu{
-	background: #9D50BB; /* fallback for old browsers */
-	background: -webkit-linear-gradient(to left, #9D50BB , #6E48AA); /* Chrome 10-25, Safari 5.1-6 */
-	background: linear-gradient(to left, #9D50BB , #6E48AA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: #B7A1FF; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #B7A1FF , #8D78E5); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #B7A1FF , #8D78E5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .side-wrapper{
@@ -38,14 +46,14 @@
 }
 
 .side-list .side-item{
-  font-size: 16px;
+  font-size: 15px;
   padding: 6.5%;
   padding-left: 25%;
   letter-spacing: 1px;
 }
 
 .side-list .side-bottom{
-  padding-top: 34%;
+  padding-top: 30%;
   color: #fff;
 }
 
