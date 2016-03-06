@@ -6,15 +6,15 @@
             <div class="side-wrapper">
               <div class="side-protrait-back">
                 <div class="wrapper">
-                  <div style="background-image: url({{currentUser.get('Profile').url()}})" class="side-protrait"></div>
+                  <div style="background-image: url({{user.get('Profile').url()}})" class="side-protrait"></div>
                   <div id="myname">
-                    <div class='myname-text'>{{currentUser.get("username")}}</div>
+                    <div class='myname-text'>{{user.get("username")}}</div>
             <!--    <img class='pro-gender' src= "{{getSex(currentUser.get('Sex'))}}" alt="female" />  -->
                   </div>
                 </div>
               </div>
               <div class="side-list">
-                <div class="side-item" ng-click="userDetail(x.get('Owner').id)">
+                <div class="side-item" ng-click="userDetail(user.id)">
                   <img src="../img/user.png" title="External" width="25">
                   <div class='sideitem-text'>Profile</div>
                 </div>
@@ -60,7 +60,7 @@
         <img id='user-head' src={{x.get("Profile").url()}}>
         <div id='user-name'>{{x.get("username")}}</div>
         <div id='user-time'>{{getTime(x.updatedAt)}}</div>
-        <div id='user-char'>{{GP.milesTo(x.get("username").get("CurrentGP"))}} | Evanston, IL</div>
+        <div id='user-char'>{{GetDistance(x.get("username").get("CurrentGP"))}} | Evanston, IL</div>
         <div id='user-tags'>{{x.get("SelfDes")}}</div>
      </a>
    </div>

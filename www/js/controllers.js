@@ -13,6 +13,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 })
 
 .controller('NeighborsTabCtrl', function($scope, $http) {
+    $scope.user = currentUser;
     $scope.neighborList = [];
     userQuery($scope, currentUser);
     $scope.getNeighbors = function() {
@@ -67,7 +68,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       APP.set("CurrentGP", GP);
       APP.search($scope, 1, false);
       userQuery($scope, currentUser);
-        console.log("set time");
+      console.log("set time");
       currentUser.updatedAt = Date();
       $state.go('tabs.home');
     }
@@ -80,15 +81,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       user.set("email", newUser.email);
       user.set("Address", newUser.address);
       user.set("password", newUser.password);
+      var newCstm = new Customer();
+      newCstm.set("ListOfPostItem", []);
+      newCstm.set("ListOfRequest", []);
+      newCstm.set("ListOfGet", []);
+      newCstm.set("ListOfLent", []);
+      newCstm.set("Requests", []);
+      user.set("customer", newCstm);
+
       user.signUp(null,{
         success: function(user){
-            var newCstm = new Customer();
-            newCstm.set("ListOfPostItem", []);
-            newCstm.set("ListOfRequest", []);
-            newCstm.set("ListOfGet", []);
-            newCstm.set("ListOfLent", []);
-            newCstm.set("Requests", []);
-            user.set("customer", newCstm);
           currentUser = user;
           if(currentUser){
             isLogin = true;
@@ -199,6 +201,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 
 .controller('HomeTabCtrl', function($scope,$state, $http) {
+  $scope.user = currentUser;
     console.log('HomeTabCtrl');
     curTime = Date.now();
     $scope.search_res = [];
@@ -666,8 +669,15 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $ionicPopup, $state, $cordovaCamera, $timeout, $ionicSideMenuDelegate) {
 
 
+
     $scope.GP = new Parse.GeoPoint();
 
+    $scope.GetDistance = function(Target) {
+      if($scope.GP == null || Target == null)
+        return "0 miles";
+      else
+        return $scope.GP.milesTo(Target) + "miles";
+    }
     console.log("MainCtrl");
     curTime = Date.now();
     $scope.getTime = function(time) {
@@ -794,6 +804,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       return "../img/female.png"
     }
   }
+
+  // console.log($scope.user.get("Profile"));
   //bar上面的两种状态
    // $scope.Header = function(){
    //  if(!isLogin)
