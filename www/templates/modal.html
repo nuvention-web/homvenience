@@ -6,16 +6,18 @@
   </ion-header-bar>
 
   <ion-content scroll = "false" has-bouncing = "false" padding = "false">
-  <label class="item item-input">
-    <input type="text" placeholder="Add a subject" ng-model="newItem.Title"></label>
-    <div class = "padding">
-    <textarea placeholder=" Write a message" rows = 8 ng-model ="newItem.Desc"/>
+    <div class="">
+      <label class="item item-input">
+        <input type="text" placeholder="Add a subject" ng-model="newItem.Title"></label>
+        <div class = "padding">
+        <textarea placeholder=" Write a message" rows = 8 ng-model ="newItem.Desc"/>
+        </div>
+      <div class="row">
+        <div class = "col col-20" ng-repeat = "x in photo_arry">
+        <img src="{{ImgURL(x)}}" height="60" width="60" ng-click = "deleteImage(x)">
+        </div>
+      </div>
     </div>
-  <div class="row">
-    <div class = "col col-20" ng-repeat = "x in photo_arry">
-    <img src="{{ImgURL(x)}}" height="60" width="60" ng-click = "deleteImage(x)">
-    </div>
-  </div>
   </ion-content>
   <ion-footer-bar keyboard-attach class = "bar bar-footer">
     <button class="button button-icon icon ion-camera pull-right" ng-click = showDetails()></button>
