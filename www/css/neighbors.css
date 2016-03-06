@@ -1,0 +1,40 @@
+
+/*-----附近的人-----*/
+#user-head{
+	max-height: 60px !important;
+	max-width: 60px !important;
+	border-radius: 30px !important;
+	top:10px !important;
+	left:10px !important;
+}
+
+.item-avatar{
+	padding-left: 80px !important;
+	min-height: 70px !important;
+	padding: 10px;
+}
+
+#user-name{
+	display: inline-block;
+	font-size: 15px;
+}
+
+#user-time{
+	float: right;
+	font-size:10px !important;
+}
+
+#user-char{
+	font-size: 10px;
+}
+
+#user-tags{
+	display: inline-block;
+	background-color: #ff9832;
+	color: #fff;
+	border-radius: 9px;
+	padding: 0 5px;
+	font-size: 10px;
+}
+
+/*-----附近的人-----*/
