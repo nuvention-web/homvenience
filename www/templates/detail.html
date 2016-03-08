@@ -12,7 +12,7 @@
     <a id='home-a' ng-click="userDetail(Item.get('Owner').id)">
       <div class="item item-avatar">
         <img class='portrait' src={{Item.get("Owner").get("Profile").url()}}>
-        <div id='user-time'>{{Item.createdAt}}</div>
+        <div id='user-time'>{{Item.createdAt.toDateString()}}</div>
         <h2>{{Item.get("Owner").get("username")}}</h2>
         <p><i class="icon ion-ios-location icon-site"></i>
         &nbspEvanston 500m</p>
@@ -37,7 +37,7 @@
       <img src={{mes.get("Poster").get("Profile").url()}}>
       <h2>{{mes.get("Poster").get("username")}}</h2>
       <p>{{mes.get("Content")}}</p>
-      <p>{{mes.createdAt}}</p>
+      <p>{{mes.createdAt.toDateString()}}</p>
     </div>
     <div class="item item-avatar">
       <form name="addPostForm" ng-submit="postComment(input.commentinput)" novalidate>
