@@ -29,7 +29,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
        // Stop the ion-refresher from spinning
        $scope.$broadcast('scroll.refreshComplete');
      });
-    }    
+    }
 })
 
 
@@ -50,9 +50,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       isLogin = true;
       APP = currentUser.get("customer");
       APP.fetch().then(function(obj){
-        if(APP.get("Requests").length != 0){
-          AcceptTimer = setInterval(checkAccept,3000);
-        }
+        //if(APP.get("Requests").length != 0){
+        //  AcceptTimer = setInterval(checkAccept,3000);
+        //}
         //if(APP.get("ListOfPostItem").length!=0){
         //  RequestTimer = setInterval(checkRequest,3000);
         //}
@@ -96,12 +96,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             isLogin = true;
             APP = currentUser.get("customer");
             APP.fetch().then(function(obj){
-              if(APP.get("Requests").length != 0){
-                AcceptTimer = setInterval(checkAccept,3000);
-              }
-              if(APP.get("ListOfPostItem").length!=0){
-                RequestTimer = setInterval(checkRequest,3000);
-              }
+              //if(APP.get("Requests").length != 0){
+              //  AcceptTimer = setInterval(checkAccept,3000);
+              //}
+              //if(APP.get("ListOfPostItem").length!=0){
+              //  RequestTimer = setInterval(checkRequest,3000);
+             // }
             });
             var GP = new Parse.GeoPoint.current({
               success: function (point){
@@ -132,29 +132,19 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
           APP = currentUser.get("customer");
           APP.fetch().then(function(obj){
             console.log("Customer Fetched");
-            if(APP.get("MBox") == null){
-              var temp = new MessageBox();
-              temp.set("User",currentUser.get("username"));
-              temp.set("Messages",[]);
-              APP.set("MessageBox", temp);
-              temp.save();
-            }
-            else {
-              APP.get("MBox").fetch().then(function (res) {
-                  console.log("Message Box fetched");
-                  MessageCheckTimer = setInterval(APP.get("MBox").reload, 5000);
-                  console.log("Message Timer Set!");
-                },
-                function (err) {
-                  console.log("Box corrupted!");
-                });
-            }
-            if(APP.get("Requests").length != 0){
-              AcceptTimer = setInterval(checkAccept,3000);
-            }
-            if(APP.get("ListOfPostItem").length!=0){
-              RequestTimer = setInterval(checkRequest,3000);
-            }
+            //if(APP.get("Requests").length != 0){
+            //  AcceptTimer = setInterval(checkAccept,3000);
+           // }
+            //if(APP.get("ListOfPostItem").length!=0){
+            //  RequestTimer = setInterval(checkRequest,3000);
+            //}
+            userRef = FirebaseRef.child("Users").child(currentUser.get("username"));
+            messageBoxRef = userRef.child("MessageBox");
+            messageBoxRef.on("value",function(snapshot){
+              MessageBox = snapshot.val();
+              console.log("MessageBox loaded");
+              console.log(MessageBox);
+            });
           });
           var GP = new Parse.GeoPoint.current({
             success: function (point){
@@ -240,44 +230,58 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.targetUser.fetch().then(function (obj){
       console.log($scope.targetUser.get("username"));
     });
-
-    $scope.chat = function (user){
-      var mboxquery = APP.relation("MBox").query();
-      mboxquery.equaltTo("Receiver", user);
-      mboxquery.find().then(function (res){
-        if(res.length == 0){
-          var mb;
-          var messagebox = new MessageBox();
-          messagebox.set("User",currentUser);
-          messagebox.set("Receiver",user);
-          APP.relation("MBox").add(messagebox);
-          messagebox.save().then(function(){
-            APP.save();
-          });
-          mb = messagebox;
-        }
-        else{
-          mb = res[0];
-        }
-        $state.go('chatdetail',{mb:mb.id});
-      })
-
-    }
   })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams) {
-  var mbid = new MessageBox();
-  $scope.myId = currentUser.id;
-  mbid.id = $stateParams.mb;
+  $scope.toUser = $stateParams.username;
+  $scope.User
+  console.log("show" + $scope.toUser);
+  $scope.messages = [];
+  $scope.input={};
+  $scope.messagesRef = null;
+  $scope.doneLoading = false;
 
-  mbid.fetch().then(function(){
-    mbid.reload();
-  }).then(function(obj){
-    //mbid.showMessage($scope,);
-    $scope.Messages = mbid.get("Messages");
-    $scope.$apply();
+
+  $scope.addNewPost = function (postObj, prevObjKey){
+    $scope.messages.push(postObj);
+  }
+
+  var SessionRef = FirebaseRef.child("MessageSession").child(MessageBox[$scope.toUser]);
+  console.log("Session loaded" + MessageBox[$scope.toUser]);
+  SessionRef.on("child_added",function(childsnapshot,prevchildkey){
+    $scope.messages.push(childsnapshot.val());
+    console.log($scope.messages.length);
+    console.log(childsnapshot.val().content);
   });
 
+  $scope.sendMessage = function(){
+    var newMessage = {};
+    newMessage.content = $scope.input.message;
+    newMessage.poster = currentUser.get("username");
+    $scope.input = {};
+    SessionRef.push(newMessage);
+  }
+  /*
+  if(MessageBox == null || MessageBox[$scope.toUser]==null){
+    var obj = {};
+    obj[$scope.toUser] = guid();
+    var postRef = FirebaseRef.child("MessageBox").child(obj[$scope.toUser]);
+    postRef.on("child_added",$scope.addNewPost);
+    messageBoxRef.set(obj);
+    var obj2 = {};
+    obj2[currentUser.get("username")] = obj[$scope.toUser];
+    FirebaseRef.child($scope.toUser).("MessageBox").update(obj2);
+    var check = setTimeInterval(function(){
+      console.log("check update");
+      if(!MessageBox == null && !MessageBox[$scope.toUser]==null){
+        clearInterval(check);
+      }
+    },500);
+  }
+
+  var id = MessageBox[$scope.toUser];
+
+  console.log(userRef);*/
 
 
 
@@ -310,7 +314,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         )
       });
       console.log("Registering Timer");
-      $scope.postUpdate = setInterval(refresh,1000);
+      //$scope.postUpdate = setInterval(refresh,1000);
     }
     $scope.request = function(){
       APP.request();
@@ -448,53 +452,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       });
     }
   })
-
-  .controller('ChatCtrl',function($scope,$state){
-    $scope.users;
-
-
-
-    $scope.reloadUser = function (){
-      APP.get("MBox").showUsers($scope);
-    }
-
-
-    $scope.chatDetail = function(user){
-      console.log(user.get('username'));
-      $state.go('chatdetail',{"toUser":user});
-    }
-
-
-  })
-
-  .controller('ChatDetailCtrl',function($scope,$stateParams){
-    $scope.toUser = $stateParams.toUser;
-    console.log("Received user "+$scope.toUser.get("username") );
-    $scope.doneLoading = false;
-    $scope.messages;
-
-
-    $scope.loadChat = function (){
-      $scope.chats = APP.get("MBox").showMessage();
-      $scope.$apply();
-    }
-
-
-    $scope.getMessages = function(){
-      APP.get("MBox").showMessage($scope,$scope.toUser.get("username"));
-    }
-
-    $scope.sendMessage = function (){
-      var mes = new Message();
-      mes.set("Content",$scope.input);
-      mes.set("Receiver", $scope.toUser.get("username"));
-      mes.set("Username", currentUser.get("username"));
-      mes.save();
-      $scope.messages.push(mes);
-      $scope.$apply();
-    }
-  })
-
 
   .controller('ModalCtrl', function($scope, $ionicModal, $ionicActionSheet,
     $ionicPopup, $state, $cordovaCamera, $timeout, $ionicSideMenuDelegate) {
@@ -709,14 +666,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
     currentUser = H_User.current();
 
+
+
     $scope.currentUser = currentUser;
     if(currentUser){
       isLogin = true;
       APP = currentUser.get("customer");
       APP.fetch().then(function(obj){
-        if(APP.get("Requests").length != 0){
-          AcceptTimer = setInterval(checkAccept,3000);
-        }
+        //if(APP.get("Requests").length != 0){
+        //  AcceptTimer = setInterval(checkAccept,3000);
+        //}
       });
       var GP = new Parse.GeoPoint.current({
         success: function (point){
@@ -732,6 +691,17 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       APP.search($scope, 1, false);
       userQuery($scope, currentUser);
       $state.go('tabs.home');
+
+
+      //To initialize the Message configuration
+      userRef = FirebaseRef.child("Users").child(currentUser.get("username"));
+      messageBoxRef = userRef.child("MessageBox");
+      messageBoxRef.on("value",function(snapshot){
+        MessageBox = snapshot.val();
+        console.log("MessageBox loaded");
+        console.log(MessageBox);
+      });
+      //====================
     }
 
     $scope.getNeighbors = function() {

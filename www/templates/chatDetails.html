@@ -1,0 +1,62 @@
+<ion-view>
+
+  <ion-header-bar class="bar-style post-type3">
+    <h2 id='home-bar' class="title">{{toUser}}</h2>
+  </ion-header-bar>
+
+    <ion-content has-bouncing="true" class="has-header has-footer">
+
+      <div ng-repeat="message in messages" class="message-wrapper">
+
+        <div ng-if="toUser === message.poster">
+
+          <img ng-click="viewProfile(message.poster)" class="profile-pic left"
+               ng-src="img/ivy.jpg"/>
+
+          <div class="chat-bubble left">
+
+            <div class="message" ng-bind-html="message.content" autolinker></div>
+
+<!--            <div class="message-detail">
+                              <span ng-click="viewProfile(message)"
+                                    class="bold">{{toUser.username}}</span>,
+              <span am-time-ago="message.date"></span>-->
+          </div>
+        </div>
+
+        <div ng-if="toUser !== message.poster">
+
+          <img ng-click="viewProfile(message)" class="profile-pic right"
+               src={{currentUser.get('Profile').url()}} />
+
+          <div class="chat-bubble right">
+
+            <div class="message" ng-bind-html="message.content">
+            </div>
+
+           <!-- <div class="message-detail">
+                              <span ng-click="viewProfile(message)"
+                                    class="bold">{{user.username}}</span>,
+          </div>-->
+
+          </div>
+
+        </div>
+      </div>
+
+    </ion-content>
+
+    <form name="sendMessageForm" ng-submit="sendMessage()" novalidate>
+      <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
+        <label class="item-input-wrapper">
+          <textarea ng-model="input.message" value="" placeholder="Send {{toUser}} a message..." required minlength="1" maxlength="1500" msd-elastic></textarea>
+        </label>
+        <div class="footer-btn-wrap">
+          <button class="button button-icon icon ion-android-send footer-btn" type="submit"
+                  ng-disabled="!input.message || input.message === ''">
+          </button>
+        </div>
+      </ion-footer-bar>
+    </form>
+
+</ion-view>
