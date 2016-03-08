@@ -60,7 +60,7 @@ img.profile-pic.right {
 .chat-bubble.left {
   background-color: #e6e5eb;
   float: left;
-  margin-left: 55px;
+  margin-left: 10px;
 }
 
 .chat-bubble.left:before {
@@ -73,7 +73,7 @@ img.profile-pic.right {
   background-color: #158ffe;
   color: #fff;
   float: right;
-  margin-right: 55px;
+  margin-right: 10px;
 }
 
 .chat-bubble.right:before {

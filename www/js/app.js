@@ -65,6 +65,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     })
 
+    .state('tabs.sessions', {
+      url: '/sessions',
+      views: {
+        'sessions-tab': {
+          templateUrl: 'templates/sessions.html',
+          controller: 'SessionsCtrl'
+        }
+      }
+    })
     .state('detail', {
       url: '/detail/:itemObj',
       templateUrl: 'templates/detail.html',
@@ -116,7 +125,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       controller:'OfferingCtrl',
       templateUrl: 'templates/offering.html',
     })
-
     .state('record', {
       url: '/record',
       controller: 'RecordCtrl',

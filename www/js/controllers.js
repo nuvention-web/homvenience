@@ -228,22 +228,57 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.targetUser.id = $stateParams.user;
     $scope.targetUser.fetch().then(function (obj){
       console.log($scope.targetUser.get("username"));
+      if(Users[obj.get("username")] == null){
+        Users[obj.get("username")] = $scope.targetUser;
+      }
     });
+    $scope.chatDetail = function(name){
+      $state.go("chatdetail",{username:name});
+    }
+  })
+
+  .controller('SessionsCtrl', function($scope,$state){
+    $scope.Sessions = [];
+    for(var p in MessageBox){
+      var obj = {};
+      obj.name = p;
+      console.log(p);
+      $scope.Sessions.push(obj);
+    }
+    $scope.chatDetail = function(name){
+      $state.go("chatdetail",{username:name});
+    }
   })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams) {
   $scope.toUser = $stateParams.username;
-  $scope.User
+  $scope.toUserObj = Users[$scope.toUser];
+  $scope.me = currentUser;
   console.log("show" + $scope.toUser);
   $scope.messages = [];
   $scope.input={};
   $scope.messagesRef = null;
   $scope.doneLoading = false;
 
+   if(MessageBox == null || MessageBox[$scope.toUser]==null){
+     var obj = {};
+     obj[$scope.toUser] = guid();
+     messageBoxRef.update(obj);
+     var obj2 = {};
+     obj2[currentUser.get("username")] = obj[$scope.toUser];
+     FirebaseRef.child("Users").child($scope.toUser).child("MessageBox").update(obj2);
+     //var check = setTimeInterval(function(){
+     //  console.log("check update");
+     //  if(!MessageBox == null && !MessageBox[$scope.toUser]==null){
+     //    clearInterval(check);
+     //  }
+     //},500);
+   }
 
-  $scope.addNewPost = function (postObj, prevObjKey){
-    $scope.messages.push(postObj);
-  }
+   var id = MessageBox[$scope.toUser];
+
+   console.log(userRef);
+
 
   var SessionRef = FirebaseRef.child("MessageSession").child(MessageBox[$scope.toUser]);
   console.log("Session loaded" + MessageBox[$scope.toUser]);
@@ -260,27 +295,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.input = {};
     SessionRef.push(newMessage);
   }
-  /*
-  if(MessageBox == null || MessageBox[$scope.toUser]==null){
-    var obj = {};
-    obj[$scope.toUser] = guid();
-    var postRef = FirebaseRef.child("MessageBox").child(obj[$scope.toUser]);
-    postRef.on("child_added",$scope.addNewPost);
-    messageBoxRef.set(obj);
-    var obj2 = {};
-    obj2[currentUser.get("username")] = obj[$scope.toUser];
-    FirebaseRef.child($scope.toUser).("MessageBox").update(obj2);
-    var check = setTimeInterval(function(){
-      console.log("check update");
-      if(!MessageBox == null && !MessageBox[$scope.toUser]==null){
-        clearInterval(check);
-      }
-    },500);
-  }
 
-  var id = MessageBox[$scope.toUser];
-
-  console.log(userRef);*/
 
 
 

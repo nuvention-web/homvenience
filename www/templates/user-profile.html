@@ -10,13 +10,11 @@
     <ion-content>
       <div class="header-wallpaper">
         <div class="header-wrapper">
-          <div style="background-image: url({{targetUser.get('Profile').url()}})" class="protrait"></div>
+          <div style="background-image: url({{targetUser.get('Profile').url()}})" class="protrait" ng-click="chatDetail(targetUser.get('username'))"></div>
           <div id="myname">
             {{targetUser.get('username')}}
   <!--          <img class='pro-gender' src="" alt="female" /> -->
           </div>
-
-<!--          <a href="#/chatDetail/{{targetUser.get('username')}}">Send a Message</a> -->
 
           <div class="row user-stat">
             <div class="col stat-item">

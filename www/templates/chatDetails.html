@@ -1,6 +1,10 @@
 <ion-view>
 
   <ion-header-bar class="bar-style post-type3">
+    <a href='#/tab/home'>
+      <button class="button button-icon button-clear button-white ion-ios-arrow-back">
+      </button>
+    </a>
     <h2 id='home-bar' class="title">{{toUser}}</h2>
   </ion-header-bar>
 
@@ -10,8 +14,8 @@
 
         <div ng-if="toUser === message.poster">
 
-          <img ng-click="viewProfile(message.poster)" class="profile-pic left"
-               ng-src="img/ivy.jpg"/>
+          <!--<img ng-click="viewProfile(message.poster)" class="profile-pic left"
+               ng-src={{toUserObj.get("Profile").url()}}/>-->
 
           <div class="chat-bubble left">
 
@@ -26,8 +30,7 @@
 
         <div ng-if="toUser !== message.poster">
 
-          <img ng-click="viewProfile(message)" class="profile-pic right"
-               src={{currentUser.get('Profile').url()}} />
+          <!--<img ng-click="viewProfile(message)" class="profile-pic right" src={{me.get("Profile").url()}} />-->
 
           <div class="chat-bubble right">
 
