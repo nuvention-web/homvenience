@@ -56,7 +56,7 @@
       </ion-refresher>
 
     <div class="list">
-     <a class="item item-avatar" href="#/user-profile" ng-repeat = "x in neighborList">
+     <a class="item item-avatar" href="#/user-profile/{{x.id}}" ng-repeat = "x in neighborList">
         <img id='user-head' src={{x.get("Profile").url()}}>
         <div id='user-name'>{{x.get("username")}}</div>
         <div id='user-time'>{{getTime(x.updatedAt)}}</div>

@@ -4,6 +4,8 @@
 
 
 Parse.initialize("KnJk0tRr89V3CoheSEVz2Q89B6K1DMjLFGu6Kjj0", "YUFmkfELE7CXIHVfI8tnIjjPzcTFr7qSacEAWJmC");
+var FirebaseRef = new Firebase("https://aroundmii.firebaseio.com/");
+var MessageBox = [];
 
 /*var TestObject = Parse.Object.extend("TestObject");
 var testObject = new TestObject();
@@ -163,10 +165,10 @@ var Customer = Parse.Object.extend("Customer" , {
         res.save().then(function(call){
           var req = app.get("Requests");
           req.push(obj.id);
-          if(req.length==1) {
-            AcceptTimer = setInterval(checkAccept, 2000);
-            console.log("set Interval finished");
-          }
+          //if(req.length==1) {
+          //  AcceptTimer = setInterval(checkAccept, 2000);
+          //  console.log("set Interval finished");
+          //}
           app.save().then(function(saved){
             //alert("Request Sent");
           },function(err){
@@ -337,4 +339,12 @@ var userQuery = function ($scope, user){
 
 var sortByTime = function (row1,row2){
 
+}
+
+function guid() {
+  function S4() {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  }
+
+  return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
 }

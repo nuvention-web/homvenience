@@ -100,8 +100,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
 
     .state('chatdetail',{
-      url: '/chatDetail/:mb',
-      templateUrl: 'templates/chatDetail.html',
+      url: '/chatDetail/:username',
+      templateUrl: 'templates/chatDetails.html',
       controller:'ChatDetailCtrl'
     })
 
