@@ -286,6 +286,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.messages.push(childsnapshot.val());
     console.log($scope.messages.length);
     console.log(childsnapshot.val().content);
+    $scope.$apply();
   });
 
   $scope.$apply();
