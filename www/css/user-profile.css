@@ -15,7 +15,7 @@
 }
 
 .header-wallpaper{
-  background-image: url("img/london.jpg");
+  background-image: url("../img/london.jpg");
   background-size: cover;
 }
 
