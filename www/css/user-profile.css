@@ -15,7 +15,7 @@
 }
 
 .header-wallpaper{
-  background-image: url("../img/london.jpg");
+  background-image: url("img/london.jpg");
   background-size: cover;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .protrait-back{
-	background-image: url("../img/ivy-back.jpg");
+	background-image: url("img/ivy-back.jpg");
 	min-height: 150px;
 	background-size: cover;
 }
