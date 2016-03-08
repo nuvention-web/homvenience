@@ -76,6 +76,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     })
     .state('detail', {
       url: '/detail/:itemObj',
+      cache:false,
       templateUrl: 'templates/detail.html',
       controller: 'DetailCtrl'
     })

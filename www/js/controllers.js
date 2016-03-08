@@ -288,6 +288,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     console.log(childsnapshot.val().content);
   });
 
+  $scope.$apply();
+
   $scope.sendMessage = function(){
     var newMessage = {};
     newMessage.content = $scope.input.message;
@@ -328,7 +330,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         )
       });
       console.log("Registering Timer");
-      //$scope.postUpdate = setInterval(refresh,1000);
+      $scope.postUpdate = setInterval(refresh,1000);
     }
     $scope.request = function(){
       APP.request();
