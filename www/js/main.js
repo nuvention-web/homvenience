@@ -213,6 +213,7 @@ var Customer = Parse.Object.extend("Customer" , {
       //for(var i =0;i<$scope.search_res.length;i++){
       //  $scope.search_res[i].get("Owner").fetch();
       //}
+      $scope.search_res.sort(function(a, b){return a.updatedAt - b.updatedAt});
       $scope.search_res.reverse();
       $scope.$apply();
       console.log($scope.search_res.length);

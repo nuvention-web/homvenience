@@ -14,7 +14,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('NeighborsTabCtrl', function($scope, $http) {
     $scope.user = currentUser;
-    $scope.neighborList = [];
     userQuery($scope, currentUser);
     $scope.getNeighbors = function() {
       userQuery($scope, currentUser);
@@ -683,21 +682,22 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.getTime = function(time) {
       var interval = (curTime - time.valueOf())/1000;
       interval /= 60;
+      interval = interval < 0 ? 0 : interval;
       if(interval < 60)
-        return Math.floor(interval) + "M";
+        return Math.floor(interval) + "m";
       interval /= 60;
       if(interval < 24)
-        return Math.floor(interval) + "H";
+        return Math.floor(interval) + "h";
       interval /= 24;
       if(interval < 7)
-        return Math.floor(interval) + "D";
+        return Math.floor(interval) + "d";
       interval /= 7;
       if(interval < 4)
-        return Math.floor(interval) + "W";
+        return Math.floor(interval) + "w";
       interval /= 4;
       if(interval < 12)
-        return Math.floor(interval) + "M";
-      return Math.floor(interval);
+        return Math.floor(interval) + "m";
+      return Math.floor(interval) + "m";
     };
 
     $scope.toggleLeft = function() {
