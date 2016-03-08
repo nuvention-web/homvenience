@@ -127,82 +127,6 @@
       </ion-view>
     </script>
 
-    <script id="templates/chatDetail.html" type="text/ng-template">
-      <ion-view cache-view="false">
-
-        <ion-header-bar  class="bar-col bar bar-header">
-          <h2 class="title rest-bar">{{toUser.get('username')}}</h2>
-        </ion-header-bar>
-
-        <div class="loader-center" ng-if="!doneLoading">
-          <div class="loader">
-            <i class="icon ion-loading-c"></i>
-          </div>
-        </div>
-
-        <ion-content has-bouncing="true" class="has-header has-footer">
-
-          <div ng-repeat="m in messages" class="message-wrapper"
-               on-hold="onMessageHold($event, $index, message)">
-
-            <div ng-if="currentUser.id !== m.id">
-
-              <img  class="profile-pic left"
-                    ng-src={{HeadProfile[toUser.get("username")]}} />
-
-              <div class="chat-bubble left">
-
-                <div class="message" ng-bind-html="m.get('Content')"r>
-                </div>
-
-                <div class="message-detail">
-                  <span am-time-ago="m.createdAt"></span>
-                </div>
-
-              </div>
-            </div>
-
-            <div ng-if="currentUser.id == m.id">
-
-              <img class="profile-pic right"
-                   ng-src={{HeadProfile[currentUser.get("username")]}} />
-
-              <div class="chat-bubble right">
-
-                <div class="message" ng-bind-html="m.get('Content')">
-                </div>
-
-                <div class="message-detail">
-                  <span am-time-ago="m.createdAt">></span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="cf"></div>
-
-          </div>
-        </ion-content>
-
-        <form name="sendMessageForm" ng-submit="sendMessage()" novalidate>
-          <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
-            <label class="item-input-wrapper">
-              <textarea ng-model="input" value="" placeholder="Send {{toUser.get('username')}} a message..." required minlength="1" maxlength="1500" msd-elastic></textarea>
-            </label>
-            <div class="footer-btn-wrap">
-              <button class="button button-icon icon ion-android-send footer-btn" type="submit"
-                      ng-disabled="!input || input === ''">
-              </button>
-            </div>
-          </ion-footer-bar>
-        </form>
-
-      </ion-view>
-    </script>
-
-
     <script id="templates/request.html" type="text/ng-template">
       <ion-view>
 
@@ -286,6 +210,29 @@
               </div>
             </ion-item>
           </ion-list>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/sessions.html" type="text/ng-template">
+      <ion-view>
+
+        <ion-header-bar class="bar-style bar ">
+          <a href='#/tab/home'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
+          </a>
+          <h2 class="title rest-bar">Messages</h2>
+        </ion-header-bar>
+
+        <ion-content  ng-init="Refresh()">
+          <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="Refresh()">
+          </ion-refresher>
+          <ul class="list">
+            <li class="item" ng-repeat="x in Sessions"  ng-click="chatDetail(x.name)">
+                <p>{{x.name}}</p>
+            </li>
+          </ul>
         </ion-content>
       </ion-view>
     </script>
