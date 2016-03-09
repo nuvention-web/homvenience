@@ -6,8 +6,8 @@
 }
 
 .wrapper{
-	padding-top: 45px;
-	padding-bottom:25px;
+	padding-top: 35px;
+	padding-bottom:10px;
 	min-height: 150px;
 	background-color: rgba(0, 0, 0, 0.1);
 }
@@ -46,7 +46,7 @@
 }
 
 .side-list .side-item{
-  font-size: 15px;
+  font-size: 12px;
   padding: 6.5%;
   padding-left: 25%;
   letter-spacing: 1px;
@@ -60,7 +60,6 @@
 .side-item .sideitem-text{
   display: inline-block;
   margin: auto;
-  padding-top: 1%;
   padding-left: 7%;
   position: fixed;
 }
