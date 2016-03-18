@@ -286,7 +286,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.messages.push(childsnapshot.val());
     console.log($scope.messages.length);
     console.log(childsnapshot.val().content);
-    $scope.$apply();
   });
 
   $scope.$apply();
@@ -318,7 +317,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       $scope.Item.fetch().then(function(obj){
         obj.relation("Comments").query().find().then(function(list){
           $scope.Comments = list;
-          $scope.Comments.sort(function(a, b){return a.updatedAt - b.updatedAt});
+          $scope.Comments.sort(function(a, b){return b.updatedAt - a.updatedAt});
           for(var i = 0;i<$scope.Comments.length;i++) {
             $scope.loaded.push($scope.Comments[i].id);
           }

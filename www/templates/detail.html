@@ -1,6 +1,6 @@
 
 <ion-view ng-init="init()">
-  <ion-header-bar class="bar-style post-type3">
+  <ion-header-bar class="bar-style post-type1">
     <a href='#/tab/home' ng-click="cancelTimer()">
       <button class="button button-icon button-clear button-light ion-ios-arrow-back">
       </button>
@@ -39,21 +39,18 @@
       <p>{{mes.get("Content")}}</p>
       <p>{{mes.createdAt.toDateString()}}</p>
     </div>
-    <div class="item item-avatar">
-      <form name="addPostForm" ng-submit="postComment(input.commentinput)" novalidate>
-        <ion-footer-bar class="bar-stable item-input-inset message-footer" keyboard-attach>
-          <label class="item-input-wrapper">
-            <input type="text" ng-model="input.commentinput" value="" placeholder="Send {{Item.get('Owner').get('username')}} a message..." required minlength="1" maxlength="1500" msd-elastic/>
-          </label>
-          <div class="footer-btn-wrap">
-            <button class="button button-icon icon ion-android-send footer-btn" type="submit"
-                    ng-disabled="!input.commentinput || input.commentinput === ''">
-            </button>
-          </div>
-        </ion-footer-bar>
-      </form>
-    </div>
-
 
   </ion-content>
+
+
+  <ion-footer-bar class = "bar bar-footer message-footer">
+      <form name="addPostForm" ng-submit="postComment(input.commentinput)" novalidate>
+          <label class="item-input-wrapper">
+            <input type="text" ng-model="input.commentinput" value="80" placeholder="Send {{Item.get('Owner').get('username')}} a message..." required minlength="1" maxlength="1500" msd-elastic>
+            <button class="button button-icon icon ion-android-send pull-right" type="submit"
+                    ng-disabled="!input.commentinput || input.commentinput === ''">
+            </button>
+          </label>
+      </form>
+  </ion-footer-bar>
 </ion-view>
