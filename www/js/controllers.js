@@ -233,6 +233,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
       }
     });
     $scope.chatDetail = function(name){
+      if(name == currentUser.get("username"))
+        return;
       $state.go("chatdetail",{username:name});
     }
   })
