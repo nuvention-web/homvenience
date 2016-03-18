@@ -1,7 +1,46 @@
+/*-----bar part-----*/
+.bar-style{
+	background-color: #8D78E5 ;
+	color: #fff;
+}
+
+
+#home-bar{
+	color: #fff !important;
+	font-size: 20px;
+	font-family: 'Merriweather Sans', sans-serif;
+	font-weight: bold;
+}
+
+.rest-bar{
+	color: #fff;
+	font-family: 'Roboto', sans-serif;
+	font-size: 20px;
+}
+/*-----bar part-----*/
+
+/*-----公用-----*/
+.bottom-icon{
+	color: #8D78E5;
+}
+
+.tabs{
+	background-color: #fff !important;
+}
+
+.button-white{
+	color: #fff !important;
+}
+
+/*-----公用-----*/
+
+
+
+
 /*-----间隙背景-----*/
 .popup-buttons .ng-binding{
 	border-radius:10px !important;
-	background-color: #9BDDFF !important; 
+	background-color: #9BDDFF !important;
 }
 
 a{
@@ -20,36 +59,61 @@ a{
 	background-color: #ddd;
 }
 
-.bar-col{
-	background-color: #9BDDFF !important;
-}
-
-.rest-bar{
-	color: #fff;
-	font-family: 'Roboto', sans-serif;
-	font-size: 26px;
-}
-
 /*----Signin部分----*/
 
 #sign-button{
 
 }
 
-/*----home部分----*/
-
-#home-bar{
-	color: #fff !important;
-	font-size: 28px;
-	font-family: 'Oleo Script', cursive;
+/*----home部分 2.24 added----*/
+.post-icon{
+	height: 46px;
+	width: 46px;
+	position: absolute;
+	bottom: 9%;
+	right:5%;
+	background-color: #8D78E5;
+	z-index: 3;
+	border-radius: 23px;
+	color: white;
 }
+
+.post-icon:hover{
+	color: white;
+}
+
+.item-divider-mii{
+	height:5px !important;
+	min-height: 0px;
+	padding: 0px;
+}
+
+.portrait{
+	max-height: 53px !important;
+	max-width: 53px !important;
+	top: 8px !important;
+	left: 12px !important;
+}
+
+.post-type{
+	background-color: #eb2226;
+}
+
+.post-type1{
+	background-color: #D16AEA;
+}
+
+.post-type2{
+	background-color: #fdca30;
+}
+
+.post-type3{
+	background-color: #7fbb00;
+}
+
 
 #itembar{
 	font-size: 15px !important;
-}
-
-.icon-site{
-	color: #9BDDFF;
 }
 
 #user-item{
@@ -75,6 +139,10 @@ a{
 
 .item-header{
 	border-width: 0px !important;
+}
+
+.icolor .item-avatar{
+	color: #9BDDFF;
 }
 
 /*-----home超链接-----*/
@@ -112,6 +180,16 @@ a{
 	color: #666 !important;
 }
 
+.adic-modal .modal {
+    min-height: 0 !important;
+}
 
-
-
+.adic-popup {
+    width: 90%;
+    height: 60%;
+    top: 20%;
+    bottom: 20%;
+    right: 5%;
+    left: 5%;
+    background-color: #ffffff;
+}

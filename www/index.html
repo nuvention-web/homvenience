@@ -4,14 +4,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
-    <!--字体-->
+    <!--fonts-->
     <link href="https://fonts.googleapis.com/css?family=Oleo%20Script" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C500" rel="stylesheet" type="text/css">
-
-
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather%20Sans" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito%3A400%2C300" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Numans" rel="stylesheet" type="text/css">
+    <!--css-->
+    <link rel="stylesheet" href="css/user-profile.css" charset="utf-8">
+    <link rel="stylesheet" href="lib/ionic/css/ionic.css">
+    <link rel="stylesheet" href="css/side-menu.css" charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/message.css">
+    <link rel="stylesheet" href="css/sign-in.css">
+    <link rel="stylesheet" href="css/neighbors.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -24,16 +32,21 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
     <script src="js/ng-cordova.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-latest.js"></script>
 
     <!-- Backend Logic -->
     <script src="js/main.js"></script>
+    <script src="js/Messages.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
+    <script src="js/controllers/ModalCtrl.js"></script>
     <script src="js/services.js"></script>
+
+
 
 
   </head>
@@ -45,67 +58,9 @@
 
     <ion-nav-view></ion-nav-view>
 
-<!--固定导航栏-->
-
-    <script id="templates/tabs.html" type="text/ng-template">
-      <ion-view >
-        <ion-tabs class="tabs-icon-only">
-
-          <ion-tab title="Home" icon="ion-aperture" href="#/tab/home">
-            <ion-nav-view name="home-tab"></ion-nav-view>
-          </ion-tab>
-
-          <ion-tab title="Search" icon="ion-ios-search-strong" href="#/tab/search">
-            <ion-nav-view name="search-tab"></ion-nav-view>
-          </ion-tab>
-
-          <ion-tab title="Post" icon="icon ion-ios-plus-outline" ng-click="postShow()">
-              <ion-nav-view name="post-tab" ></ion-nav-view>
-          </ion-tab>
-
-          <ion-tab title="Chat" icon="ion-chatbubble" href="#/tab/chat">
-            <ion-nav-view name="chat-tab" ></ion-nav-view>
-          </ion-tab>
-
-          <ion-tab title="Account" icon="ion-person" href="#/tab/account">
-            <ion-nav-view name="account-tab" ></ion-nav-view>
-          </ion-tab>
-        </ion-tabs>
-      </ion-view>
-    </script>
-
 
 <!--登录页面-->
-    <script id="templates/sign-in.html" type="text/ng-template">
-      <ion-view >
-        <ion-header-bar class="bar-col bar-header bar">
 
-          <h2 class="title rest-bar">Sign-In</h2>
-        </ion-header-bar>
-        <ion-content>
-          <div class="list">
-            <br>
-            <label class="item item-input">
-              <span class="input-label">Username</span>
-              <input type="text" ng-model="user.username">
-            </label>
-            <label class="item item-input">
-              <span class="input-label">Password</span>
-              <input type="password" ng-model="user.password">
-            </label>
-          </div>
-          <div class="padding">
-            <button id='sign-button' class="button button-block button-outline button-calm" ng-click="SignIn(user)">
-              Sign In
-            </button>
-
-              <a href="#/forgot-password">Sign Up</a>
-              <a href="#/forgot-password">Forgot password</a>
-
-          </div>
-        </ion-content>
-      </ion-view>
-    </script>
 
 
     <script id="templates/forgot-password.html" type="text/ng-template">
@@ -118,129 +73,10 @@
       </ion-view>
     </script>
 
-
-
-
-<!--Homepage!!!!!-->
-
-    <script id="templates/home.html" type="text/ng-template">
-      <ion-view ng-init="init()">
-
-        <ion-header-bar  class="bar-col bar bar-header">
-          <h2 id='home-bar' class="title">Neighborship</h2>
-        </ion-header-bar>
-
-        <ion-content class='content-back'>
-          <ion-refresher
-              pulling-text="Pull to refresh..."
-              on-refresh="init()">
-          </ion-refresher>
-
-          <div class="list" ng-repeat = "x in search_res" ng-click="esc()">
-
-              <a class="item item-avatar item-header" >
-                  <img src="img/mike.png">
-                  <h2>{{x.get("Owner")}}<i class="icon fa fa-smile-o icolor"></i></h2>
-                  <p>活跃度.</p>
-              </a>
-
-              <a id='home-a' href="#/detail">
-                <div class='item-detail'>
-                  <img class="full-image" src="img/ps.png">
-                  <p>
-                      {{x.get("Desc")}}
-                  </p>
-                  <div id='item-bar'class="row">
-                      <div class="col col-67"><i class="icon ion-ios-location icon-site"></i>
-                      &nbspEvanston
-                      </div>
-                      <div class="col col-13"><i class="ion-thumbsup icolor"></i>
-                       7
-                       </div>
-                      <div class="col col-13"><i class="icon ion-chatbubble icolor"></i>
-                       10
-                       </div>
-                  </div>
-                </div>
-              </a>
-
-            </div>
-        </ion-content>
-      </ion-view>
-    </script>
-
-
-
-<!--item详情页面-->
-    <script id="templates/detail.html" type="text/ng-template">
-      <ion-view ng-init="init()">
-
-        <ion-header-bar class="bar-col bar bar-header">
-        <a href='#/tab/home'>
-          <button class="button button-clear button-text button-back"><i class='ion-ios-arrow-back'>&nbsp back</i></button>
-        </a>
-
-        </ion-header-bar>
-
-        <ion-content >
-
-          <div class="list">
-              <a class="item item-avatar item-header" href="#account">
-                  <img src="img/mike.png">
-                  <h2 >Venkman</h2>
-                  <p>
-                    Back. I am going to zhuang B.
-                  </p>
-              </a>
-              <div class='item-detail'>
-                <p>
-                    This is my PS3！I bought it in 2013. Anyone want play with it? Free to lend
-                </p>
-                <div id='itembar'class="row">
-                  <i class="icon ion-ios-location icon-site"></i>
-<!--传定位进来-->
-                  <p>&nbsp Evanston</p>
-                  <p>&nbsp 多久之前</p>
-                </div>
-              <img class="full-image" src="img/ps.png">
-              </div>
-          </div>
-
-          <button class="button button-block button-outline button-calm" ng-click="showAlert()" >
-            Want
-          </button>
-
-
-          <div id='detail-comment' class="list" ng-repeat = "x in search_res">
-              <a class="item item-avatar" href="#">
-
-                <img src="venkman.jpg">
-                <h2>Venkman</h2>
-                <p>Back off, man. Im a scientist.</p>
-              </a>
-              <p>adfasdfaf</p>
-          </div>
-          <div class="tabs tabs-icon-only">
-            <a class="tab-item">
-              <i class="icon ion-home"></i>
-            </a>
-            <a class="tab-item">
-              <i class="icon ion-star"></i>
-            </a>
-            <a class="tab-item">
-              <i class="icon ion-gear-a"></i>
-            </a>
-          </div>
-
-        </ion-content>
-      </ion-view>
-    </script>
-
-
     <script id="templates/search.html" type="text/ng-template">
         <ion-view view-title="Search"  ng-init="init()">
 
-          <ion-header-bar class="bar-col bar-header bar">
+          <ion-header-bar class="bar-style  bar">
           <h2 class="title rest-bar">Search</h2>
 
           <button class="button button-clear icon ion-log-in" ng-click="init()"></button>
@@ -260,7 +96,7 @@
                 <img src="img/ben.png">
                 <h2>{{x.get("Title")}}</h2>
 
-                <p>{{x.get("Owner")}}</p>
+                <p>{{x.get("Owner").get("username")}}</p>
               </div>
               <div class="item item-body">
                 <p>{{x.get("Desc")}}</p>
@@ -272,62 +108,21 @@
 
 <!--Chat页面-->
     <script id="templates/chat.html" type="text/ng-template">
-    <ion-view>
+    <ion-view ng-init="reloadUser()">
 
-        <ion-header-bar  class="bar-col bar bar-header">
+        <ion-header-bar  class="bar-style bar ">
           <h2 class="title rest-bar">Messages</h2>
         </ion-header-bar>
-
-
-
-        </ion-content>
-      </ion-view>
-    </script>
-
-<!--个人信息页面-->
-    <script id="templates/account.html" type="text/ng-template">
-      <ion-view>
-
-        <ion-header-bar class="bar-col bar bar-header">
-          <h2 class="title rest-bar">Account</h2>
-          <button class="button button-clear icon ion-ios-gear"></button>
-
-        </ion-header-bar>
-
-        <ion-content>
-        <ul class="list">
-            <li class="item">
-              <a class="item item-avatar item-header" href="#account">
-                  <img src="img/mike.png">
-                  <h2 >Venkman</h2>
-                  <p>
-                    Back. I am going to zhuang B.
-                  </p>
-              </a>
-            </li>
-            <a href='#request'>
-            <li class="item">
-              Request
-            </li>
-            </a>
-            <a href='#offering'>
-            <li class="item">
-              Offering
-            </li>
-            </a>
-            <a href='#record'>
-            <li class="item">
-              Record
-            </li>
-            </a>
-        </ul>
-
-
-        <button class="button button-block button-outline button-stable" ng-click = "LogOut()">
-
-          Log Out
-        </button>
-
+        <ion-content >
+          <ion-list>
+            <ion-item class="item item-thumbnail-left" ng-repeat="x in users" ng-click="chatDetail(x)">
+              <img src={{HeadProfile[x.get("username")]}}>
+              <h2 >{{x.get("username")}}</h2>
+              <div class="">
+                <p>{{x.get("email")}}</p>
+              </div>
+            </ion-item>
+          </ion-list>
         </ion-content>
       </ion-view>
     </script>
@@ -335,7 +130,7 @@
     <script id="templates/request.html" type="text/ng-template">
       <ion-view>
 
-        <ion-header-bar class="bar-col bar bar-header">
+        <ion-header-bar class="bar-style bar ">
           <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
           </a>
           <h2 class="title rest-bar">Request</h2>
@@ -349,8 +144,8 @@
               on-refresh="Refresh()">
           </ion-refresher>
           <ion-list>
-            <ion-item class="item item-avatar" ng-repeat="x in reqs">
-              <img src="img/mike.png">
+            <ion-item class="item item-thumbnail-left" ng-repeat="x in reqs">
+              <img src={{HeadProfile[x.get('requesterName')]}}>
               <h2 >{{x.get("requesterName")}}</h2>
               <div class="">
                 <p>{{x.get("itemName")}}</p>
@@ -367,7 +162,7 @@
     <script id="templates/record.html" type="text/ng-template">
       <ion-view>
 
-        <ion-header-bar class="bar-col bar bar-header">
+        <ion-header-bar class="bar-style bar ">
           <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
           </a>
           <h2 class="title rest-bar">Record</h2>
@@ -379,11 +174,11 @@
               on-refresh="Refresh()">
           </ion-refresher>
           <ion-list>
-            <ion-item class="item item-avatar" ng-repeat="x in getItems">
-              <img src="img/mike.png">
+            <ion-item class="item item-thumbnail-left" ng-repeat="x in getItems">
+              <img src={{x.get('ImageArry')[0].url()}}></img>
               <h2 >{{x.get("Title")}}</h2>
               <div class="">
-                <p>{{x.get("Owner")}}</p>
+                <p>{{x.get("Owner").get("username")}}</p>
               </div>
             </ion-item>
             </ul>
@@ -395,51 +190,82 @@
     <script id="templates/offering.html" type="text/ng-template">
       <ion-view>
 
-        <ion-header-bar class="bar-col bar bar-header">
+        <ion-header-bar class="bar-style bar ">
           <a href='#/tab/account'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
           </a>
           <h2 class="title rest-bar">Offering</h2>
         </ion-header-bar>
 
-        <ion-content>
-        <ul class="list">
-            <li class="item item-avatar">
-                <img src="img/mike.png">
-                <h2 >Venkman</h2>
-                <button class="{{head()}}}"></button>
-            </li>
-        </ul>
+        <ion-content  ng-init="Refresh()">
+          <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="Refresh()">
+          </ion-refresher>
+          <ion-list>
+            <ion-item class="item item-thumbnail-left" ng-repeat="x in lentItem"  ng-click="eventDetail(x.id)">
+              <img ng-repeat="y in x.get('ImageArry')" src={{y.url()}}></img>
+              <h2 >{{x.get("Title")}}</h2>
+              <div class="">
+                <p>{{x.get("Owner").get("username")}}</p>
+              </div>
+            </ion-item>
+          </ion-list>
         </ion-content>
       </ion-view>
     </script>
 
+    <script id="templates/sessions.html" type="text/ng-template">
+      <ion-view>
 
-
-<!--发布信息页面-->
-    <script id="templates/modal.html" type="text/ng-template">
-      <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-col">
-          <h2 class="title rest-bar">I can help</h2>
-          <button class="button button-clear" ng-click="modal.hide()"><i class='ion-close-round'></i></button>
+        <ion-header-bar class="bar-style bar ">
+          <a href='#/tab/home'><button class="button button-clear button-text ion-ios-arrow-back">&nbsp back</button>
+          </a>
+          <h2 class="title rest-bar">Messages</h2>
         </ion-header-bar>
 
+        <ion-content  ng-init="Refresh()">
+          <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="Refresh()">
+          </ion-refresher>
+          <ul class="list">
+            <li class="item" ng-repeat="x in Sessions"  ng-click="chatDetail(x.name)">
+                <p>{{x.name}}</p>
+            </li>
+          </ul>
+        </ion-content>
+      </ion-view>
+    </script>
+
+    <script id="templates/Register-modal.html" type="text/ng-template">
+      <ion-modal-view>
+      <ion-header-bar class="bar  bar-style">
+        <h1 class="title rest-bar">Join your neighborhood!</h1>
+          <button class="button button-clear" ng-click="closeModal()"><i class='ion-close-round'></i></button>
+      </ion-header-bar>
         <ion-content>
-        <label class="item item-input">
-          <input type="text" placeholder="Subject" ng-model="newItem.Title"></label>
-
-        <button class = "button button-icon icon ion-camera" ng-click = showDetails()></button>
-
-        <label class="item item-input">
-          <textarea placeholder="Write description here" rows = "8" ng-model ="newItem.Desc"></textarea></label>
-
-        <button class="button button-block button-stable" ng-click="createPost()">
-          Post
-        </button>
-
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="Enter your Address" ng-model="newUser.address">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Enter your E-mail" ng-model="newUser.email">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="Enter your username" ng-model="newUser.username">
+          </label>
+          <label class="item item-input">
+            <input type="password" placeholder="Enter your password" ng-model="newUser.password">
+          </label>
+        <div class="col">
+          <button id='sign-button' class="button button-block button-outline button-calm" ng-click="SignUp(newUser)">
+                 Sign Up
+          </button>
+        </div>
+        </div>
         </ion-content>
       </ion-modal-view>
     </script>
-
 
 <feature name="Camera">
     <param name="ios-package" value="CDVCamera">
@@ -450,4 +276,3 @@
   </body>
 
 </html>
-

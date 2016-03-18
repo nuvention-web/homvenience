@@ -44,6 +44,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       abstract: true,
       templateUrl: 'templates/tabs.html'
     })
+
+    .state('tabs.neighbors', {
+      url: '/neighbors',
+      views: {
+        'neighbors-tab': {
+          templateUrl: 'templates/neighbors.html',
+          controller: 'NeighborsTabCtrl'
+        }
+      }
+    })
+
     .state('tabs.home', {
       url: '/home',
       views: {
@@ -54,10 +65,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     })
 
+    .state('tabs.sessions', {
+      url: '/sessions',
+      views: {
+        'sessions-tab': {
+          templateUrl: 'templates/sessions.html',
+          controller: 'SessionsCtrl'
+        }
+      }
+    })
     .state('detail', {
-      url: '/detail',
+      url: '/detail/:itemObj',
+      cache:false,
       templateUrl: 'templates/detail.html',
       controller: 'DetailCtrl'
+    })
+
+    .state('user-profile', {
+      url: '/user-profile/:user',
+      templateUrl: 'templates/user-profile.html',
+      controller:'ProfileCtrl'
     })
 
     .state('tabs.search',{
@@ -73,12 +100,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     .state('tabs.chat',{
       url: '/chat',
+      cache:false,
       views:{
         'chat-tab':{
           templateUrl: 'templates/chat.html',
-          controller:''
+          controller:'ChatCtrl'
         }
       }
+    })
+
+    .state('chatdetail',{
+      url: '/chatDetail/:username',
+      templateUrl: 'templates/chatDetails.html',
+      controller:'ChatDetailCtrl'
     })
 
     .state('request', {
@@ -89,26 +123,30 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
     .state('offering', {
       url: '/offering',
+      controller:'OfferingCtrl',
       templateUrl: 'templates/offering.html',
     })
-
     .state('record', {
       url: '/record',
       controller: 'RecordCtrl',
       templateUrl: 'templates/record.html',
     })
 
-
-
-
     .state('tabs.account', {
       url: '/account',
       views: {
         'account-tab': {
-          templateUrl: 'templates/account.html',
+          templateUrl: 'templates/tab-account.html',
           controller: 'AccountCtrl'
         }
       }
+    })
+
+
+    .state('eventmenu', {
+      url: "/event",
+      abstract: true,
+      templateUrl: "templates/event-menu.html"
     });
     // .state("tabs.post", {
     //   url: '/post',
@@ -124,4 +162,3 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   $urlRouterProvider.otherwise('/sign-in');
 
 });
-

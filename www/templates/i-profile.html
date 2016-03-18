@@ -1,0 +1,87 @@
+<ion-view class='user-profile'>
+    <ion-header-bar class="bar-style bar-tou">
+      <a href='#/tab/home'>
+        <button class="button button-icon button-clear button-white ion-ios-arrow-back">
+        </button>
+      </a>
+      <h2 class='title rest-bar'>Profile</h2>
+    </ion-header-bar>
+
+    <ion-content>
+      <div class="header-wallpaper">
+        <div class="header-wrapper">
+          <div style="background-image: url({{targetUser.get('Profile').url()}})" class="protrait"></div>
+          <div id="myname">
+            {{targetUser.get('username')}}
+  <!--          <img class='pro-gender' src="" alt="female" /> -->
+          </div>
+
+          <div class="row user-stat">
+            <div class="col stat-item">
+              <div class="stat-num">
+                26
+              </div>
+              <div class="stat-title">
+                likes
+              </div>
+            </div>
+
+            <div class="col stat-item">
+              <div class="stat-num">
+                18
+              </div>
+              <div class="stat-title">
+                post
+              </div>
+            </div>
+
+            <div class="col stat-item">
+              <div class="stat-num">
+                9
+              </div>
+              <div class="stat-title">
+                ?
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pro-info">
+        <div class="pro-item">
+          <div class="pro-item-title">
+            Age
+          </div>
+          <div class="pro-item-content">
+            20
+          </div>
+        </div>
+        <div class="pro-line">
+        </div>
+        <div class="pro-item">
+          <div class="pro-item-title">
+            Occupation
+          </div>
+          <div class="pro-item-content">
+            Game Engineer
+          </div>
+        </div>
+        <div class="pro-line">
+        </div>
+        <div class="pro-item">
+          <div class="pro-item-title">
+            Hometown
+          </div>
+          <div class="pro-item-content">
+            Boudler, CO
+          </div>
+        </div>
+        <div class="pro-line">
+        </div>
+
+
+      </div>
+
+
+  </ion-content>
+</ion-view>

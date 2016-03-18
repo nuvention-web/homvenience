@@ -1,0 +1,85 @@
+
+/*-----side-menu-----*/
+.side-font{
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
+
+.wrapper{
+	padding-top: 35px;
+	padding-bottom:10px;
+	min-height: 150px;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.side-protrait{
+	margin: 0 auto;
+	height: 100px;
+	width: 100px;
+	border-radius: 50px;
+	background-size: cover;
+	border: 1px #fff solid;
+}
+
+.side-protrait-back{
+	background-color: transparent;
+	background-size: cover;
+
+}
+
+#side-menu{
+	background: #B7A1FF; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #B7A1FF , #8D78E5); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #B7A1FF , #8D78E5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.side-wrapper{
+	background-color: rgba(0, 0, 0, 0.2);
+	height: auto;
+}
+
+.side-list{
+  width:100%;
+  height: 100%;
+  padding: 5%;
+  color: #fff;
+}
+
+.side-list .side-item{
+  font-size: 12px;
+  padding: 6.5%;
+  padding-left: 25%;
+  letter-spacing: 1px;
+}
+
+.side-list .side-bottom{
+  padding-top: 30%;
+  color: #fff;
+}
+
+.side-item .sideitem-text{
+  display: inline-block;
+  margin: auto;
+  padding-left: 7%;
+  position: fixed;
+}
+
+#side-logout{
+  padding-left: 2%;
+}
+
+#side-setting{
+  float: right;
+  padding-right: 2%;
+}
+
+.myname-text{
+  display: inline-block;
+  margin: 0 auto;
+}
+
+
+
+
+
+/*-----side-menu-----*/

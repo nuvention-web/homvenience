@@ -1,0 +1,101 @@
+<ion-view ng-init="init()">
+  <ion-side-menus>
+    <!-- Left menu -->
+    <ion-side-menu side="left" class="side-font">
+          <ion-content id='side-menu'>
+            <div class="side-wrapper">
+              <div class="side-protrait-back">
+                <div class="wrapper">
+                  <div style="background-image: url({{user.get('Profile').url()}})" class="side-protrait"></div>
+                  <div id="myname">
+                    <div class='myname-text'>{{user.get("username")}}</div>
+            <!--    <img class='pro-gender' src= "{{getSex(currentUser.get('Sex'))}}" alt="female" />  -->
+                  </div>
+                </div>
+              </div>
+              <div class="side-list">
+                <div class="side-item" ng-click="userDetail(user.id)">
+                  <img src="img/user.png" title="External" width="20">
+                  <div class='sideitem-text'>Profile</div>
+                </div>
+                <div class="side-item">
+                  <img src="img/events.png" title="External" width="20">
+                    <div class='sideitem-text'>Posts</div></div>
+                <div class="side-item">
+                  <img src="img/myfavorite.png" title="External" width="20">
+                  <div class='sideitem-text'>Favorite</div></div>
+                <div class="side-item">
+                  <img src="img/message.png" title="External" width="20">
+                  <div class='sideitem-text'>Messages</div></div>
+                <div class="side-bottom">
+                  <i id='side-logout' ng-click = "LogOut()">
+                    <img src="img/logout.png" title="External" width="20"></i>
+                  <i id='side-setting'>
+                    <img src="img/setting.png" title="External" width="20"></i>
+                </div>
+
+              </div>
+            </div>
+          </ion-content>
+    </ion-side-menu>
+
+<ion-side-menu-content>
+
+  <ion-header-bar  class="bar-style">
+    <h2 id='home-bar' class="title">AroundMii</h2>
+    <button class="button button-icon button-white button-clear icon ion-navicon" menu-toggle="left">
+    <button class="button button-icon button-clear button-white icon ion-ios-settings-strong"></button>
+  </ion-header-bar>
+
+  <button class="button button-icon post-icon icon ion-ios-plus-empty" ng-click="postShow()"></button>
+
+<ion-content class='content-back'>
+    <ion-refresher
+        pulling-text="Pull to refresh..."
+        on-refresh="doRefresh()">
+    </ion-refresher>
+
+    <div class="list card" ng-repeat="x in search_res">
+
+      <div class="item-divider-mii {{'item item-divider ' + x.get('postType')}}"></div>
+
+      <div id='home-a' ng-click="userDetail(x.get('Owner').id)">
+        <div class="item item-avatar">
+          <img class='portrait' src={{x.get('Owner').get("Profile").url()}}>
+          <div id='user-time'>{{getTime(x.updatedAt)}}</div>
+          <h2>{{x.get("Owner").get("username")}}</h2>
+          <p>
+            <i class="icon ion-ios-location icon-site"></i>
+            &nbspEvanston 500m
+          </p>
+        </div>
+      </div>
+
+      <div ng-click="eventDetail(x.id)">
+        <div class="item item-body">
+          <h2 class='item-title' style='margin-top:0px;'> {{x.get("Title")}}</h2>
+          <p>
+            {{x.get("Desc")}}
+          </p>
+          <img class="full-image" src={{x.get("ImageArry")[0].url()}}>
+        </div>
+        <div class="item">
+          <p>
+            <a href="#" class="subdued"><i class='ion-android-star'></i>&nbspfavorite</a>
+            <a href="#" class="subdued"><i class='ion-heart'></i>&nbsp1 Like</a>
+            <a href="#" class="subdued"><i class='ion-chatbubble'></i>&nbsp5 Comments</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+
+    </ion-side-menu-content>
+  </ion-side-menu>
+
+</ion-side-menus>
+
+
+  </ion-content>
+</ion-view>

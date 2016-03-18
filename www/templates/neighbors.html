@@ -1,0 +1,74 @@
+<ion-view ng-init = "getNeigbors()">
+  <ion-side-menus>
+    <!-- Left menu -->
+    <ion-side-menu side="left" class="side-font">
+          <ion-content id='side-menu'>
+            <div class="side-wrapper">
+              <div class="side-protrait-back">
+                <div class="wrapper">
+                  <div style="background-image: url({{user.get('Profile').url()}})" class="side-protrait"></div>
+                  <div id="myname">
+                    <div class='myname-text'>{{user.get("username")}}</div>
+            <!--    <img class='pro-gender' src= "{{getSex(currentUser.get('Sex'))}}" alt="female" />  -->
+                  </div>
+                </div>
+              </div>
+              <div class="side-list">
+                <div class="side-item" ng-click="userDetail(user.id)">
+                  <img src="../img/user.png" title="External" width="25">
+                  <div class='sideitem-text'>Profile</div>
+                </div>
+                <div class="side-item">
+                  <img src="../img/events.png" title="External" width="25">
+                    <div class='sideitem-text'>Posts</div></div>
+                <div class="side-item">
+                  <img src="../img/myfavorite.png" title="External" width="25">
+                  <div class='sideitem-text'>Favorite</div></div>
+                <div class="side-item">
+                  <img src="../img/message.png" title="External" width="25">
+                  <div class='sideitem-text'>Messages</div></div>
+                <div class="side-bottom">
+                  <i id='side-logout' ng-click = "LogOut()">
+                    <img src="../img/logout.png" title="External" width="25"></i>
+                  <i id='side-setting'>
+                    <img src="../img/setting.png" title="External" width="25"></i>
+                </div>
+
+              </div>
+            </div>
+          </ion-content>
+    </ion-side-menu>
+
+<ion-side-menu-content>
+
+  <ion-header-bar  class="bar-style">
+    <button class="button button-icon button-white button-clear icon ion-navicon"
+     menu-toggle="left">
+    </button>
+    <h2 id='home-bar' class="title">AroundMii</h2>
+    <button class="button button-icon button-clear button-white icon ion-ios-search" ng-click="postShow()"></button>
+  </ion-header-bar>
+
+  <ion-content class='content-back'>
+      <ion-refresher
+          pulling-text="Pull to refresh..."
+          on-refresh="doRefresh()">
+      </ion-refresher>
+
+    <div class="list">
+     <a class="item item-avatar" href="#/user-profile/{{x.id}}" ng-repeat = "x in neighborList">
+        <img id='user-head' src={{x.get("Profile").url()}}>
+        <div id='user-name'>{{x.get("username")}}</div>
+        <div id='user-time'>{{getTime(x.updatedAt)}}</div>
+        <div id='user-char'>{{GetDistance(x.get("username").get("CurrentGP"))}} | Evanston, IL</div>
+        <div id='user-tags'>{{x.get("SelfDes")}}</div>
+     </a>
+   </div>
+  </ion-content>
+
+    </ion-side-menu-content>
+  </ion-side-menu>
+
+</ion-side-menus>
+
+</ion-view>
